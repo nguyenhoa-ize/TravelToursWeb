@@ -1,4 +1,4 @@
-<footer style="margin-left: 200px;">
+<footer>
         <p>&copy; <?php echo date("Y"); ?> <b> Travel Tour. Bản quyền thuộc về nhóm 3 - Đồ án Web.</b></p>
         <p><a >Thông tin liên hệ</a> | <a href="Email.php">2251120220@ut.edu.vn</a></p>
     </footer>
