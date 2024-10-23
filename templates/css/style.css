@@ -1,87 +1,133 @@
 /*Header*/
-.top-bar {
-    background-color: #094c8f; 
-    color: white;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.top-bar .social-icons a {
-    margin: 0 10px;
-}
-
-.top-bar .social-icons a img {
-    width: 20px;
-    height: 20px;
-}
-
-.top-bar .user-links a {
-    color: white;
-    margin-left: 15px;
-    text-decoration: none;
-}
-
-.top-bar .user-links a:hover {
-    text-decoration: underline;
-}
-
-.main-header {
-    background-image: url("../image/backgroundhead.jpeg");
-    padding: 20px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo h1 {
-    margin-left: 20px;
-    font-size: 24px;
-    color: #1b5a99;
-}
-
-.main-nav {
-    display: flex;
-    align-items: center;
-}
-
-.main-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.main-nav ul li a {
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 2px solid #0066CC;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0066CC;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar ul li {
+    position: relative;
+    margin-right: 20px;
+}
+
+.navbar ul li a {
     text-decoration: none;
-    color: #333;
+    color: #000;
     font-size: 16px;
 }
 
-.main-nav ul li a:hover {
-    color: #fa052e;
+.navbar ul li:hover .dropdown-menu {
+    display: block;
 }
 
-.book-now-btn {
-    background-color: #77b2ec;
-    color: white;
-    padding: 10px 20px;
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 150px;
+}
+
+.dropdown-menu li {
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.dropdown-menu li a {
     text-decoration: none;
-    border-radius: 5px;
+    color: #000;
+}
+.navbar ul li .dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.navbar ul li:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-right a {
+    text-decoration: none;
+    color: #0066CC;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.header-right .cart-count {
+    background-color: #FF0000;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.hotline {
+    font-size: 16px;
+    color: #0066CC;
     font-weight: bold;
-    margin-left: auto;
 }
 
-.book-now-btn:hover {
-    background-color: #a3b6c5;
+.arrow-down {
+    font-size: 12px;
+    margin-left: 5px;
 }
-
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 200px;
+    background-color: #fff;
+    border-bottom: 2px solid #0066CC;
+}
 
 /*Footer*/
 footer {
-    background-color: #f9f9fa;
+    background-color: #fff;
     padding: 20px;
     text-align: center;
     width: calc(100% - 200px); 
@@ -93,8 +139,15 @@ footer {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
+    padding-left: 200px;
+    padding-right: 200px;
 }
-
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+}
 .col-lg-5 {
     flex: 0 0 20%;
     max-width: 20%;
@@ -153,4 +206,7 @@ p {
 
 .btn-primary:hover {
     background-color: #0f2b5d;
+}
+.logo{
+    width: auto;
 }
