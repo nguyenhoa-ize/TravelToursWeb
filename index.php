@@ -1,3 +1,17 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = ""; 
+$dbname = "traveltoursweb";
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$departureQuery = "SELECT name FROM destinations WHERE type = 'departure'";
+$departureResult = $conn->query($departureQuery);
+$destinationQuery = "SELECT name FROM destinations WHERE type = 'destination'";
+$destinationResult = $conn->query($destinationQuery);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +19,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelTour Homepage</title>
     <link rel="stylesheet" href="templates/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <?php   include 'templates/layout/header.php';?>
-
+    <div>
+        <img id="banner" src="templates/image/banner.png" alt="Banner">
+    </div>
+    <div class="form-search">
+        <form action="search.php" method="GET" style="display: flex; align-items: center; gap: 10px;">
+            <input type="text" name="query" placeholder="Bạn muốn đi đâu?" autocomplete="off">
+            <div class="icon-background">
+                <i class="fa fa-map-marker"></i>
+            </div>
+            <select name="departure">
+                <option value="">Chọn điểm đi</option>
+                <?php while($row = $departureResult->fetch_assoc()): ?>
+                    <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
+                <?php endwhile; ?>
+            </select>
+            <div class="icon-background">
+                <i class="fa fa-map-marker"></i>
+            </div>
+            <select name="destination">
+                <option value="">Chọn điểm đến</option>
+                <?php while($row = $destinationResult->fetch_assoc()): ?>
+                    <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
+                <?php endwhile; ?>
+            </select>
+            <div class="icon-background">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <input type="date" name="date">
+            <button type="submit" class="btn-search">Tìm kiếm</button>
+        </form>
+    </div>
     <div class="container-fluid about py-5">
     <div class="container-fluid about py-5">
     <div class="container py-5">
@@ -19,7 +64,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(templates/image/about-img-1.png); background-size: cover;">
+            <div class="col-lg-7" >
                 <h5 class="section-about-title pe-3">Giới thiệu</h5>
                 <h1 class="mb-4">Chào mừng bạn đến với <span class="text-primary">Travel Tours!</span></h1>
                 <p class="mb-4">Chúng tôi tự hào mang đến cho bạn những trải nghiệm du lịch đẳng cấp và đáng nhớ. Với đội ngũ chuyên nghiệp, dịch vụ tận tâm, Travel Tours luôn nỗ lực để biến những chuyến đi của bạn trở nên hoàn hảo nhất.</p>
