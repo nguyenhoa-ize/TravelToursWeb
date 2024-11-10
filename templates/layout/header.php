@@ -14,8 +14,8 @@
           <div class="logo">
               <a href="#" id="logo-link">
                   <img src="templates/image/Logo.jpeg" alt="Travel Tours">
-                  <span>Travel Tours</span>
               </a>
+              <span>Travel Tours</span>
           </div>
           <nav class="navbar">
               <ul>

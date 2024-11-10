@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 80px;
+    margin-bottom: 55px;
+}
+
+h2 {
+    text-align: left;
+    color: #333;    
+}
+
+/* CSS cho bảng */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f1f3f5;
+    color: #333;
+}
+
+.table td {
+    background-color: #fff;
+}
+
+/* CSS cho nút chỉnh sửa và xóa */
+.btn {
+    display: inline-block;
+    padding: 6px 10px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-sua {
+    background-color: #ffc107;
+}
+
+.btn-xoa {
+    background-color: #dc3545;
+}
+
+
+/* Hiệu ứng khi hover vào nút */
+.btn-sua:hover,.btn-xoa:hover {
+    opacity: 0.8;
+}
+
+.btn-them {
+  background-color: #28a745; 
+  text-decoration: none;
+  color: black;
+}
+
+
+.btn-them:hover {
+  background-color: #218838; 
+    color: #fff;
+}
+.status-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #dc3545; 
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 102px;
+    cursor: pointer;
+}
