@@ -27,11 +27,12 @@ $stt = 1;
 </head>
 <body>
 <?php include '../../templates/layout/header.php'; ?>
+
 <div class="container">
     <hr>
     <h2>Quản lý người dùng</h2>
     <p>
-        <a href="#" class="btn btn-them">Thêm người dùng <i class="fa-solid fa-plus"></i></a>
+        <a href="add.php" class="btn btn-them">Thêm người dùng <i class="fa-solid fa-plus"></i></a>
     </p>
     <table class="table table-bordered">
         <thead>
@@ -40,7 +41,6 @@ $stt = 1;
                 <th>Họ tên</th>
                 <th>Email</th>
                 <th>Số điện thoại</th>
-                <th>Password</th>
                 <th>Trạng thái</th>
                 <th width="5%">Sửa</th>
                 <th width="5%">Xóa</th>
@@ -51,25 +51,38 @@ $stt = 1;
             // Kiểm tra nếu có dữ liệu
             if ($kq && $kq->num_rows > 0) {
                 while ($d = $kq->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $stt++ . "</td>";
-                    echo "<td>" . $d['username'] . "</td>";
-                    echo "<td>" . $d['email'] . "</td>";
-                    echo "<td>" . $d['phone'] . "</td>"; 
-                    echo "<td>" . $d['password'] . "</td>";
-                    if ($d['status'] == 0) {
-                        echo "<td><span class='status-btn'>Đã kích hoạt</span></td>";
-                    } else {
-                        echo "<td><span class='status-btn'>Chưa kích hoạt</span></td>";
-                    }
-                    echo "<td><a href='#' class='btn btn-sua'><i class='fa-solid fa-pen-to-square'></i></a></td>";
-                    echo "<td><a href='#' class='btn btn-xoa'><i class='fa-solid fa-trash'></i></a></td>";
-                    echo "</tr>";
+            ?>
+                    <tr>
+                        <td><?= $stt++ ?></td>
+                        <td><?= $d['username'] ?></td>
+                        <td><?= $d['email'] ?></td>
+                        <td><?= $d['phone'] ?></td>
+                        <td>
+                            <?php if ($d['status'] == 0): ?>
+                                <span class="status-btn">Đã kích hoạt</span>
+                            <?php else: ?>
+                                <span class="status-btn">Chưa kích hoạt</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <a href="edit.php?id=<?= $d['id'] ?>" class="btn btn-sua">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="delete.php?id=<?= $d['id'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">
+                            <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+            <?php
                 }
             } else {
-                echo "<tr><td colspan='8'>Không có dữ liệu</td></tr>";
+            ?>
+                <tr><td colspan="8">Không có dữ liệu</td></tr>
+            <?php
             }
-        ?>
+            ?>
         </tbody>
     </table>
 </div>

@@ -12,11 +12,11 @@
         $errors =[];// Chứa các lỗi
 
         // Validate fullname
-        if (empty($filterAll['fullname'])) {
-            $errors['fullname']['required'] = 'Cần phải nhập họ tên';
+        if (empty($filterAll['username'])) {
+            $errors['username']['required'] = 'Cần phải nhập họ tên';
         } else {
-            if (strlen($filterAll['fullname']) < 5) {
-                $errors['fullname']['min'] = 'Họ tên phải có ít nhất 5 ký tự.';
+            if (strlen($filterAll['username']) < 5) {
+                $errors['username']['min'] = 'Họ tên phải có ít nhất 5 ký tự.';
             }
         }
         // validate email: bắt buộc phải nhập, đúng định dạng, kiểm tra email đã tồn tại hay chưa
@@ -57,7 +57,7 @@
     }
     if(empty($errors)){
         $dataInsert = [
-            'fullname' => $filterAll['fullname'],
+            'username' => $filterAll['username'],
             'email' => $filterAll['email'],
             'phone' => $filterAll['phone'],
             'password' => password_hash($filterAll['password'],PASSWORD_DEFAULT),
@@ -145,11 +145,11 @@ $old = getFlashData('old');
 <div class="register-container">
     <form action="" method="post">
     <h2>Đăng Ký Tài Khoản</h2>
-    <input type="text" name="fullname" id="fullname" placeholder="Họ và tên" value="<?php 
-    echo old('fullname',$old);
+    <input type="text" name="username" id="username" placeholder="Họ và tên" value="<?php 
+    echo old('username',$old);
     ?>">
     <?php 
-        echo form_error('fullname','<span class="error">','</span>',$errors );
+        echo form_error('username','<span class="error">','</span>',$errors );
     ?>
     <input type="email" name="email" id="email" placeholder="Email"value="<?php 
     echo old('email',$old);
