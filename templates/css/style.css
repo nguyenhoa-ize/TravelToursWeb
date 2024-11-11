@@ -414,3 +414,91 @@ p {
 .tour-card .tour-info p:last-child {
     margin-bottom: 0;
 }
+/* Dịch vụ */
+.container-fluid.service {
+    font-family: 'Arial', sans-serif;
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.container-fluid.service .service-content-inner {
+    background-color: #ffffff;
+    border: 2px solid #003366;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #003366;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.container-fluid.service .service-content-inner:hover {
+    background-color: #003366;
+    color: #ffffff;
+    border-radius: 15px;
+}
+
+.container-fluid.service .service-icon i {
+    font-size: 3em;
+    color: #003366;
+    transition: color 0.3s ease;
+}
+
+.container-fluid.service .service-content-inner:hover .service-icon i {
+    color: #ffffff;
+}
+
+@media (min-width: 768px) {
+    .container-fluid.service .row.g-4 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; 
+        gap: 20px;
+    }
+
+    .container-fluid.service .col-lg-3, 
+    .container-fluid.service .col-md-6 {
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
+}
+
+/* Nếu bạn muốn thêm style cho các phần tử khác trong khu vực dịch vụ, hãy tiếp tục sử dụng .container-fluid.service */
+.container-fluid.service .section-title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #003366;
+    text-align: center;
+}
+
+.container-fluid.service h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #003366;
+    text-align: right;
+    margin-right: 80px;
+}
+
+.container-fluid.service button.btn-primary {
+    background-color: #003366;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.container-fluid.service button.btn-primary:hover {
+    background-color: #0055cc;
+}
+h5 {
+    display: block;
+    font-size: 1.50em;
+    margin-block-start: 1.67em;
+    margin-block-end: 1.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
