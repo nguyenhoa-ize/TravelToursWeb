@@ -1,4 +1,90 @@
-<?php include '../../templates/layout/header.php';?>
+<?php
+    include '../../templates/layout/header.php';
+    include '../../config.php';
+    include '../../includes/connect.php';
+    include '../../includes/database.php';
+    include '../../includes/functions.php';
+    include '../../includes/session.php';
+?>
+<?php 
+   if (isPost()) {
+        $filterAll = filter();
+        $errors =[];// Chứa các lỗi
+
+        // Validate fullname
+        if (empty($filterAll['fullname'])) {
+            $errors['fullname']['required'] = 'Cần phải nhập họ tên';
+        } else {
+            if (strlen($filterAll['fullname']) < 5) {
+                $errors['fullname']['min'] = 'Họ tên phải có ít nhất 5 ký tự.';
+            }
+        }
+        // validate email: bắt buộc phải nhập, đúng định dạng, kiểm tra email đã tồn tại hay chưa
+        if (empty($filterAll['email'])) {
+            $errors['email']['required'] = 'Cần phải nhập email';
+        } 
+        else {
+            $email  = $filterAll['email'];
+            $sql = "SELECT id FROM user WHERE email ='$email'";
+            if(getRows($sql) > 0){
+                $errors['email']['unique'] = 'Email đã tồn tại.';
+        }
+        
+        // Validate số điện thoại: bắt buộc phải nhập, số có đúng định dạng không
+        if (empty($filterAll['phone'])) {
+            $errors['phone']['required'] = 'Số điện thoại bắt buộc phải nhập.';
+        } else {
+            if(!isPhone($filterAll['phone'])){
+                $errors['phone']['isPhone'] = 'Số điện thoại không hợp lệ.';
+            }
+        }
+        // Validate password: bắt buộc phải nhập, >=8 ký tự
+        if (empty($filterAll['password'])) {
+            $errors['password']['required'] = 'Mật khẩu bắt buộc phải nhập.';
+        } else {
+            if(strlen($filterAll['password']) < 8){
+                $errors['password']['min'] = 'Mật khẩu phải lớn hơn hoặc bằng 8.';
+            }
+        }
+        // Validate pasword_confirm: bắt buộc phải nhập, giống password
+        if (empty($filterAll['confirm-password'])) {
+            $errors['confirm-password']['required'] = 'Bạn phải nhập lại mật khẩu.';
+        } else {
+            if(($filterAll['password']) != $filterAll['confirm-password']){
+                $errors['pconfirm-password']['match'] = 'Mật khẩu bạn nhập lại không đúng.';
+            }
+        }
+    }
+    if(empty($errors)){
+        $dataInsert = [
+            'fullname' => $filterAll['fullname'],
+            'email' => $filterAll['email'],
+            'phone' => $filterAll['phone'],
+            'password' => password_hash($filterAll['password'],PASSWORD_DEFAULT),
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+        $insertStatus = insert('user',$dataInsert);
+        if($insertStatus){
+            setFlashData('smg','Đăng ký thành công');
+            setFlashData('smg_type','success');
+            redirect('login.php');
+            
+        }
+        else{
+            setFlashData('smg','Vui lòng kiểm tra lại dữ liệu!!');
+            setFlashData('smg_type','danger');
+            setFlashData('errors',$errors);
+            setFlashData('old',$filterAll);
+            
+        }
+    }
+}
+$smg = getFlashData('smg');
+$smg_type = getFlashData('smg_type');
+$errors = getFlashData('errors');
+$old = getFlashData('old');
+?>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -7,10 +93,10 @@
     <title>Đăng Ký - Đặt Tour Du Lịch</title>
     <link rel="stylesheet" href="../../templates/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f2f6fc;
+            font-family: Arial, sans-serif;
         }
         .register-container {
             max-width: 500px;
@@ -25,23 +111,23 @@
             color: #007bff;
             margin-bottom: 30px;
         }
-        .register-container input {
+        .register-container input, .register-container button {
             display: block;
-            width: 100%;
+            width: 460px;
             padding: 12px 20px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
         .register-container button {
-            display: block;
-            width: 100%;
-            padding: 12px 20px;
             background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
+        }
+        .register-container button:hover {
+            background-color: #0056b3;
         }
         .register-container a {
             display: block;
@@ -50,38 +136,48 @@
             color: #007bff;
             text-decoration: none;
         }
+        .register-container a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 <div class="register-container">
+    <form action="" method="post">
     <h2>Đăng Ký Tài Khoản</h2>
-    <input type="text" id="fullname" placeholder="Họ và tên" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="text" id="username" placeholder="Tên đăng nhập" required>
-    <input type="password" id="password" placeholder="Mật khẩu" required>
-    <input type="password" id="confirm-password" placeholder="Xác nhận mật khẩu" required>
-    <button onclick="register()">Đăng Ký</button>
+    <input type="text" name="fullname" id="fullname" placeholder="Họ và tên" value="<?php 
+    echo old('fullname',$old);
+    ?>">
+    <?php 
+        echo form_error('fullname','<span class="error">','</span>',$errors );
+    ?>
+    <input type="email" name="email" id="email" placeholder="Email"value="<?php 
+    echo old('email',$old);
+    ?>">
+    <?php 
+        echo form_error('email','<span class="error">','</span>',$errors );
+    ?>
+    <input type="number" name="phone" id="phone" placeholder="Số điện thoại"value="<?php 
+    echo old('phone',$old);
+    ?>">
+    <?php 
+        echo form_error('phone','<span class="error">','</span>',$errors );
+    ?>
+    <input type="password" name="password" id="password" placeholder="Mật khẩu">
+    <?php 
+        echo form_error('password','<span class="error">','</span>',$errors );
+    ?>
+    <input type="password" name="confirm-password" id="confirm-password" placeholder="Xác nhận mật khẩu">
+    <?php 
+        echo form_error('confirm-password','<span class="error">','</span>',$errors );
+    ?>
+    <button type="submit">Đăng ký</button> 
     <a href="login.php">Đã có tài khoản?</a>
+    </form>
 </div>
-
-<script>
-    function register() {
-        const fullname = document.getElementById('fullname').value;
-        const email = document.getElementById('email').value;
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-
-        // Kiểm tra thông tin đăng ký
-        if (password === confirmPassword) {
-            alert("Đăng ký tài khoản thành công!");
-            // Chuyển hướng đến trang đăng nhập
-            window.location.href = "login.php"; 
-        } else {
-            alert("Mật khẩu không khớp. Vui lòng kiểm tra lại.");
-        }
-    }
-</script>
 </body>
 </html>
-<?php include '../../templates/layout/footer.php';?>
+
+<?php
+    include '../../templates/layout/footer.php';
+?>

@@ -1,6 +1,7 @@
+<?php
+    include '../../templates/layout/header.php';
+?>
 
-
-<?php include '../../templates/layout/header.php';?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -8,11 +9,10 @@
     <title>Đăng Nhập - Đặt Tour Du Lịch</title>
     <link rel="stylesheet" href="../../templates/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
         }
         .login-container {
             max-width: 400px;
@@ -33,6 +33,7 @@
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 3px;
+            font-size: 16px;
         }
         .login-container button {
             display: block;
@@ -43,6 +44,10 @@
             border: none;
             border-radius: 3px;
             cursor: pointer;
+            font-size: 16px;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
         }
         .login-container a {
             display: block;
@@ -50,6 +55,9 @@
             margin-top: 10px;
             color: #007bff;
             text-decoration: none;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -80,9 +88,7 @@
 </script>
 </body>
 </html>
+
 <?php
     include '../../templates/layout/footer.php';
 ?>
-
-
-
