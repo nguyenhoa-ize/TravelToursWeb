@@ -19,7 +19,7 @@
           </div>
           <nav class="navbar">
               <ul>
-                  <li><a href="#" id="home-link">Trang chủ</a></li>
+                  <li><a href="" id="home-link">Trang chủ</a></li>
                   <li class="dropdown">
                       <a href="#" id="about-link">Giới thiệu <span class="arrow-down">&#9660;</span></a>
                       <ul class="dropdown-menu">
@@ -48,10 +48,10 @@
               </div>
 
               <div class="header-right">
-                  <a href="#" id="login-link" class="btn-login">
+                  <a href="../../models/auth/login.php" id="login-link" class="btn-login">
                       <i class="fas fa-user"></i> Đăng Nhập
                   </a>
-                  <a href="#" id="register-link" class="btn-register">
+                  <a href="../../models/auth/register.php" id="register-link" class="btn-register">
                       Đăng ký
                   </a>
                   <span class="hotline">Hotline: 1900 0000</span>

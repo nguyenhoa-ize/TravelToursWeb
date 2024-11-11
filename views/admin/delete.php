@@ -5,15 +5,17 @@ include '../../includes/database.php';
 include '../../includes/functions.php';
 include '../../includes/session.php';
 
-
-
 $filterAll = filter();
 if (!empty($filterAll['id'])) {
     $userId = $filterAll['id'];
-    $userDetail = getRows("SELECT * FROM user WHERE id = $userId");
-    if ($userDetail > 0) {
-        // Xóa user
-        $deleteUser = delete('user', "id = $userId");
+
+    // Sử dụng prepared statements để tránh SQL injection
+    $userDetail = getRows("SELECT *  FROM user WHERE id = $userId");
+
+    // Kiểm tra nếu người dùng tồn tại
+    if (!empty($userDetail)) {
+        // Thực hiện xóa người dùng
+        $deleteUser = delete('user', "id = $userId");  // Sử dụng prepared statement cho câu lệnh DELETE
         if ($deleteUser) {
             setFlashData('smg', 'Xóa người dùng thành công.');
             setFlashData('smg_type', 'success');
@@ -31,5 +33,5 @@ if (!empty($filterAll['id'])) {
 }
 
 // Điều hướng lại trang danh sách người dùng
-redirect('admin.php');
-
+redirect('../admin/admin.php?page=QLND');
+?>

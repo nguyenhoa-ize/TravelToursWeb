@@ -13,7 +13,7 @@
         if(!empty($userDetail)){
             setFlashData('user-detail',$userDetail);
         }else{
-            redirect('edit.php');
+            redirect('?page=edit_user');
         }
     }
 
@@ -89,7 +89,7 @@
             setFlashData('errors',$errors);
             setFlashData('old',$filterAll);
         }
-        redirect('edit.php?id='.$userID);
+        redirect('?page=QLND&action=edit_user&id='.$userID);
     }
 
     $smg = getFlashData('smg');
@@ -172,7 +172,7 @@
         
         <div class="form-buttons">
             <button type="submit" class="btn-primary">Sửa người dùng</button>
-            <button type="button" class="btn-secondary" onclick="window.location.href='admin.php'">Quay lại</button>
+            <button type="button" class="btn-secondary" onclick="window.location.href='?page=QLND'">Quay lại</button>
         </div>
     </form>
 </div>

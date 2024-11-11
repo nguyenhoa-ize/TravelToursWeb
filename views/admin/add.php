@@ -61,7 +61,7 @@
             'username' => $filterAll['username'],
             'email' => $filterAll['email'],
             'phone' => $filterAll['phone'],
-            'password' => $filterAll['password'],
+            'password' => password_hash($filterAll['password'],PASSWORD_DEFAULT),
             'status' => $filterAll['status'],
             'created_at' => date('Y-m-d H:i:s')
         ];
@@ -70,11 +70,11 @@
         if($insertStatus){
                 setFlashData('smg','Thêm người dùng mới thành công!');
                 setFlashData('smg_type','success');
-                redirect('admin.php');
+                redirect('?page=QLND');
         }else{
                 setFlashData('smg','Không thành công');
                 setFlashData('smg_type','danger');
-                redirect('add.php');
+                redirect('?page=add_user');
         }
        
         }else{
@@ -82,7 +82,7 @@
             setFlashData('smg_type','danger');
             setFlashData('errors',$errors);
             setFlashData('old',$filterAll);
-            redirect('add.php');
+            redirect('?page=add_user');
             
         }
     }
@@ -156,7 +156,7 @@
         
         <div class="form-buttons">
             <button type="submit" class="btn-primary">Thêm người dùng</button>
-            <button type="button" class="btn-secondary" onclick="window.location.href='admin.php'">Quay lại</button>
+            <button type="button" class="btn-secondary" onclick="window.location.href='?page=QLND'">Quay lại</button>
         </div>
     </form>
 </div>

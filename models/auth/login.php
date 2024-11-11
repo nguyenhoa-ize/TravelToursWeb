@@ -1,6 +1,4 @@
-<?php
-    include '../../templates/layout/header.php';
-?>
+
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -89,6 +87,4 @@
 </body>
 </html>
 
-<?php
-    include '../../templates/layout/footer.php';
-?>
+
