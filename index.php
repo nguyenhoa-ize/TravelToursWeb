@@ -132,8 +132,55 @@ $destinationResult = $conn->query($destinationQuery);
             </div>
         </div>
     </div>
-
-    
+    <div class="container-fluid bg-light service py-5">
+        <div class="container py-5">
+            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                <h1 class="mb-0">Các Dịch Vụ Của Chúng Tôi</h1>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-content-inner text-center bg-primary text-white rounded p-4">
+                        <div class="service-icon mb-3">
+                            <i class="fa fa-globe fa-4x text-white"></i>
+                        </div>
+                        <h5 class="mb-3">Tour Quốc Tế</h5>
+                        <p>Dịch vụ tổ chức các tour quốc tế chuyên nghiệp, mang đến những trải nghiệm tuyệt vời cho khách hàng với chi phí hợp lý và chất lượng dịch vụ tốt nhất.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-content-inner text-center bg-white border border-primary rounded p-4">
+                        <div class="service-icon mb-3">
+                            <i class="fa fa-hotel fa-4x text-primary"></i>
+                        </div>
+                        <h5 class="mb-3">Đặt Phòng Khách Sạn</h5>
+                        <p>Chúng tôi cung cấp dịch vụ đặt phòng khách sạn với các ưu đãi hấp dẫn, đảm bảo khách hàng có được những lựa chọn tốt nhất với giá cả hợp lý.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-content-inner text-center bg-white border border-primary rounded p-4">
+                        <div class="service-icon mb-3">
+                            <i class="fa fa-user fa-4x text-primary"></i>
+                        </div>
+                        <h5 class="mb-3">Hướng Dẫn Viên Du Lịch</h5>
+                        <p>Dịch vụ hướng dẫn viên chuyên nghiệp, am hiểu địa phương, nhiệt tình hỗ trợ khách hàng trong suốt chuyến đi để có trải nghiệm đáng nhớ.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-content-inner text-center bg-white border border-primary rounded p-4">
+                        <div class="service-icon mb-3">
+                            <i class="fa fa-cog fa-4x text-primary"></i>
+                        </div>
+                        <h5 class="mb-3">Quản Lý Sự Kiện</h5>
+                        <p>Chúng tôi hỗ trợ tổ chức và quản lý các sự kiện quan trọng, đảm bảo mọi chi tiết đều được chuẩn bị một cách hoàn hảo và chu đáo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-primary">Xem Thêm Dịch Vụ</button>
+            </div>
+        </div>
+    </div>
+                            
 
     <?php   include 'templates/layout/footer.php';?>
 </body>
