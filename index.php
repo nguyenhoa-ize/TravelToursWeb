@@ -90,7 +90,7 @@ $destinationResult = $conn->query($destinationQuery);
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="tour-card">
-                                    <img src="templates/image/tours/<?= $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
+                                    <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
                                     <div class="tour-info p-3">
                                         <h5><?= $row['name'] ?></h5>
                                         <p><?= $row['description'] ?></p>

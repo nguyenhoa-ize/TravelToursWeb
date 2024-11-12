@@ -74,7 +74,7 @@
         }else{
                 setFlashData('smg','Không thành công');
                 setFlashData('smg_type','danger');
-                redirect('?page=add_user');
+                redirect('?page=QLND&action=add_user');
         }
        
         }else{
@@ -82,7 +82,7 @@
             setFlashData('smg_type','danger');
             setFlashData('errors',$errors);
             setFlashData('old',$filterAll);
-            redirect('?page=add_user');
+            redirect('?page=QLND&action=add_user');
             
         }
     }
