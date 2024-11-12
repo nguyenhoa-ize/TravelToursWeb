@@ -1,7 +1,54 @@
 <?php
     include '../../templates/layout/header.php';
+    include '../../config.php';
+    include '../../includes/connect.php';
+    include '../../includes/database.php';
+    include '../../includes/functions.php';
+    include '../../includes/session.php';
 ?>
+<?php
+    
+    if (isPost()) {
+        $filterAll = filter();
+    
+        if (!empty(trim($filterAll['email'])) && !empty(trim($filterAll['password']))) {
+            // kiểm tra đăng nhập
+            $email = $filterAll['email'];
+            $password = $filterAll['password'];
+    
+            // Truy vấn lấy thông tin users theo email
+            $userQuery = oneRaw("SELECT password FROM user WHERE email = '$email'");
+    
+            if (!empty($userQuery)) {
+                $passwordHash = $userQuery['password'];
+                if (password_verify($password, $passwordHash)) {
+                    redirect('../../index.php');
+                    exit();
 
+                } else {
+                    setFlashData('msg', 'Mật khẩu không chính xác.');
+                    setFlashData('msg_type', 'danger');
+                    redirect('login.php');
+                }
+            } else {
+                setFlashData('msg', 'Email không tồn tại.');
+                setFlashData('msg_type', 'danger');
+                redirect('login.php');
+            }
+        exit();
+        } else {
+            setFlashData('msg', 'Vui lòng nhập email và mật khẩu.');
+            setFlashData('msg_type', 'danger');
+            redirect('login.php');
+        }
+        
+        
+    }
+    
+    $msg = getFlashData('msg');
+    $msg_type = getFlashData('msg_type');
+    
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -63,32 +110,22 @@
 </head>
 <body>
 <div class="login-container">
+    <form action="" method="post">
     <h2>Đăng Nhập</h2>
-    <input type="text" id="username" placeholder="Tên đăng nhập" required>
-    <input type="password" id="password" placeholder="Mật khẩu" required>
-    <button onclick="login()">Đăng Nhập</button>
+    <?php
+        if (!empty($msg)) {
+            getSmg($msg, $msg_type);
+        }
+
+        ?>
+    <input type="text" name="email" id="email" placeholder="Địa chỉ email">
+    <input type="password" name="password" id="password" placeholder="Mật khẩu">
+    <button type="submit">Đăng nhập</button>
     <a href="forgot.php">Quên mật khẩu?</a>
     <a href="register.php">Chưa có tài khoản?</a>
+    </form>
 </div>
-
-<script>
-    function login() {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        // Kiểm tra thông tin đăng nhập 
-        if (username === "user" && password === "pass") {
-            alert("Đăng nhập thành công!");
-            // Chuyển hướng đến trang khác
-            window.location.href = "homepage.html"; 
-        } else {
-            alert("Tên đăng nhập hoặc mật khẩu không đúng.");
-        }
-    }
-</script>
 </body>
 </html>
 
-<?php
-    include '../../templates/layout/footer.php';
-?>
+

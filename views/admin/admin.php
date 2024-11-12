@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 $servername = "localhost";
 $username = "root";
@@ -15,64 +16,73 @@ if ($conn->connect_error) {
 $kq = $conn->query("SELECT * FROM user");
 $stt = 1;
 ?>
+=======
+<!-- index.php -->
+>>>>>>> 6368f10ff27c5eb8d7f3d9e38cd392040352a872
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../templates/css/stylesAdmin.css">
-    <link rel="stylesheet" href="../../templates/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Dashboard</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f1f1f1;
+            padding: 15px;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            margin-bottom: 5px;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-<?php include '../../templates/layout/header.php'; ?>
-<div class="container">
-    <hr>
-    <h2>Quản lý người dùng</h2>
-    <p>
-        <a href="#" class="btn btn-them">Thêm người dùng <i class="fa-solid fa-plus"></i></a>
-    </p>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>Số điện thoại</th>
-                <th>Password</th>
-                <th>Trạng thái</th>
-                <th width="5%">Sửa</th>
-                <th width="5%">Xóa</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-            // Kiểm tra nếu có dữ liệu
-            if ($kq && $kq->num_rows > 0) {
-                while ($d = $kq->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $stt++ . "</td>";
-                    echo "<td>" . $d['username'] . "</td>";
-                    echo "<td>" . $d['email'] . "</td>";
-                    echo "<td>" . $d['phone'] . "</td>"; 
-                    echo "<td>" . $d['password'] . "</td>";
-                    if ($d['status'] == 0) {
-                        echo "<td><span class='status-btn'>Đã kích hoạt</span></td>";
-                    } else {
-                        echo "<td><span class='status-btn'>Chưa kích hoạt</span></td>";
-                    }
-                    echo "<td><a href='#' class='btn btn-sua'><i class='fa-solid fa-pen-to-square'></i></a></td>";
-                    echo "<td><a href='#' class='btn btn-xoa'><i class='fa-solid fa-trash'></i></a></td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='8'>Không có dữ liệu</td></tr>";
-            }
-        ?>
-        </tbody>
-    </table>
+    <?php
+    if (isset($_GET['action']) && $_GET['action'] === 'QLND') {
+        include("QLND.php");
+    } 
+    ?>
+    <div class="sidebar">
+    <a href="?page=QLND">User</a>
+    <a href="?page=add_category">Sản phẩm</a>
+    <a href="?page=orders">Đơn hàng</a>
 </div>
-<?php   include '../../templates/layout/footer.php';?>
+<div class="content">
+    <?php
+    if (isset($_GET['page']) && $_GET['page'] === 'QLND') {
+        if (isset($_GET['action'])) {
+            if ($_GET['action'] === 'add_user') {
+                include("add.php"); // Hiển thị form thêm người dùng
+            } elseif ($_GET['action'] === 'edit_user' && isset($_GET['id'])) {
+                include("edit.php"); // Hiển thị form sửa người dùng
+            } 
+        } else {
+            include("QLND.php"); // Hiển thị danh sách người dùng
+        }
+    } else {
+        echo "<h2>Chào mừng đến với bảng điều khiển!</h2>";
+    }
+    ?>
+</div>
 </body>
 </html>
