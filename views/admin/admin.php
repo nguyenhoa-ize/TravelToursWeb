@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+<?php   include '../../templates/layout/header.php';?>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -11,14 +11,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 // Thực hiện truy vấn lấy danh sách người dùng
 $kq = $conn->query("SELECT * FROM user");
 $stt = 1;
 ?>
-=======
 <!-- index.php -->
->>>>>>> 6368f10ff27c5eb8d7f3d9e38cd392040352a872
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +25,7 @@ $stt = 1;
     <title>Dashboard</title>
     <style>
         body {
+            margin-top: 40px;
             display: flex;
             margin: 0;
             font-family: Arial, sans-serif;
@@ -57,32 +55,40 @@ $stt = 1;
     </style>
 </head>
 <body>
-    <?php
-    if (isset($_GET['action']) && $_GET['action'] === 'QLND') {
-        include("QLND.php");
-    } 
-    ?>
     <div class="sidebar">
-    <a href="?page=QLND">User</a>
-    <a href="?page=add_category">Sản phẩm</a>
-    <a href="?page=orders">Đơn hàng</a>
-</div>
-<div class="content">
-    <?php
-    if (isset($_GET['page']) && $_GET['page'] === 'QLND') {
-        if (isset($_GET['action'])) {
-            if ($_GET['action'] === 'add_user') {
-                include("add.php"); // Hiển thị form thêm người dùng
-            } elseif ($_GET['action'] === 'edit_user' && isset($_GET['id'])) {
-                include("edit.php"); // Hiển thị form sửa người dùng
-            } 
+        <a href="?page=QLND">User</a>
+        <a href="?page=category">Tour du lịch</a>
+        <a href="?page=orders">Đơn hàng</a>
+    </div>
+    <div class="content">
+        <?php
+        // Kiểm tra và xử lý các trang trong sidebar
+        if (isset($_GET['page'])) {
+            switch ($_GET['page']) {
+                case 'QLND':
+                    if (isset($_GET['action'])) {
+                        if ($_GET['action'] === 'add_user') {
+                            include("add.php"); // Hiển thị form thêm người dùng
+                        } elseif ($_GET['action'] === 'edit_user' && isset($_GET['id'])) {
+                            include("edit.php"); // Hiển thị form sửa người dùng
+                        }
+                    } else {
+                        include("QLND.php"); // Hiển thị danh sách người dùng
+                    }
+                    break;
+                case 'category':
+                    include("category.php");
+                    break;
+                case 'orders':
+                    include("orders.php");
+                    break;
+                default:
+                    echo "<h2>Chào mừng đến với bảng điều khiển!</h2>";
+            }
         } else {
-            include("QLND.php"); // Hiển thị danh sách người dùng
+            echo "<h2>Chào mừng đến với bảng điều khiển!</h2>";
         }
-    } else {
-        echo "<h2>Chào mừng đến với bảng điều khiển!</h2>";
-    }
-    ?>
-</div>
+        ?>
+    </div>
 </body>
 </html>

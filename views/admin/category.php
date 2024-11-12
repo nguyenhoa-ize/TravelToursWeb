@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 
 
 // Thực hiện truy vấn lấy danh sách người dùng
-$kq = $conn->query("SELECT * FROM user");
+$kq = $conn->query("SELECT * FROM tours");
 $stt = 1;
 ?>
 <!DOCTYPE html>
@@ -30,18 +30,18 @@ $stt = 1;
 
 <div class="container">
     <hr>
-    <h2>Quản lý người dùng</h2>
+    <h2>Quản lý Tours du lịch</h2>
     <p>
-        <a href="?page=QLND&action=add_user" class="btn btn-them">Thêm người dùng <i class="fa-solid fa-plus"></i></a>
+        <a href="" class="btn btn-them">Thêm Tours <i class="fa-solid fa-plus"></i></a>
     </p>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>Số điện thoại</th>
-                <th>Trạng thái</th>
+                <th>Name</th>
+                <th>Mô tả</th>
+                <th>Giá</th>
+                <th>Ảnh</th>
                 <th width="5%">Sửa</th>
                 <th width="5%">Xóa</th>
             </tr>
@@ -54,23 +54,17 @@ $stt = 1;
             ?>
                     <tr>
                         <td><?= $stt++ ?></td>
-                        <td><?= $d['username'] ?></td>
-                        <td><?= $d['email'] ?></td>
-                        <td><?= $d['phone'] ?></td>
+                        <td><?= $d['name'] ?></td>
+                        <td><?= $d['description'] ?></td>
+                        <td><?= $d['price'] ?></td>
+                        <td> <img src="../templates/image/tours/<?php echo $row['image'] ?>" ></td>
                         <td>
-                            <?php if ($d['status'] == 0): ?>
-                                <span class="status-btn">Đã kích hoạt</span>
-                            <?php else: ?>
-                                <span class="status-btn">Chưa kích hoạt</span>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <a href="?page=QLND&action=edit_user&id=<?= $d['id'] ?>" class="btn btn-sua">
+                            <a href="" class="btn btn-sua">
                             <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
                         <td>
-                        <a href="delete.php?id=<?= $d['id'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">
+                        <a href="" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa tours này không?');">
                             <i class="fa-solid fa-trash"></i>
                         </a>                        
                         </td>
