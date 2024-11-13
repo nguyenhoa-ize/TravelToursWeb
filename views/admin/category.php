@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost";
+$servername = "localhost:3307";
 $username = "root";
 $password = ""; 
 $dbname = "traveltoursweb";
@@ -32,7 +32,7 @@ $stt = 1;
     <hr>
     <h2>Quản lý Tours du lịch</h2>
     <p>
-        <a href="" class="btn btn-them">Thêm Tours <i class="fa-solid fa-plus"></i></a>
+        <a href="?page=category&action=add_category" class="btn btn-them">Thêm Tours <i class="fa-solid fa-plus"></i></a>
     </p>
     <table class="table table-bordered">
         <thead>
@@ -57,7 +57,7 @@ $stt = 1;
                         <td><?= $d['name'] ?></td>
                         <td><?= $d['description'] ?></td>
                         <td><?= $d['price'] ?></td>
-                        <td> <img src="../templates/image/tours/<?php echo $row['image'] ?>" ></td>
+                        <td> <img src="http://localhost/TravelToursWeb/templates/image/tours/<?php echo $d['image']; ?>" alt="Tour Image" style="width: 100px;" ></td>
                         <td>
                             <a href="" class="btn btn-sua">
                             <i class="fa-solid fa-pen-to-square"></i>
