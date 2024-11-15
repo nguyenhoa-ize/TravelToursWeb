@@ -36,7 +36,7 @@ $destinationResult = $conn->query($destinationQuery);
                 <select name="departure">
                     <option value="">Chọn điểm đi</option>
                     <?php while($row = $departureResult->fetch_assoc()): ?>
-                        <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
+                        <option value="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></option>
                     <?php endwhile; ?>
                 </select>
                 <div class="icon-background">
@@ -45,7 +45,7 @@ $destinationResult = $conn->query($destinationQuery);
                 <select name="destination">
                     <option value="">Chọn điểm đến</option>
                     <?php while($row = $destinationResult->fetch_assoc()): ?>
-                        <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
+                        <option value="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></option>
                     <?php endwhile; ?>
                 </select>
                 <div class="icon-background">
@@ -90,11 +90,11 @@ $destinationResult = $conn->query($destinationQuery);
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="tour-card">
-                                    <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
+                                    <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
                                     <div class="tour-info p-3">
-                                        <h5><?= $row['name'] ?></h5>
-                                        <p><?= $row['description'] ?></p>
-                                        <p><strong>Giá:</strong> <?= number_format($row['price'], 0, ',', '.') ?> VND</p>
+                                        <h5><?php echo $row['name'] ?></h5>
+                                        <p><?php echo $row['description'] ?></p>
+                                        <p><strong>Giá:</strong> <?php echo number_format($row['price'], 0, ',', '.') ?> VND</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,12 +116,12 @@ $destinationResult = $conn->query($destinationQuery);
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="tour-card">
-                                    <img src="templates/image/tours/<?= $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
+                                    <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
                                     <div class="tour-info p-3">
-                                        <h5><?= $row['name'] ?></h5>
-                                        <p><?= $row['description'] ?></p>
-                                        <p><strong>Giá Gốc:</strong> <del><?= number_format($row['price'], 0, ',', '.') ?> VND</del></p>
-                                        <p><strong>Giá Khuyến Mãi:</strong> <?= number_format($row['discount_price'], 0, ',', '.') ?> VND</p>
+                                        <h5><?php echo $row['name'] ?></h5>
+                                        <p><?php echo $row['description'] ?></p>
+                                        <p><strong>Giá Gốc:</strong> <del><?php echo number_format($row['price'], 0, ',', '.') ?> VND</del></p>
+                                        <p><strong>Giá Khuyến Mãi:</strong> <?php echo number_format($row['discount_price'], 0, ',', '.') ?> VND</p>
                                     </div>
                                 </div>
                             </div>
