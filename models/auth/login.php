@@ -12,19 +12,19 @@
         $filterAll = filter();
     
         if (!empty(trim($filterAll['email'])) && !empty(trim($filterAll['password']))) {
-            // kiểm tra đăng nhập
             $email = $filterAll['email'];
             $password = $filterAll['password'];
     
-            // Truy vấn lấy thông tin users theo email
-            $userQuery = oneRaw("SELECT password FROM user WHERE email = '$email'");
+            // Truy vấn lấy thông tin user theo email
+            $userQuery = oneRaw("SELECT fullname, password FROM user WHERE email = '$email'");
     
             if (!empty($userQuery)) {
                 $passwordHash = $userQuery['password'];
                 if (password_verify($password, $passwordHash)) {
+                    // Lưu thông tin vào session
+                    setSession('fullname', $userQuery['fullname']);
                     redirect('../../index.php');
                     exit();
-
                 } else {
                     setFlashData('msg', 'Mật khẩu không chính xác.');
                     setFlashData('msg_type', 'danger');
@@ -35,15 +35,13 @@
                 setFlashData('msg_type', 'danger');
                 redirect('login.php');
             }
-        exit();
         } else {
             setFlashData('msg', 'Vui lòng nhập email và mật khẩu.');
             setFlashData('msg_type', 'danger');
             redirect('login.php');
         }
-        
-        
     }
+    
     
     $msg = getFlashData('msg');
     $msg_type = getFlashData('msg_type');
