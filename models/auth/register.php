@@ -1,4 +1,5 @@
 <?php
+    include '../../templates/layout/header.php';
     include '../../config.php';
     include '../../includes/connect.php';
     include '../../includes/database.php';
@@ -10,9 +11,18 @@
         $filterAll = filter();
         $errors =[];// Chứa các lỗi
 
+        //Validate username
+        if (empty($filterAll['username'])) {
+            $errors['username']['required'] = 'Bạn chưa nhập username';
+        } else {
+            if (strlen($filterAll['username']) < 5) {
+                $errors['username']['min'] = 'Username phải có ít nhất 5 ký tự.';
+            }
+        }
+
         // Validate fullname
         if (empty($filterAll['fullname'])) {
-            $errors['fullname']['required'] = 'Cần phải nhập họ tên';
+            $errors['fullname']['required'] = 'Bạn chưa nhập họ và tên';
         } else {
             if (strlen($filterAll['fullname']) < 5) {
                 $errors['fullname']['min'] = 'Họ tên phải có ít nhất 5 ký tự.';
@@ -56,6 +66,7 @@
     }
     if(empty($errors)){
         $dataInsert = [
+            'username' => $filterAll['username'],
             'fullname' => $filterAll['fullname'],
             'email' => $filterAll['email'],
             'phone' => $filterAll['phone'],
@@ -117,7 +128,7 @@ $old = getFlashData('old');
             color: #007bff;
             margin-bottom: 30px;
         }
-        .register-container input, .register-container button {
+        .register-container input {
             display: block;
             width: 460px;
             padding: 12px 20px;
@@ -127,6 +138,13 @@ $old = getFlashData('old');
             font-size: 16px;
         }
         .register-container button {
+            display: block;
+            width: 500px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -145,6 +163,18 @@ $old = getFlashData('old');
         .register-container a:hover {
             text-decoration: underline;
         }
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 <body>
@@ -157,6 +187,12 @@ $old = getFlashData('old');
     ?>
     <form action="" method="post">
     <h2>Đăng Ký Tài Khoản</h2>
+    <?php 
+        echo form_error('username','<span class="error">','</span>',$errors );
+    ?>
+    <input type="text" name="username" id="username" placeholder="Username" value="<?php 
+    echo old('username',$old);
+    ?>">
     <?php 
         echo form_error('fullname','<span class="error">','</span>',$errors );
     ?>
@@ -189,3 +225,8 @@ $old = getFlashData('old');
 </div>
 </body>
 </html>
+
+<?php
+    include '../../templates/layout/footer.php';
+?>
+
