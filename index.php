@@ -86,7 +86,12 @@ $destinationResult = $conn->query($destinationQuery);
                         $popularToursQuery = "SELECT name, description, price, image FROM tours WHERE is_popular = 1 LIMIT 4";
                         $popularToursResult = $conn->query($popularToursQuery);
 
-                        while ($row = $popularToursResult->fetch_assoc()):
+                        $popularTours = [];
+                        while ($row = $popularToursResult->fetch_assoc()) {
+                            $popularTours[] = $row;
+                        }
+
+                        foreach ($popularTours as $row):
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="tour-card">
@@ -98,7 +103,30 @@ $destinationResult = $conn->query($destinationQuery);
                                     </div>
                                 </div>
                             </div>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
+                        
+                        <div class="extra-tours d-none">
+                            <?php
+                            $popularToursQuery = "SELECT name, description, price, image FROM tours WHERE is_popular = 1 LIMIT 4, 100";
+                            $popularToursResult = $conn->query($popularToursQuery);
+
+                            while ($row = $popularToursResult->fetch_assoc()):
+                            ?>
+                                <div class="col-lg-3 col-md-6 mb-4">
+                                    <div class="tour-card">
+                                        <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
+                                        <div class="tour-info p-3">
+                                            <h5><?php echo $row['name'] ?></h5>
+                                            <p><?php echo $row['description'] ?></p>
+                                            <p><strong>Giá:</strong> <?php echo number_format($row['price'], 0, ',', '.') ?> VND</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary" id="seeMoreBtn">Xem Thêm</button>
                     </div>
                 </div>
             </div>
@@ -112,7 +140,12 @@ $destinationResult = $conn->query($destinationQuery);
                         $promotionToursQuery = "SELECT name, description, price, discount_price, image FROM tours WHERE discount_price IS NOT NULL LIMIT 4";
                         $promotionToursResult = $conn->query($promotionToursQuery);
 
-                        while ($row = $promotionToursResult->fetch_assoc()):
+                        $promotionTours = [];
+                        while ($row = $promotionToursResult->fetch_assoc()) {
+                            $promotionTours[] = $row;
+                        }
+
+                        foreach ($promotionTours as $row):
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="tour-card">
@@ -125,7 +158,31 @@ $destinationResult = $conn->query($destinationQuery);
                                     </div>
                                 </div>
                             </div>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
+
+                        <div class="extra-promotions d-none">
+                            <?php
+                            $promotionToursQuery = "SELECT name, description, price, discount_price, image FROM tours WHERE discount_price IS NOT NULL LIMIT 4, 100";
+                            $promotionToursResult = $conn->query($promotionToursQuery);
+
+                            while ($row = $promotionToursResult->fetch_assoc()):
+                            ?>
+                                <div class="col-lg-3 col-md-6 mb-4">
+                                    <div class="tour-card">
+                                        <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
+                                        <div class="tour-info p-3">
+                                            <h5><?php echo $row['name'] ?></h5>
+                                            <p><?php echo $row['description'] ?></p>
+                                            <p><strong>Giá Gốc:</strong> <del><?php echo number_format($row['price'], 0, ',', '.') ?> VND</del></p>
+                                            <p><strong>Giá Khuyến Mãi:</strong> <?php echo number_format($row['discount_price'], 0, ',', '.') ?> VND</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary" id="seeMoreBtnPromotions">Xem Thêm</button>
                     </div>
                 </div>
             </div>
@@ -183,5 +240,16 @@ $destinationResult = $conn->query($destinationQuery);
                             
 
     <?php   include 'templates/layout/footer.php';?>
+        <script>
+        document.getElementById("seeMoreBtn").addEventListener("click", function() {
+            document.querySelector(".extra-tours").classList.remove("d-none");
+            this.style.display = "none";
+        });
+
+        document.getElementById("seeMoreBtnPromotions").addEventListener("click", function() {
+            document.querySelector(".extra-promotions").classList.remove("d-none");
+            this.style.display = "none";
+        });
+    </script>
 </body>
 </html>
