@@ -111,11 +111,8 @@ function redirect($path = 'index.php')
 // Hàm thông báo lỗi
 function form_error($fileName, $beforeHtml = '', $afterHtml = '', $errors)
 {
-    return (!empty($errors[$fileName])) ? 
-        $beforeHtml . '<span class="error" style="color: red;"><i>' . reset($errors[$fileName]) . '</i></span>' . $afterHtml : 
-        null;
+    return (!empty($errors[$fileName])) ? '<span class="error">' . reset($errors[$fileName]) . '</span>' : null;
 }
-
 
 
 // Hàm hiển thị dữ liệu cũ

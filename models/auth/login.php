@@ -22,16 +22,8 @@
             if (!empty($userQuery)) {
                 $passwordHash = $userQuery['password'];
                 if (password_verify($password, $passwordHash)) {
-                    $roleQuery = oneRaw("SELECT role FROM user WHERE email = '$email'");
-                    if ($roleQuery['role'] == 'admin') {
-                        // Chuyển hướng người dùng đến trang quản lý
-                        redirect('../../views/admin/admin.php');
-                        exit();
-                    } else {
-                        // Chuyển hướng người dùng đến trang chủ
-                        redirect('../../index.php');
-                        exit();
-                    }
+                    redirect('../../index.php');
+                    exit();
 
                 } else {
                     setFlashData('msg', 'Mật khẩu không chính xác.');
@@ -83,7 +75,7 @@
         }
         .login-container input {
             display: block;
-            width: 375px;
+            width: 100%;
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
@@ -92,7 +84,7 @@
         }
         .login-container button {
             display: block;
-            width: 400px;
+            width: 100%;
             padding: 10px;
             background-color: #007bff;
             color: #fff;
@@ -113,18 +105,6 @@
         }
         .login-container a:hover {
             text-decoration: underline;
-        }
-        .alert {
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
@@ -147,8 +127,5 @@
 </div>
 </body>
 </html>
-<?php
-    include '../../templates/layout/footer.php';
-?>
 
 
