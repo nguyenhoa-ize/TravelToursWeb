@@ -4,7 +4,7 @@ session_start();
 // Lấy thông tin người dùng từ session (nếu đã đăng nhập)
 $fullname = isset($_SESSION['fullname']) ? $_SESSION['fullname'] : null;
 
-$servername = "localhost";
+$servername = "localhost:3307";
 $username = "root";
 $password = "";
 $dbname = "traveltoursweb";

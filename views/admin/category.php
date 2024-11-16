@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost";
+$servername = "localhost:3307";
 $username = "root";
 $password = ""; 
 $dbname = "traveltoursweb";
@@ -32,16 +32,18 @@ $stt = 1;
     <hr>
     <h2>Quản lý Tours du lịch</h2>
     <p>
-        <a href="" class="btn btn-them">Thêm Tours <i class="fa-solid fa-plus"></i></a>
+        <a href="?page=category&action=add_category" class="btn btn-them">Thêm Tours <i class="fa-solid fa-plus"></i></a>
     </p>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Name</th>
+                <th>Tours</th>
                 <th>Mô tả</th>
                 <th>Giá</th>
+                <th>Giảm giá</th>
                 <th>Ảnh</th>
+                <th>Loại tours</th>
                 <th width="5%">Sửa</th>
                 <th width="5%">Xóa</th>
             </tr>
@@ -57,14 +59,22 @@ $stt = 1;
                         <td><?= $d['name'] ?></td>
                         <td><?= $d['description'] ?></td>
                         <td><?= $d['price'] ?></td>
-                        <td> <img src="../templates/image/tours/<?php echo $row['image'] ?>" ></td>
+                        <td><?= $d['discount_price'] ?></td>
+                        <td> <img src="http://localhost/TravelToursWeb/templates/image/tours/<?php echo $d['image']; ?>" alt="Tour Image" style="width: 100px;" ></td>
                         <td>
-                            <a href="" class="btn btn-sua">
+                            <?php if ($d['is_popular'] == 0): ?>
+                                <span class="status-btn">Bình thường</span>
+                            <?php else: ?>
+                                <span class="status-btn">Phổ biến</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <a href="?page=category&action=edit_category&id=<?= $d['id'] ?>" class="btn btn-sua">
                             <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
                         <td>
-                        <a href="" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa tours này không?');">
+                            <a href="deleteCategory.php?id=<?= $d['id'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa tours này không?');">
                             <i class="fa-solid fa-trash"></i>
                         </a>                        
                         </td>
