@@ -31,7 +31,7 @@ $destinationResult = $conn->query($destinationQuery);
         <div class="header-container">
             <div class="logo">
                 <a href="#" id="logo-link">
-                    <img src="templates/image/Logo.jpeg" alt="Travel Tours">
+                    <img src="http://localhost/TravelToursWeb/templates/image/Logo.jpeg" alt="Travel Tours">
                 </a>
                 <span>Travel Tours</span>
             </div>
