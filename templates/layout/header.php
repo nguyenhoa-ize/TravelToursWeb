@@ -7,20 +7,19 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <script src="javascript.js"></script>
 </head>
 <body>
   <header>
       <div class="header-container">
           <div class="logo">
               <a href="#" id="logo-link">
-                  <img src="http://localhost/TravelToursWeb/templates/image/Logo.jpeg" alt="Travel Tours">
+                  <img src="templates/image/Logo.jpeg" alt="Travel Tours">
               </a>
               <span>Travel Tours</span>
           </div>
           <nav class="navbar">
               <ul>
-                  <li><a href="http://localhost/TravelToursWeb/index.php" id="home-link">Trang chủ</a></li>
+                  <li><a href="" id="home-link">Trang chủ</a></li>
                   <li class="dropdown">
                       <a href="#" id="about-link">Giới thiệu <span class="arrow-down">&#9660;</span></a>
                       <ul class="dropdown-menu">
