@@ -31,6 +31,7 @@ $stt = 1;
 <div class="container">
     <hr>
     <h2>Quản lý người dùng</h2>
+    
     <p>
         <a href="?page=QLND&action=add_user" class="btn btn-them">Thêm người dùng <i class="fa-solid fa-plus"></i></a>
     </p>

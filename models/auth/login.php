@@ -40,6 +40,12 @@
             setFlashData('msg_type', 'danger');
             redirect('login.php');
         }
+<<<<<<< HEAD
+=======
+        
+        
+        
+>>>>>>> parent of b996243 (Revert "bổ sung")
     }
     
     

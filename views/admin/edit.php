@@ -1,8 +1,11 @@
 <?php
     include '../../config.php';
     include '../../includes/connect.php';
-    include '../../includes/database.php';
     include '../../includes/functions.php';
+   
+   
+    include '../../includes/database.php';
+   
     include '../../includes/session.php';
 
     $filterAll = filter();
