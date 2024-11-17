@@ -1,0 +1,419 @@
+/* Reset và thiết lập cơ bản */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    color: #212633;
+    background-color: #f8f9fa;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Breadcrumb styling */
+.duong-dan {
+    background-image: url(//bizweb.dktcdn.net/100/505/645/themes/956063/assets/bg-brea.png?1720155052070);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #0396ff;
+    min-height: 150px;
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    color: #fff;
+    margin-top: 90px;
+}
+
+.duong-dan .container {
+    padding: 10px;
+    margin: 37px;
+}
+
+.duongdan {
+    display: flex;
+    text-align: left;
+    height: 100%;
+}
+.duongdan li {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.duongdan li a {
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.duongdan li a:hover {
+    color: #ff5e14;
+}
+
+.duongdan .icon {
+    margin: 0 10px;
+}
+
+.duongdan li strong {
+    font-weight: bold;
+}
+
+
+.duongdan svg {
+    width: 10px;
+    height: 10px;
+    fill: currentColor;
+}
+
+/* Text styles */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Additional styling for breadcrumb container */
+.detail-tour {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.title-tour{
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0px 0px 15px;
+}
+
+.danh-gia {
+    width: 100%;
+    max-width: 400px;
+}
+
+.stars {
+    display: flex;
+    gap: 5px;
+    justify-content: left;
+    margin-bottom: 10px;
+}
+
+.stars span {
+    font-size: 24px;
+    color: #cccccc;
+    cursor: pointer;
+}
+
+.stars span.selected,
+.stars span:hover {
+    color: #FFD700;
+}
+
+.detail-tour .info-tour{
+    display: flex;
+}
+
+.detail-tour .info-tour .item{
+    display: flex;
+    margin-bottom: 10px;
+    margin-right: 20px;
+
+}
+
+.detail-tour .info-tour .item .icon{
+    width: 45px;
+    height: 45px;
+    background-color: #e6f4ff;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-tour .info-tour .item .info{
+    padding-left: 10px;
+    width: inherit;
+}
+
+.detail-tour .info-tour .item .info{
+    padding-left: 10px;
+    width: inherit;
+}
+
+.detail-tour .info-tour .item .info .content{
+    color: #0396ff;
+}
+
+.main-info{
+    display: flex;
+}
+
+.content-tour{
+    margin-left: 10px;
+    margin-right: 10px;
+    flex: 2;
+    padding-top: 5px;
+}
+.khung-anh .hinh-anh {display: none}
+.khung-anh img {
+    vertical-align: middle;
+    border-radius: 16px;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+
+/* Slideshow container */
+.khung-anh {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    margin-top: 10px;
+}
+    
+    /* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+    
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+    
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+    
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+    
+.dot:hover {
+    background-color: #717171;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+.tab-tour {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #ccc;
+}
+
+.tab-link {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #555;
+    text-align: center;
+    transition: color 0.3s ease;
+    font-weight: bold;
+}
+
+.tab-link:hover {
+    color: #0073e6;
+}
+
+.tab-link.active {
+    color: #0073e6;
+    border-bottom: 2px solid #0073e6;
+}
+
+.tab-content {
+    margin-top: 10px;
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-link h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.form-tour{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 15px;
+    flex: 1;
+}
+
+#dat-tour{
+    background-color: #e6f4ff;
+    border-radius: 16px;
+    padding: 15px;
+}
+
+#gia-tour{
+    text-align: left;
+    font-size: 30px;
+    font-weight: 500;
+    color: #007bff;
+    box-sizing: border-box;
+}
+
+#ma-tour{
+    border-bottom: 2px solid #bbb;
+    margin-bottom: 10px;
+}
+
+.time-block {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #0396ff;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.time-block .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.time-block .icon svg {
+    fill: #fff;
+    width: 30px;
+    height: 30px;
+}
+
+.time-block .chon-ngay{
+    display: flex;
+    width: inherit;
+}
+
+.time-block .chon-ngay input[type="date"] {
+    margin-left: 0;
+    width: inherit; 
+    background-color: #fff;
+    font-family: "Roboto Mono",monospace;
+    color: #555;
+    border: 2px solid #717171;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 16px; 
+}
+
+.soluong{
+    padding-bottom: 10px;
+    margin-top: 15px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+}
+
+#so-luong{
+    margin-top: 5px;
+    margin-left: 100px;
+    width: 100px;
+    height: 35px;
+    padding: 0;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #0396ff;
+    border-radius: 8px;
+    padding-left: 10px;
+}
+
+.ngay-di{
+    display: flex;
+    align-items: center ;
+}
+
+.tongtien {
+    text-align: left;
+    margin-top: 10px;
+}
+
+#tong-tien {
+    float: right;
+}
+
+input[type="submit"], input[type="reset"] {
+    padding: 10px 20px;
+    border: none; 
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px; 
+    width: 45%;
+}
+
+input[type="submit"] {
+    background-color: #007bff; 
+    color: white; 
+}
+
+input[type="submit"]:hover {
+    background-color: #0396ff;
+}
+
+input[type="reset"] {
+    background-color: #f44336;
+    color: white;
+    float: right;
+}
+
+input[type="reset"]:hover {
+    background-color: #e53935; 
+}
+
+
+
+
+
+
+    
