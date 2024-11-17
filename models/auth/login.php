@@ -12,27 +12,19 @@
         $filterAll = filter();
     
         if (!empty(trim($filterAll['email'])) && !empty(trim($filterAll['password']))) {
-            // kiểm tra đăng nhập
             $email = $filterAll['email'];
             $password = $filterAll['password'];
     
-            // Truy vấn lấy thông tin users theo email
-            $userQuery = oneRaw("SELECT password FROM user WHERE email = '$email'");
+            // Truy vấn lấy thông tin user theo email
+            $userQuery = oneRaw("SELECT fullname, password FROM user WHERE email = '$email'");
     
             if (!empty($userQuery)) {
                 $passwordHash = $userQuery['password'];
                 if (password_verify($password, $passwordHash)) {
-                    $roleQuery = oneRaw("SELECT role FROM user WHERE email = '$email'");
-                    if ($roleQuery['role'] == 'admin') {
-                        // Chuyển hướng người dùng đến trang quản lý
-                        redirect('../../views/admin/admin.php');
-                        exit();
-                    } else {
-                        // Chuyển hướng người dùng đến trang chủ
-                        redirect('../../index.php');
-                        exit();
-                    }
-
+                    // Lưu thông tin vào session
+                    setSession('fullname', $userQuery['fullname']);
+                    redirect('../../index.php');
+                    exit();
                 } else {
                     setFlashData('msg', 'Mật khẩu không chính xác.');
                     setFlashData('msg_type', 'danger');
@@ -43,15 +35,13 @@
                 setFlashData('msg_type', 'danger');
                 redirect('login.php');
             }
-        exit();
         } else {
             setFlashData('msg', 'Vui lòng nhập email và mật khẩu.');
             setFlashData('msg_type', 'danger');
             redirect('login.php');
         }
-        
-        
     }
+    
     
     $msg = getFlashData('msg');
     $msg_type = getFlashData('msg_type');
@@ -83,7 +73,7 @@
         }
         .login-container input {
             display: block;
-            width: 375px;
+            width: 100%;
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
@@ -92,7 +82,7 @@
         }
         .login-container button {
             display: block;
-            width: 400px;
+            width: 100%;
             padding: 10px;
             background-color: #007bff;
             color: #fff;
@@ -113,18 +103,6 @@
         }
         .login-container a:hover {
             text-decoration: underline;
-        }
-        .alert {
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
@@ -147,8 +125,5 @@
 </div>
 </body>
 </html>
-<?php
-    include '../../templates/layout/footer.php';
-?>
 
 

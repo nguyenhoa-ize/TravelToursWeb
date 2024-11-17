@@ -12,8 +12,7 @@ if ($conn->connect_error) {
 
 
 // Thực hiện truy vấn lấy danh sách người dùng
-$kq = $conn->query("SELECT * FROM user");
-$stt = 1;
+$kq = $conn->query("SELECT * FROM tours");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,21 +29,19 @@ $stt = 1;
 
 <div class="container">
     <hr>
-    <h2>Quản lý người dùng</h2>
-    
-    <p>
-        <a href="?page=QLND&action=add_user" class="btn btn-them">Thêm người dùng <i class="fa-solid fa-plus"></i></a>
-    </p>
+    <h2>Quản lý đơn hàng</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>STT</th>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>Số điện thoại</th>
+                <th>ID tours</th>
+                <th>ID người dùng</th>
+                <th>Tên người đặt</th>
+                <th>Thành tiền</th>
+                <th>Ngày đặt</th>
+                <th>Phương thức thanh toán</th>
+                <th>Giảm giá</th>
                 <th>Trạng thái</th>
-                <th width="5%">Sửa</th>
-                <th width="5%">Xóa</th>
+                <th >Thông tin đơn hàng</th>
             </tr>
         </thead>
         <tbody>
@@ -54,26 +51,18 @@ $stt = 1;
                 while ($d = $kq->fetch_assoc()) {
             ?>
                     <tr>
-                        <td><?= $stt++ ?></td>
-                        <td><?= $d['username'] ?></td>
-                        <td><?= $d['email'] ?></td>
-                        <td><?= $d['phone'] ?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
-                            <?php if ($d['status'] == 0): ?>
-                                <span class="status-btn">Đã kích hoạt</span>
-                            <?php else: ?>
-                                <span class="status-btn">Chưa kích hoạt</span>
-                            <?php endif; ?>
+                            <a href=""></a>
                         </td>
                         <td>
-                            <a href="?page=QLND&action=edit_user&id=<?= $d['id'] ?>" class="btn btn-sua">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                        </td>
-                        <td>
-                        <a href="delete.php?id=<?= $d['id'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>                        
+                            <a href="" ></a>                        
                         </td>
                     </tr>
             <?php
