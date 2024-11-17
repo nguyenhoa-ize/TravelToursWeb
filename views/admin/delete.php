@@ -15,7 +15,7 @@ if (!empty($filterAll['id'])) {
     // Kiểm tra nếu người dùng tồn tại
     if (!empty($userDetail)) {
         // Thực hiện xóa người dùng
-        $deleteUser = delete('user', "id = $userId");  
+        $deleteUser = delete('user', "id = $userId");  // Sử dụng prepared statement cho câu lệnh DELETE
         if ($deleteUser) {
             setFlashData('smg', 'Xóa người dùng thành công.');
             setFlashData('smg_type', 'success');

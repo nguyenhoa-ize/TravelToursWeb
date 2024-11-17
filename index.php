@@ -36,7 +36,7 @@ $destinationResult = $conn->query($destinationQuery);
                 <select name="departure">
                     <option value="">Chọn điểm đi</option>
                     <?php while($row = $departureResult->fetch_assoc()): ?>
-                        <option value="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></option>
+                        <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
                     <?php endwhile; ?>
                 </select>
                 <div class="icon-background">
@@ -45,7 +45,7 @@ $destinationResult = $conn->query($destinationQuery);
                 <select name="destination">
                     <option value="">Chọn điểm đến</option>
                     <?php while($row = $destinationResult->fetch_assoc()): ?>
-                        <option value="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></option>
+                        <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
                     <?php endwhile; ?>
                 </select>
                 <div class="icon-background">
@@ -67,6 +67,7 @@ $destinationResult = $conn->query($destinationQuery);
                             </div>
                         </div>
                         <div class="col-lg-7">
+                            <h5 class="section-about-title pe-3">Giới thiệu</h5>
                             <h1 class="mb-4">Chào mừng bạn đến với <span class="text-primary">Travel Tours!</span></h1>
                             <p class="mb-4">Chúng tôi tự hào mang đến cho bạn những trải nghiệm du lịch đẳng cấp và đáng nhớ. Với đội ngũ chuyên nghiệp, dịch vụ tận tâm, Travel Tours luôn nỗ lực để biến những chuyến đi của bạn trở nên hoàn hảo nhất.</p>
                             <p class="mb-4">Tại Travel Tours, chúng tôi cung cấp các chuyến bay hạng nhất, những khách sạn được chọn lọc kỹ càng và dịch vụ lưu trú 5 sao. Ngoài ra, bạn sẽ được trải nghiệm những phương tiện di chuyển hiện đại nhất và có cơ hội khám phá hơn 150 tour du lịch thành phố cao cấp. Đặc biệt, chúng tôi luôn sẵn sàng phục vụ bạn 24/7, đảm bảo mọi nhu cầu của bạn được đáp ứng nhanh chóng và hiệu quả.</p>
@@ -85,47 +86,19 @@ $destinationResult = $conn->query($destinationQuery);
                         $popularToursQuery = "SELECT name, description, price, image FROM tours WHERE is_popular = 1 LIMIT 4";
                         $popularToursResult = $conn->query($popularToursQuery);
 
-                        $popularTours = [];
-                        while ($row = $popularToursResult->fetch_assoc()) {
-                            $popularTours[] = $row;
-                        }
-
-                        foreach ($popularTours as $row):
+                        while ($row = $popularToursResult->fetch_assoc()):
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="tour-card">
-                                    <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
+                                    <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
                                     <div class="tour-info p-3">
-                                        <h5><?php echo $row['name'] ?></h5>
-                                        <p><?php echo $row['description'] ?></p>
-                                        <p><strong>Giá:</strong> <?php echo number_format($row['price'], 0, ',', '.') ?> VND</p>
+                                        <h5><?= $row['name'] ?></h5>
+                                        <p><?= $row['description'] ?></p>
+                                        <p><strong>Giá:</strong> <?= number_format($row['price'], 0, ',', '.') ?> VND</p>
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
-                        
-                        <div class="extra-tours d-none">
-                            <?php
-                            $popularToursQuery = "SELECT name, description, price, image FROM tours WHERE is_popular = 1 LIMIT 4, 100";
-                            $popularToursResult = $conn->query($popularToursQuery);
-
-                            while ($row = $popularToursResult->fetch_assoc()):
-                            ?>
-                                <div class="col-lg-3 col-md-6 mb-4">
-                                    <div class="tour-card">
-                                        <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
-                                        <div class="tour-info p-3">
-                                            <h5><?php echo $row['name'] ?></h5>
-                                            <p><?php echo $row['description'] ?></p>
-                                            <p><strong>Giá:</strong> <?php echo number_format($row['price'], 0, ',', '.') ?> VND</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endwhile; ?>
-                        </div>
-                    </div>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-primary" id="seeMoreBtn">Xem Thêm</button>
+                        <?php endwhile; ?>
                     </div>
                 </div>
             </div>
@@ -139,49 +112,20 @@ $destinationResult = $conn->query($destinationQuery);
                         $promotionToursQuery = "SELECT name, description, price, discount_price, image FROM tours WHERE discount_price IS NOT NULL LIMIT 4";
                         $promotionToursResult = $conn->query($promotionToursQuery);
 
-                        $promotionTours = [];
-                        while ($row = $promotionToursResult->fetch_assoc()) {
-                            $promotionTours[] = $row;
-                        }
-
-                        foreach ($promotionTours as $row):
+                        while ($row = $promotionToursResult->fetch_assoc()):
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
                                 <div class="tour-card">
-                                    <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
+                                    <img src="templates/image/tours/<?= $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
                                     <div class="tour-info p-3">
-                                        <h5><?php echo $row['name'] ?></h5>
-                                        <p><?php echo $row['description'] ?></p>
-                                        <p><strong>Giá Gốc:</strong> <del><?php echo number_format($row['price'], 0, ',', '.') ?> VND</del></p>
-                                        <p><strong>Giá Khuyến Mãi:</strong> <?php echo number_format($row['discount_price'], 0, ',', '.') ?> VND</p>
+                                        <h5><?= $row['name'] ?></h5>
+                                        <p><?= $row['description'] ?></p>
+                                        <p><strong>Giá Gốc:</strong> <del><?= number_format($row['price'], 0, ',', '.') ?> VND</del></p>
+                                        <p><strong>Giá Khuyến Mãi:</strong> <?= number_format($row['discount_price'], 0, ',', '.') ?> VND</p>
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
-
-                        <div class="extra-promotions d-none">
-                            <?php
-                            $promotionToursQuery = "SELECT name, description, price, discount_price, image FROM tours WHERE discount_price IS NOT NULL LIMIT 4, 100";
-                            $promotionToursResult = $conn->query($promotionToursQuery);
-
-                            while ($row = $promotionToursResult->fetch_assoc()):
-                            ?>
-                                <div class="col-lg-3 col-md-6 mb-4">
-                                    <div class="tour-card">
-                                        <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?php echo $row['name'] ?>">
-                                        <div class="tour-info p-3">
-                                            <h5><?php echo $row['name'] ?></h5>
-                                            <p><?php echo $row['description'] ?></p>
-                                            <p><strong>Giá Gốc:</strong> <del><?php echo number_format($row['price'], 0, ',', '.') ?> VND</del></p>
-                                            <p><strong>Giá Khuyến Mãi:</strong> <?php echo number_format($row['discount_price'], 0, ',', '.') ?> VND</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endwhile; ?>
-                        </div>
-                    </div>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-primary" id="seeMoreBtnPromotions">Xem Thêm</button>
+                        <?php endwhile; ?>
                     </div>
                 </div>
             </div>
@@ -239,16 +183,5 @@ $destinationResult = $conn->query($destinationQuery);
                             
 
     <?php   include 'templates/layout/footer.php';?>
-        <script>
-        document.getElementById("seeMoreBtn").addEventListener("click", function() {
-            document.querySelector(".extra-tours").classList.remove("d-none");
-            this.style.display = "none";
-        });
-
-        document.getElementById("seeMoreBtnPromotions").addEventListener("click", function() {
-            document.querySelector(".extra-promotions").classList.remove("d-none");
-            this.style.display = "none";
-        });
-    </script>
 </body>
 </html>
