@@ -20,7 +20,7 @@
         // validate email: bắt buộc phải nhập, đúng định dạng, kiểm tra email đã tồn tại hay chưa
         if (!empty($filterAll['email'])) {
             $email  = $filterAll['email'];
-            $sql = "SELECT id FROM user WHERE email ='$email'";
+            $sql = "SELECT id_user FROM user WHERE email ='$email'";
             if(getRows($sql) > 0){
                 $errors['email']['unique'] = 'Email đã tồn tại.';
         }

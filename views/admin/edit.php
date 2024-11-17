@@ -9,10 +9,10 @@
     include '../../includes/session.php';
 
     $filterAll = filter();
-    if(!empty($filterAll['id'])){
-        $userID=$filterAll['id'];
+    if(!empty($filterAll['id_user'])){
+        $userID=$filterAll['id_user'];
 
-        $userDetail=oneRaw("SELECT * FROM user WHERE id='$userID'");
+        $userDetail=oneRaw("SELECT * FROM user WHERE id_user='$userID'");
         if(!empty($userDetail)){
             setFlashData('user-detail',$userDetail);
         }else{
@@ -40,7 +40,7 @@
         } 
         else {
             $email  = $filterAll['email'];
-            $sql = "SELECT id FROM user WHERE email ='$email'AND id <> $userID ";
+            $sql = "SELECT id_user FROM user WHERE email ='$email'AND id_user <> $userID ";
             if(getRows($sql) > 0){
                 $errors['email']['unique'] = 'Email đã tồn tại.';
         }
@@ -74,7 +74,7 @@
         if(!empty($filterAll['password'])){
             $dataUpdate['password'] = password_hash($filterAll['password'], PASSWORD_DEFAULT);
         }
-        $condition = "id = $userID";
+        $condition = "id_user = $userID";
         $UpdateStatus = update('user',$dataUpdate, $condition);
         if($UpdateStatus){
             setFlashData('smg', 'Sửa người dùng thành công!');
@@ -92,7 +92,7 @@
             setFlashData('errors',$errors);
             setFlashData('old',$filterAll);
         }
-        redirect('?page=QLND&action=edit_user&id='.$userID);
+        redirect('?page=QLND&action=edit_user&id_user='.$userID);
     }
 
     $smg = getFlashData('smg');
@@ -115,12 +115,13 @@
 </head>
 <body>
 <div class="register-container">
-        <?php
-            // Hiển thị thông báo nếu có
-            if (!empty($smg)) {
-                echo "<div class='alert alert-{$smg_type}'>{$smg}</div>";
-                }
-        ?>
+    <div class="alert-container">
+        <?php if (!empty($msg)): ?>
+            <div class="alert alert-<?php echo $msg_type; ?>">
+                <?php echo htmlspecialchars($msg); ?>
+            </div>
+        <?php endif; ?>
+    </div>
     <form action="" method="post">
         <h2>Sửa người dùng</h2>
         
@@ -171,7 +172,7 @@
                 <?php echo form_error('status', '<span class="error">', '</span>', $errors); ?>
             </div>
         </div>
-        <input  type="hidden" name="id" value="<?php echo $userID ?>">
+        <input  type="hidden" name="id_user" value="<?php echo $userID ?>">
         
         <div class="form-buttons">
             <button type="submit" class="btn-primary">Sửa người dùng</button>

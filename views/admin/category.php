@@ -69,12 +69,12 @@ $stt = 1;
                             <?php endif; ?>
                         </td>
                         <td>
-                            <a href="?page=category&action=edit_category&id=<?= $d['id'] ?>" class="btn btn-sua">
+                            <a href="?page=category&action=edit_category&id_tours=<?= $d['id_tours'] ?>" class="btn btn-sua">
                             <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
                         <td>
-                            <a href="deleteCategory.php?id=<?= $d['id'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa tours này không?');">
+                            <a href="deleteCategory.php?id_tours=<?= $d['id_tours'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa tours này không?');">
                             <i class="fa-solid fa-trash"></i>
                         </a>                        
                         </td>

@@ -6,30 +6,17 @@ include '../../includes/functions.php';
 include '../../includes/session.php';
 
 $filterAll = filter();
-if (!empty($filterAll['id'])) {
-    $userId = $filterAll['id'];
+if (isset($filterAll['id_user'])) {
+    $userId = $filterAll['id_user'];
 
     // Sử dụng prepared statements để tránh SQL injection
-    $userDetail = getRows("SELECT *  FROM user WHERE id = $userId");
+    $userDetail = getRows("SELECT *  FROM user WHERE id_user = $userId");
 
     // Kiểm tra nếu người dùng tồn tại
     if (!empty($userDetail)) {
         // Thực hiện xóa người dùng
-        $deleteUser = delete('user', "id = $userId");  
-        if ($deleteUser) {
-            setFlashData('smg', 'Xóa người dùng thành công.');
-            setFlashData('smg_type', 'success');
-        } else {
-            setFlashData('smg', 'Lỗi khi xóa người dùng.');
-            setFlashData('smg_type', 'danger');
-        }
-    } else {
-        setFlashData('smg', 'Người dùng không tồn tại trong hệ thống.');
-        setFlashData('smg_type', 'danger');
+        $deleteUser = delete('user', "id_user = $userId");  
     }
-} else {
-    setFlashData('smg', 'Liên kết không tồn tại.');
-    setFlashData('smg_type', 'danger');
 }
 
 // Điều hướng lại trang danh sách người dùng

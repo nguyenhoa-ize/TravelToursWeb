@@ -28,7 +28,7 @@ if (isPost()) {
     }
     // Validate giảm giá
     if (!is_numeric($filterAll['discount_price']) || $filterAll['discount_price'] <= 0) {
-        $errors['discount_price']['valid'] = 'Giá phải là số và lớn hơn 0.';
+        $errors['discount_price']['valid'] = 'Giảm giá phải là số và lớn hơn 0.';
     }
 
     // Validate ảnh (tùy chọn)

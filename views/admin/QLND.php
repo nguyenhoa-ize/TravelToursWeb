@@ -66,12 +66,12 @@ $stt = 1;
                             <?php endif; ?>
                         </td>
                         <td>
-                            <a href="?page=QLND&action=edit_user&id=<?= $d['id'] ?>" class="btn btn-sua">
+                            <a href="?page=QLND&action=edit_user&id_user=<?= $d['id_user'] ?>" class="btn btn-sua">
                             <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
                         <td>
-                        <a href="delete.php?id=<?= $d['id'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">
+                        <a href="delete.php?id_user=<?= $d['id_user'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?');">
                             <i class="fa-solid fa-trash"></i>
                         </a>                        
                         </td>

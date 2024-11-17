@@ -12,9 +12,9 @@ error_reporting(E_ALL);
 
 // Lấy dữ liệu đầu vào
 $filterAll = filter();
-if (!empty($filterAll['id'])) {
-    $tourID = $filterAll['id'];
-    $tourDetail = oneRaw("SELECT * FROM tours WHERE id='$tourID'");
+if (!empty($filterAll['id_tours'])) {
+    $tourID = $filterAll['id_tours'];
+    $tourDetail = oneRaw("SELECT * FROM tours WHERE id_tours='$tourID'");
     if (!empty($tourDetail)) {
         setFlashData("tour-detail", $tourDetail);
     } else {
@@ -28,7 +28,7 @@ if (isPost()) {
 
     // Validate tên sản phẩm
     if (empty($filterAll['name'])) {
-        $errors['name']['required'] = 'Tên sản phẩm là bắt buộc.';
+        $errors['name']['required'] = 'Tên tours là bắt buộc.';
     }
 
     // Validate mô tả
@@ -38,7 +38,7 @@ if (isPost()) {
 
     // Validate giá
     if (empty($filterAll['price'])) {
-        $errors['price']['required'] = 'Giá sản phẩm là bắt buộc.';
+        $errors['price']['required'] = 'Giá tours là bắt buộc.';
     } else if (!is_numeric($filterAll['price']) || $filterAll['price'] <= 0) {
         $errors['price']['valid'] = 'Giá phải là số và lớn hơn 0.';
     }
@@ -69,9 +69,9 @@ if (isPost()) {
 
         // Thêm điều kiện WHERE để chỉ cập nhật bản ghi theo ID
         if (isset($tourID) && !empty($tourID)) {
-            $updateStatus = update('tours', $dataUpdate, "id = '$tourID'");
+            $updateStatus = update('tours', $dataUpdate, "id_tours = '$tourID'");
             if ($updateStatus) {
-                setFlashData('msg', 'Cập nhật sản phẩm thành công!');
+                setFlashData('msg', 'Cập nhật tours thành công!');
                 setFlashData('msg_type', 'success');
             } else {
                 setFlashData('msg', 'Không thể cập nhật sản phẩm.');
@@ -88,7 +88,7 @@ if (isPost()) {
         setFlashData('old', $filterAll);
     }
 
-    redirect('?page=category&action=edit_category&id=' . $tourID);
+    redirect('?page=category&action=edit_category&id_tours=' . $tourID);
 }
 
 // Lấy dữ liệu flash
@@ -113,24 +113,7 @@ if (!empty($tourDetail)) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
     <style>
-        .alert-container {
-        margin-bottom: 15px;
-        }
-        .alert {
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+        
 
     </style>
 </head>
@@ -146,19 +129,19 @@ if (!empty($tourDetail)) {
         <?php endif; ?>
     </div>
     <form action="" method="post" enctype="multipart/form-data">
-        <h2>Thêm Sản Phẩm</h2>
+        <h2>Sửa tours</h2>
         
         <div class="form-group">
             <div class="form-item">
-                <label for="name">Tên Sản Phẩm</label>
-                <input type="text" name="name" id="name" placeholder="Tên sản phẩm" 
+                <label for="name">Tên tours</label>
+                <input type="text" name="name" id="name" placeholder="Tên tours" 
                        value="<?php echo old('name', $old); ?>">
                 <?php echo form_error('name', '<span class="error">', '</span>', $errors); ?>
             </div>
             
             <div class="form-item">
                 <label for="price">Giá</label>
-                <input type="number" name="price" id="price" placeholder="Giá sản phẩm" 
+                <input type="number" name="price" id="price" placeholder="Giá tours" 
                        value="<?php echo old('price', $old); ?>">
                 <?php echo form_error('price', '<span class="error">', '</span>', $errors); ?>
             </div>
@@ -176,8 +159,8 @@ if (!empty($tourDetail)) {
                 <?php echo form_error('is_popular', '<span class="error">', '</span>', $errors); ?>
             </div>
             <div class="form-item">
-                <label for="discount_price">Giảm giá</label>
-                <input type="number" name="discount_price" id="discount_price" placeholder="Giảm giá" 
+                <label for="discount_price">Giá giảm</label>
+                <input type="number" name="discount_price" id="discount_price" placeholder="Giá giảm" 
                        value="<?php echo old('discount_price', $old); ?>">
                 <?php echo form_error('discount_price', '<span class="error">', '</span>', $errors); ?>
             </div>
@@ -194,10 +177,10 @@ if (!empty($tourDetail)) {
             </div>
         
         <div class="form-buttons">
-            <button type="submit" class="btn-primary">Sửa sản phẩm</button>
+            <button type="submit" class="btn-primary">Sửa Tours</button>
             <button type="button" class="btn-secondary" onclick="window.location.href='?page=category'">Quay lại</button>
         </div>
-        <input type="hidden" name="id" value="<?php echo $tourID; ?>">
+        <input type="hidden" name="id_tours" value="<?php echo $tourID; ?>">
     </form>
 </div>
 
