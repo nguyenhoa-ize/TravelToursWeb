@@ -26,6 +26,10 @@ if (isPost()) {
     } else if (!is_numeric($filterAll['price']) || $filterAll['price'] <= 0) {
         $errors['price']['valid'] = 'Giá phải là số và lớn hơn 0.';
     }
+    // Validate giảm giá
+    if (!is_numeric($filterAll['discount_price']) || $filterAll['discount_price'] <= 0) {
+        $errors['discount_price']['valid'] = 'Giá phải là số và lớn hơn 0.';
+    }
 
     // Validate ảnh (tùy chọn)
     if (empty($_FILES['image']['name'])) {
@@ -43,7 +47,9 @@ if (isPost()) {
             'name' => $filterAll['name'],
             'description' => $filterAll['description'],
             'price' => $filterAll['price'],
+            'discount_price' => $filterAll['discount_price'],
             'image' => $_FILES['image']['name'],
+            'is_popular' => $filterAll['is_popular'],
         ];
 
         $insertStatus = insert('tours', $dataInsert);
@@ -100,14 +106,30 @@ $old = getFlashData('old');
                 <?php echo form_error('price', '<span class="error">', '</span>', $errors); ?>
             </div>
         </div>
+
+       
         
         <div class="form-group">
             <div class="form-item">
+                <label for="is_popular">Loại tours</label>
+                <select name="is_popular" id="is_popular" >
+                    <option value="0" <?php echo (old('is_popular', $old) == '0') ? 'selected' : ''; ?>>Bình thường</option>
+                    <option value="1" <?php echo (old('is_popular', $old) == '1') ? 'selected' : ''; ?>>phổ biến</option>
+                </select>
+                <?php echo form_error('is_popular', '<span class="error">', '</span>', $errors); ?>
+            </div>
+            <div class="form-item">
+                <label for="discount_price">Giảm giá</label>
+                <input type="number" name="discount_price" id="discount_price" placeholder="Giảm giá" required
+                       value="<?php echo old('discount_price', $old); ?>">
+                <?php echo form_error('discount_price', '<span class="error">', '</span>', $errors); ?>
+            </div>
+        </div>
+        <div class="form-item">
                 <label for="image">Hình Ảnh</label>
                 <input type="file" name="image" id="image" required>
                 <?php echo form_error('image', '<span class="error">', '</span>', $errors); ?>
             </div>
-        </div>
         <div class="form-item">
                 <label for="description">Mô Tả</label>
                 <textarea style="width: 800px;height: 176px;" name="description" id="description" placeholder="Mô tả sản phẩm" required><?php echo old('description', $old); ?></textarea>
