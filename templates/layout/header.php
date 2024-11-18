@@ -20,13 +20,7 @@
           <nav class="navbar">
               <ul>
                   <li><a href="" id="home-link">Trang chủ</a></li>
-                  <li class="dropdown">
-                      <a href="#" id="about-link">Giới thiệu <span class="arrow-down">&#9660;</span></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="#" id="company-info-link">Thông tin công ty</a></li>
-                          <li><a href="#" id="team-link">Đội ngũ</a></li>
-                      </ul>
-                  </li>
+                  <li><a href="<?php echo SITE_URL. 'views/user/introduce.php'?>" id="about-link">Giới thiệu</a></li>
                   <li class="dropdown">
                       <a href="<?php echo SITE_URL. 'views/user/tours.php'?>" id="tours-link">Tour du lịch <span class="arrow-down">&#9660;</span></a>
                       <ul class="dropdown-menu">
