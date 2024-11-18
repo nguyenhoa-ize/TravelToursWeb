@@ -1,3 +1,10 @@
+<?php
+include '../../config.php';
+session_start();
+$isLoggedIn = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+$fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu đã đăng nhập
+
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -28,29 +35,34 @@
                           <li><a href="#" id="international-tours-link">Tour quốc tế</a></li>
                       </ul>
                   </li>
-                  <li><a href="#" id="news-link">Tin tức</a></li>
-                  <li><a href="#" id="faq-link">FAQs</a></li>
-                  <li><a href="#" id="contact-link">Liên hệ</a></li>
+                  <li><a href="http://localhost/traveltoursweb/views/user/FAQs.php" id="faq-link">FAQs</a></li>
               </ul>
           </nav>
 
           <div class="header-right">
-              <div class="search-container">
-                  <i class="fas fa-search search-icon"></i>
-                  <input type="text" placeholder="Tìm kiếm..." class="search-input">
-                  <button type="submit" class="search-button">Tìm kiếm</button>
-              </div>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Tìm kiếm..." class="search-input">
+                <button type="submit" class="search-button">Tìm kiếm</button>
+            </div>
 
-              <div class="header-right">
-                  <a href="../../models/auth/login.php" id="login-link" class="btn-login">
-                      <i class="fas fa-user"></i> Đăng Nhập
-                  </a>
-                  <a href="../../models/auth/register.php" id="register-link" class="btn-register">
-                      Đăng ký
-                  </a>
-                  <span class="hotline">Hotline: 1900 0000</span>
-              </div>
-          </div>
+            <?php if ($isLoggedIn): ?>
+                <div class="user-greeting">
+                    <span>Xin Chào, <?php echo htmlspecialchars($fullname); ?>!</span>
+                    <a href="<?php echo SITE_URL . 'models/auth/logout.php'; ?>" class="btn-logout">Đăng xuất</a>
+                </div>
+            <?php else: ?>
+                <div class="auth-buttons">
+                    <a href="<?php echo SITE_URL . 'models/auth/login.php'; ?>" id="login-link" class="btn-login">
+                        <i class="fas fa-user"></i> Đăng Nhập
+                    </a>
+                    <a href="<?php echo SITE_URL . 'models/auth/register.php'; ?>" id="register-link" class="btn-register">
+                        Đăng ký
+                    </a>
+                </div>
+            <?php endif; ?>
+            <span class="hotline">Hotline: 1900 0000</span>
+        </div>
       </div>
   </header>
 

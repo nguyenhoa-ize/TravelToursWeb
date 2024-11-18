@@ -10,8 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-// Thực hiện truy vấn lấy danh sách người dùng
+// Thực hiện truy vấn lấy danh sách tours
 $kq = $conn->query("SELECT * FROM tours");
 $stt = 1;
 ?>
@@ -26,7 +25,6 @@ $stt = 1;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
 
 <div class="container">
     <hr>
@@ -43,8 +41,8 @@ $stt = 1;
                 <th>Giá</th>
                 <th>Giảm giá</th>
                 <th>Ảnh</th>
-                <th>Loại tours</th>
                 <th>Tours</th>
+                <th>Loại tours</th>
                 <th width="5%">Sửa</th>
                 <th width="5%">Xóa</th>
             </tr>
@@ -54,6 +52,8 @@ $stt = 1;
             // Kiểm tra nếu có dữ liệu
             if ($kq && $kq->num_rows > 0) {
                 while ($d = $kq->fetch_assoc()) {
+                    // Tách chuỗi ảnh thành mảng
+                    $images = explode(",", $d['image']);
             ?>
                     <tr>
                         <td><?= $stt++ ?></td>
@@ -61,16 +61,23 @@ $stt = 1;
                         <td><?= $d['description'] ?></td>
                         <td><?= $d['price'] ?></td>
                         <td><?= $d['discount_price'] ?></td>
-                        <td> <img src="http://localhost/TravelToursWeb/templates/image/tours/<?php echo $d['image']; ?>" alt="Tour Image" style="width: 100px;" ></td>
                         <td>
-                            <?php if ($d['is_popular'] == 0): ?>
-                                <span class="status-btn">Ngoài nước</span>
-                            <?php else: ?>
-                                <span class="status-btn">trong nước</span>
-                            <?php endif; ?>
+                            <?php
+                            // Lặp qua mảng ảnh và hiển thị từng ảnh
+                            foreach ($images as $image) {
+                                echo '<img src="http://localhost/TravelToursWeb/templates/image/tours/' . trim($image) . '" alt="Tour Image" style="width: 100px; margin-right: 5px;">';
+                            }
+                            ?>
                         </td>
                         <td>
                             <?php if ($d['is_domestic'] == 0): ?>
+                                <span class="status-btn">Ngoài nước</span>
+                            <?php else: ?>
+                                <span class="status-btn">Trong nước</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($d['is_popular'] == 0): ?>
                                 <span class="status-btn">Bình thường</span>
                             <?php else: ?>
                                 <span class="status-btn">Phổ biến</span>
@@ -78,13 +85,13 @@ $stt = 1;
                         </td>
                         <td>
                             <a href="?page=category&action=edit_category&id_tours=<?= $d['id_tours'] ?>" class="btn btn-sua">
-                            <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
                         <td>
                             <a href="deleteCategory.php?id_tours=<?= $d['id_tours'] ?>" class="btn btn-xoa" onclick="return confirm('Bạn có chắc chắn muốn xóa tours này không?');">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>                        
+                                <i class="fa-solid fa-trash"></i>
+                            </a>                        
                         </td>
                     </tr>
             <?php

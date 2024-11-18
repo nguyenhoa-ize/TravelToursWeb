@@ -1,15 +1,32 @@
 
+
 <?php
 define('SITE_URL', 'http://localhost/traveltoursweb/');
 
 //Thông tin cấu hình DB
-define('DB_SERVER', 'localhost:3307');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_DATABASE', 'traveltoursweb');
+if (!defined('DB_SERVER')) {
+    define('DB_SERVER', 'localhost');
+}
+if (!defined('DB_USERNAME')) {
+    define('DB_USERNAME', 'root');
+}
+if (!defined('DB_PASSWORD')) {
+    define('DB_PASSWORD', '');
+}
+if (!defined('DB_DATABASE')) {
+    define('DB_DATABASE', 'traveltoursweb');
+}
 
-const _HOST = 'localhost:3307';
-const _DB = 'traveltoursweb';
-const _USER = 'root';
-const _PASS = '';
+if (!defined('_HOST')) {
+    define('_HOST', 'localhost');
+}
+if (!defined('_DB')) {
+    define('_DB', 'traveltoursweb');
+}
+if (!defined('_USER')) {
+    define('_USER', 'root');
+}
+if (!defined('_PASS')) {
+    define('_PASS', '');
+}
 ?>

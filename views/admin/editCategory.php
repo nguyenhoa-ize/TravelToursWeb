@@ -190,8 +190,8 @@ if (isPost()) {
             <?php endif; ?>
         </div>
         <div class="form-buttons">
-            <button type="submit" class="btn-primary">Sửa Tours</button>
-            <button type="button" class="btn-secondary" onclick="window.location.href='?page=category'">Quay lại</button>
+            <button type="submit" class="btn-1">Sửa Tours</button>
+            <button type="button" class="btn-2" onclick="window.location.href='?page=category'">Quay lại</button>
         </div>
         <input type="hidden" name="id_tours" value="<?php echo $tourID; ?>">
     </form>

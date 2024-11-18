@@ -22,22 +22,28 @@
             if (!empty($userQuery)) {
                 $passwordHash = $userQuery['password'];
                 if (password_verify($password, $passwordHash)) {
-                    $roleQuery = oneRaw("SELECT role FROM user WHERE email = '$email'");
-                    if ($roleQuery['role'] == 'admin') {
-                        // Chuyển hướng người dùng đến trang quản lý
-                        redirect('../../views/admin/admin.php');
-                        exit();
-                    } else {
-                        // Chuyển hướng người dùng đến trang chủ
-                        redirect('../../index.php');
+                    // Truy vấn lấy thông tin fullname và role
+                    $userDetails = oneRaw("SELECT fullname, role FROM user WHERE email = '$email'");
+                
+                    if (!empty($userDetails)) {
+                        // Lưu thông tin vào session
+                        $_SESSION['loggedin'] = true;
+                        $_SESSION['fullname'] = $userDetails['fullname'];
+                        $_SESSION['role'] = $userDetails['role'];
+                
+                        // Chuyển hướng tùy thuộc vào vai trò của người dùng
+                        if ($userDetails['role'] == 'admin') {
+                            redirect('../../views/admin/admin.php'); // Trang quản lý
+                        } else {
+                            redirect('../../index.php'); // Trang chủ
+                        }
                         exit();
                     }
-
                 } else {
                     setFlashData('msg', 'Mật khẩu không chính xác.');
                     setFlashData('msg_type', 'danger');
                     redirect('login.php');
-                }
+                }                
             } else {
                 setFlashData('msg', 'Email không tồn tại.');
                 setFlashData('msg_type', 'danger');
@@ -86,7 +92,6 @@
 </body>
 </html>
 <?php
-    include '../../templates/layout/footer.php';
 ?>
 
 

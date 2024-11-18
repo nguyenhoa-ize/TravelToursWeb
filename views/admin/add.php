@@ -111,8 +111,8 @@
         </div>
         
         <div class="form-buttons">
-            <button type="submit" class="btn-primary">Thêm người dùng</button>
-            <button type="button" class="btn-secondary" onclick="window.location.href='?page=QLND'">Quay lại</button>
+            <button type="submit" class="btn-1">Thêm người dùng</button>
+            <button type="button" class="btn-2" onclick="window.location.href='?page=QLND'">Quay lại</button>
         </div>
     </form>
 </div>

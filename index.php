@@ -1,17 +1,13 @@
 <?php
 include "config.php";
-$servername = "localhost";
-$username = "root";
-$password = ""; 
-$dbname = "traveltoursweb";
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include "includes/connect.php";
+include "includes/database.php";
+include "includes/functions.php";
+include "includes/session.php";
 $departureQuery = "SELECT DISTINCT departure_point AS name FROM tours WHERE departure_point IS NOT NULL";
-$departureResult = $conn->query($departureQuery);
+$departureResult = $conn1->query($departureQuery);
 $destinationQuery = "SELECT DISTINCT destination_point AS name FROM tours WHERE destination_point IS NOT NULL";
-$destinationResult = $conn->query($destinationQuery);
+$destinationResult = $conn1->query($destinationQuery);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,11 +64,9 @@ $destinationResult = $conn->query($destinationQuery);
                             </div>
                         </div>
                         <div class="col-lg-7">
-                            <h5 class="section-about-title pe-3">Giới thiệu</h5>
                             <h1 class="mb-4">Chào mừng bạn đến với <span class="text-primary">Travel Tours!</span></h1>
                             <p class="mb-4">Chúng tôi tự hào mang đến cho bạn những trải nghiệm du lịch đẳng cấp và đáng nhớ. Với đội ngũ chuyên nghiệp, dịch vụ tận tâm, Travel Tours luôn nỗ lực để biến những chuyến đi của bạn trở nên hoàn hảo nhất.</p>
                             <p class="mb-4">Tại Travel Tours, chúng tôi cung cấp các chuyến bay hạng nhất, những khách sạn được chọn lọc kỹ càng và dịch vụ lưu trú 5 sao. Ngoài ra, bạn sẽ được trải nghiệm những phương tiện di chuyển hiện đại nhất và có cơ hội khám phá hơn 150 tour du lịch thành phố cao cấp. Đặc biệt, chúng tôi luôn sẵn sàng phục vụ bạn 24/7, đảm bảo mọi nhu cầu của bạn được đáp ứng nhanh chóng và hiệu quả.</p>
-                            <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="#">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -85,7 +79,7 @@ $destinationResult = $conn->query($destinationQuery);
                     <div class="row">
                         <?php
                         $popularToursQuery = "SELECT name, description, price, image FROM tours WHERE is_popular = 1 LIMIT 4";
-                        $popularToursResult = $conn->query($popularToursQuery);
+                        $popularToursResult = $conn1->query($popularToursQuery);
 
                         while ($row = $popularToursResult->fetch_assoc()):
                         ?>
@@ -111,7 +105,7 @@ $destinationResult = $conn->query($destinationQuery);
                     <div class="row">
                         <?php
                         $promotionToursQuery = "SELECT name, description, price, discount_price, image FROM tours WHERE discount_price IS NOT NULL LIMIT 4";
-                        $promotionToursResult = $conn->query($promotionToursQuery);
+                        $promotionToursResult = $conn1->query($promotionToursQuery);
 
                         while ($row = $promotionToursResult->fetch_assoc()):
                         ?>
