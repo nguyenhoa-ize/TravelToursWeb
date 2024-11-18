@@ -1,6 +1,6 @@
 <?php
 include "config.php";
-$servername = "localhost:3307";
+$servername = "localhost";
 $username = "root";
 $password = ""; 
 $dbname = "traveltoursweb";
