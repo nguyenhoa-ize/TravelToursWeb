@@ -92,7 +92,6 @@
 </body>
 </html>
 <?php
-    include '../../templates/layout/footer.php';
 ?>
 
 

@@ -1,17 +1,13 @@
 <?php
 include "config.php";
-$servername = "localhost";
-$username = "root";
-$password = ""; 
-$dbname = "traveltoursweb";
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include "includes/connect.php";
+include "includes/database.php";
+include "includes/functions.php";
+include "includes/session.php";
 $departureQuery = "SELECT DISTINCT departure_point AS name FROM tours WHERE departure_point IS NOT NULL";
-$departureResult = $conn->query($departureQuery);
+$departureResult = $conn1->query($departureQuery);
 $destinationQuery = "SELECT DISTINCT destination_point AS name FROM tours WHERE destination_point IS NOT NULL";
-$destinationResult = $conn->query($destinationQuery);
+$destinationResult = $conn1->query($destinationQuery);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +79,7 @@ $destinationResult = $conn->query($destinationQuery);
                     <div class="row">
                         <?php
                         $popularToursQuery = "SELECT name, description, price, image FROM tours WHERE is_popular = 1 LIMIT 4";
-                        $popularToursResult = $conn->query($popularToursQuery);
+                        $popularToursResult = $conn1->query($popularToursQuery);
 
                         while ($row = $popularToursResult->fetch_assoc()):
                         ?>
@@ -109,7 +105,7 @@ $destinationResult = $conn->query($destinationQuery);
                     <div class="row">
                         <?php
                         $promotionToursQuery = "SELECT name, description, price, discount_price, image FROM tours WHERE discount_price IS NOT NULL LIMIT 4";
-                        $promotionToursResult = $conn->query($promotionToursQuery);
+                        $promotionToursResult = $conn1->query($promotionToursQuery);
 
                         while ($row = $promotionToursResult->fetch_assoc()):
                         ?>
