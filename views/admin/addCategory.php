@@ -8,41 +8,28 @@
 <?php 
 if (isPost()) {
     $filterAll = filter(); // Giả sử filter() là hàm xử lý dữ liệu input
-    $errors = []; // Mảng chứa lỗi
-
-    // Validate tên sản phẩm
-    if (empty($filterAll['name'])) {
-        $errors['name']['required'] = 'Tên sản phẩm là bắt buộc.';
-    }
-
-    // Validate mô tả
-    if (empty($filterAll['description'])) {
-        $errors['description']['required'] = 'Mô tả là bắt buộc.';
-    }
-
+    $_SESSION['messenger'] = []; // Chứa thông báo lỗi nếu có
     // Validate giá
-    if (empty($filterAll['price'])) {
-        $errors['price']['required'] = 'Giá sản phẩm là bắt buộc.';
-    } else if (!is_numeric($filterAll['price']) || $filterAll['price'] <= 0) {
-        $errors['price']['valid'] = 'Giá phải là số và lớn hơn 0.';
+    if (!is_numeric($filterAll['price']) || $filterAll['price'] <= 0) {
+        $_SESSION['messenger']['price']['valid'] = 'Giá phải là số và lớn hơn 0.';
     }
     // Validate giảm giá
     if (!is_numeric($filterAll['discount_price']) || $filterAll['discount_price'] <= 0) {
-        $errors['discount_price']['valid'] = 'Giảm giá phải là số và lớn hơn 0.';
+        $_SESSION['messenger']['discount_price']['valid'] = 'Giảm giá phải là số và lớn hơn 0.';
     }
 
     // Validate ảnh (tùy chọn)
     if (empty($_FILES['image']['name'])) {
-        $errors['image']['required'] = 'Bạn cần chọn một hình ảnh.';
+        $_SESSION['messenger']['image']['required'] = 'Bạn cần chọn một hình ảnh.';
     } else {
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
         $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
-            $errors['image']['valid'] = 'Ảnh không đúng định dạng (jpg, jpeg, png, gif).';
+            $_SESSION['messenger']['image']['valid'] = 'Ảnh không đúng định dạng (jpg, jpeg, png, gif).';
         }
     }
 
-    if (empty($errors)) {
+    if (empty($_SESSION['messenger'])) {
         $dataInsert = [
             'name' => $filterAll['name'],
             'description' => $filterAll['description'],
@@ -53,29 +40,22 @@ if (isPost()) {
         ];
 
         $insertStatus = insert('tours', $dataInsert);
-        if ($insertStatus) {
-            setFlashData('msg', 'Thêm sản phẩm thành công!');
-            setFlashData('msg_type', 'success');
-            redirect('?page=category');
-        } else {
-            setFlashData('msg', 'Không thêm được sản phẩm.');
-            setFlashData('msg_type', 'danger');
-            redirect('?page=category&action=add_category');
-        }
+        header('Location: ?page=category');
+        exit();
     } else {
-        setFlashData('msg', 'Vui lòng kiểm tra lại dữ liệu.');
-        setFlashData('msg_type', 'danger');
-        setFlashData('errors', $errors);
-        setFlashData('old', $filterAll);
-        redirect('?page=category&action=add_category');
+        $_SESSION['old'] = $filterAll;
+            header('Location: ?page=category&action=add_category');
+            exit();
     }
 }
 
-// Lấy dữ liệu flash
-$msg = getFlashData('msg');
-$msg_type = getFlashData('msg_type');
-$errors = getFlashData('errors');
-$old = getFlashData('old');
+
+$messenger = isset($_SESSION['messenger']) ? $_SESSION['messenger'] : [];
+$old = isset($_SESSION['old']) ? $_SESSION['old'] : [];
+
+// Xóa session sau khi hiển thị thông báo
+unset($_SESSION['messenger']);
+unset($_SESSION['old']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,14 +76,14 @@ $old = getFlashData('old');
                 <label for="name">Tên Sản Phẩm</label>
                 <input type="text" name="name" id="name" placeholder="Tên sản phẩm" required
                        value="<?php echo old('name', $old); ?>">
-                <?php echo form_error('name', '<span class="error">', '</span>', $errors); ?>
+                <?php echo form_error('name', '<span class="error">', '</span>', $messenger); ?>
             </div>
             
             <div class="form-item">
                 <label for="price">Giá</label>
                 <input type="number" name="price" id="price" placeholder="Giá sản phẩm" required
                        value="<?php echo old('price', $old); ?>">
-                <?php echo form_error('price', '<span class="error">', '</span>', $errors); ?>
+                <?php echo form_error('price', '<span class="error">', '</span>', $messenger); ?>
             </div>
         </div>
 
@@ -116,24 +96,34 @@ $old = getFlashData('old');
                     <option value="0" <?php echo (old('is_popular', $old) == '0') ? 'selected' : ''; ?>>Bình thường</option>
                     <option value="1" <?php echo (old('is_popular', $old) == '1') ? 'selected' : ''; ?>>phổ biến</option>
                 </select>
-                <?php echo form_error('is_popular', '<span class="error">', '</span>', $errors); ?>
+                <?php echo form_error('is_popular', '<span class="error">', '</span>', $messenger); ?>
             </div>
             <div class="form-item">
                 <label for="discount_price">Giảm giá</label>
                 <input type="number" name="discount_price" id="discount_price" placeholder="Giảm giá" required
                        value="<?php echo old('discount_price', $old); ?>">
-                <?php echo form_error('discount_price', '<span class="error">', '</span>', $errors); ?>
+                <?php echo form_error('discount_price', '<span class="error">', '</span>', $messenger); ?>
             </div>
         </div>
-        <div class="form-item">
-                <label for="image">Hình Ảnh</label>
-                <input type="file" name="image" id="image" required>
-                <?php echo form_error('image', '<span class="error">', '</span>', $errors); ?>
+        <div class="form-group">
+            <div class="form-item">
+                <label for="is_domestic">Tours</label>
+                <select name="is_domestic" id="is_domestic" >
+                    <option value="0" <?php echo (old('is_domestic', $old) == '0') ? 'selected' : ''; ?>>Trong nước</option>
+                    <option value="1" <?php echo (old('is_domestic', $old) == '1') ? 'selected' : ''; ?>>Ngoài nước</option>
+                </select>
+                <?php echo form_error('is_domestic', '<span class="error">', '</span>', $messenger); ?>
+            </div>
+            <div class="form-item">
+                    <label for="image">Hình Ảnh</label>
+                    <input type="file" name="image" id="image" required>
+                    <?php echo form_error('image', '<span class="error">', '</span>', $messenger); ?>
+                </div>
             </div>
         <div class="form-item">
                 <label for="description">Mô Tả</label>
                 <textarea style="width: 800px;height: 176px;" name="description" id="description" placeholder="Mô tả sản phẩm" required><?php echo old('description', $old); ?></textarea>
-                <?php echo form_error('description', '<span class="error">', '</span>', $errors); ?>
+                <?php echo form_error('description', '<span class="error">', '</span>', $messenger); ?>
             </div>
         
         <div class="form-buttons">

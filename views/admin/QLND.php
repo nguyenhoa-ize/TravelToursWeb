@@ -54,10 +54,10 @@ $stt = 1;
                 while ($d = $kq->fetch_assoc()) {
             ?>
                     <tr>
-                        <td><?= $stt++ ?></td>
-                        <td><?= $d['username'] ?></td>
-                        <td><?= $d['email'] ?></td>
-                        <td><?= $d['phone'] ?></td>
+                        <td><?php echo $stt++ ?></td>
+                        <td><?php echo $d['username'] ?></td>
+                        <td><?php echo $d['email'] ?></td>
+                        <td><?php echo $d['phone'] ?></td>
                         <td>
                             <?php if ($d['status'] == 0): ?>
                                 <span class="status-btn">Đã kích hoạt</span>

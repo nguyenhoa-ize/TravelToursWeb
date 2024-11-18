@@ -44,6 +44,7 @@ $stt = 1;
                 <th>Giảm giá</th>
                 <th>Ảnh</th>
                 <th>Loại tours</th>
+                <th>Tours</th>
                 <th width="5%">Sửa</th>
                 <th width="5%">Xóa</th>
             </tr>
@@ -63,6 +64,13 @@ $stt = 1;
                         <td> <img src="http://localhost/TravelToursWeb/templates/image/tours/<?php echo $d['image']; ?>" alt="Tour Image" style="width: 100px;" ></td>
                         <td>
                             <?php if ($d['is_popular'] == 0): ?>
+                                <span class="status-btn">Ngoài nước</span>
+                            <?php else: ?>
+                                <span class="status-btn">trong nước</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($d['is_domestic'] == 0): ?>
                                 <span class="status-btn">Bình thường</span>
                             <?php else: ?>
                                 <span class="status-btn">Phổ biến</span>

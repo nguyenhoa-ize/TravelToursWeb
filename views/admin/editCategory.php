@@ -5,10 +5,11 @@
     include '../../includes/functions.php';
     include '../../includes/session.php';
 ?>
+
 <?php 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
+// Khởi tạo biến thông báo
+$messenger = [];  // Mảng chứa thông báo lỗi hoặc thành công
 
 // Lấy dữ liệu đầu vào
 $filterAll = filter();
@@ -16,93 +17,70 @@ if (!empty($filterAll['id_tours'])) {
     $tourID = $filterAll['id_tours'];
     $tourDetail = oneRaw("SELECT * FROM tours WHERE id_tours='$tourID'");
     if (!empty($tourDetail)) {
-        setFlashData("tour-detail", $tourDetail);
+        $old = $tourDetail;
     } else {
         redirect("?page=edit_category");
     }
 }
 
 if (isPost()) {
-    $filterAll = filter(); // Giả sử filter() là hàm xử lý dữ liệu input
-    $errors = []; // Mảng chứa lỗi
-
-    // Validate tên sản phẩm
-    if (empty($filterAll['name'])) {
-        $errors['name']['required'] = 'Tên tours là bắt buộc.';
-    }
-
-    // Validate mô tả
-    if (empty($filterAll['description'])) {
-        $errors['description']['required'] = 'Mô tả là bắt buộc.';
-    }
-
+    $filterAll = filter();
     // Validate giá
     if (empty($filterAll['price'])) {
-        $errors['price']['required'] = 'Giá tours là bắt buộc.';
+        $messenger['price']['required'] = 'Giá tours là bắt buộc.';
     } else if (!is_numeric($filterAll['price']) || $filterAll['price'] <= 0) {
-        $errors['price']['valid'] = 'Giá phải là số và lớn hơn 0.';
+        $messenger['price']['valid'] = 'Giá phải là số và lớn hơn 0.';
     }
 
     // Validate giảm giá
-    if (!is_numeric($filterAll['discount_price']) || $filterAll['discount_price'] <= 0) {
-        $errors['discount_price']['valid'] = 'Giảm giá phải là số và lớn hơn 0.';
+    if (!empty($filterAll['discount_price']) && (!is_numeric($filterAll['discount_price']) || $filterAll['discount_price'] < 0)) {
+        $messenger['discount_price']['valid'] = 'Giá giảm phải là số không âm.';
     }
 
-    // Validate ảnh (tùy chọn)
-    if (empty($_FILES['image']['name'])){
+    // Kiểm tra ảnh (tùy chọn)
+    if (!empty($_FILES['image']['name'])) {
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
         $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
-            $errors['image']['valid'] = 'Ảnh không đúng định dạng (jpg, jpeg, png, gif).';
+            $messenger['image']['valid'] = 'Ảnh không đúng định dạng (jpg, jpeg, png, gif).';
+        }
+    } else {
+        if (empty($old['image'])) {
+            $messenger['image']['required'] = 'Hãy chọn ảnh nếu muốn thay đổi ảnh.';
         }
     }
 
-    if (empty($errors)) {
+    if (empty($messenger)) {
+        $image = !empty($_FILES['image']['name']) ? $_FILES['image']['name'] : $old['image'];
+        $discountPrice = !empty($filterAll['discount_price']) ? $filterAll['discount_price'] : null;
+
         $dataUpdate = [
             'name' => $filterAll['name'],
             'description' => $filterAll['description'],
             'price' => $filterAll['price'],
-            'discount_price' => $filterAll['discount_price'],
-            'image' => $_FILES['image']['name'],
+            'discount_price' => $discountPrice,
+            'image' => $image,
             'is_popular' => $filterAll['is_popular'],
         ];
 
-        // Thêm điều kiện WHERE để chỉ cập nhật bản ghi theo ID
         if (isset($tourID) && !empty($tourID)) {
             $updateStatus = update('tours', $dataUpdate, "id_tours = '$tourID'");
             if ($updateStatus) {
-                setFlashData('msg', 'Cập nhật tours thành công!');
-                setFlashData('msg_type', 'success');
+                $_SESSION['messenger'] = ['success' => 'Cập nhật tours thành công!'];
             } else {
-                setFlashData('msg', 'Không thể cập nhật sản phẩm.');
-                setFlashData('msg_type', 'danger');
+                $_SESSION['messenger'] = ['danger' => 'Không thể cập nhật sản phẩm.'];
             }
         } else {
-            setFlashData('msg', 'Không xác định được sản phẩm để cập nhật.');
-            setFlashData('msg_type', 'danger');
+            $_SESSION['messenger'] = ['danger' => 'Không xác định được sản phẩm để cập nhật.'];
         }
     } else {
-        setFlashData('msg', 'Vui lòng kiểm tra lại dữ liệu.');
-        setFlashData('msg_type', 'danger');
-        setFlashData('errors', $errors);
-        setFlashData('old', $filterAll);
+        $_SESSION['messenger'] = $messenger;
+        $_SESSION['general_error'] = 'Vui lòng kiểm tra lại dữ liệu.';
     }
 
-    redirect('?page=category&action=edit_category&id_tours=' . $tourID);
-}
-
-// Lấy dữ liệu flash
-$msg = getFlashData('msg');
-$msg_type = getFlashData('msg_type');
-$errors = getFlashData('errors');
-$old = getFlashData('old');
-$tourDetail = getFlashData('tour-detail');
-if (!empty($tourDetail)) {
-    $old = $tourDetail;
+    redirect('?page=category&action=edit_category&id_tours='.$tourID);
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -112,70 +90,105 @@ if (!empty($tourDetail)) {
     <link rel="stylesheet" href="../../templates/css/styleAdd.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
-    <style>
-        
-
-    </style>
 </head>
 <body>
 
-
 <div class="register-container">
     <div class="alert-container">
-        <?php if (!empty($msg)): ?>
-            <div class="alert alert-<?php echo $msg_type; ?>">
-                <?php echo htmlspecialchars($msg); ?>
+        <!-- Hiển thị thông báo chung -->
+        <?php if (isset($_SESSION['general_error'])): ?>
+            <div class="alert danger">
+                <?php echo $_SESSION['general_error']; unset($_SESSION['general_error']); ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Hiển thị thông báo thành công -->
+        <?php if (isset($_SESSION['messenger']['success'])): ?>
+            <div class="alert success">
+                <?php echo $_SESSION['messenger']['success']; unset($_SESSION['messenger']['success']); ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Hiển thị thông báo lỗi -->
+        <?php if (isset($_SESSION['messenger']['danger'])): ?>
+            <div class="alert danger">
+                <?php echo $_SESSION['messenger']['danger']; unset($_SESSION['messenger']['danger']); ?>
             </div>
         <?php endif; ?>
     </div>
+
+    <?php 
+    $messenger = isset($_SESSION['messenger']) ? $_SESSION['messenger'] : [];
+    unset($_SESSION['messenger']); 
+    ?>
+
     <form action="" method="post" enctype="multipart/form-data">
         <h2>Sửa tours</h2>
-        
+
         <div class="form-group">
             <div class="form-item">
                 <label for="name">Tên tours</label>
-                <input type="text" name="name" id="name" placeholder="Tên tours" 
+                <input type="text" name="name" id="name" placeholder="Tên tours" required
                        value="<?php echo old('name', $old); ?>">
-                <?php echo form_error('name', '<span class="error">', '</span>', $errors); ?>
+                <?php if (isset($messenger['name'])): ?>
+                    <span class="error"><?php echo implode(', ', $messenger['name']); ?></span>
+                <?php endif; ?>
             </div>
-            
+
             <div class="form-item">
                 <label for="price">Giá</label>
-                <input type="number" name="price" id="price" placeholder="Giá tours" 
+                <input type="number" name="price" id="price" placeholder="Giá tours" required
                        value="<?php echo old('price', $old); ?>">
-                <?php echo form_error('price', '<span class="error">', '</span>', $errors); ?>
+                <?php if (isset($messenger['price'])): ?>
+                    <span class="error"><?php echo implode(', ', $messenger['price']); ?></span>
+                <?php endif; ?>
             </div>
         </div>
 
-       
-        
         <div class="form-group">
             <div class="form-item">
                 <label for="is_popular">Loại tours</label>
-                <select name="is_popular" id="is_popular" >
+                <select name="is_popular" id="is_popular">
                     <option value="0" <?php echo (old('is_popular', $old) == '0') ? 'selected' : ''; ?>>Bình thường</option>
-                    <option value="1" <?php echo (old('is_popular', $old) == '1') ? 'selected' : ''; ?>>phổ biến</option>
+                    <option value="1" <?php echo (old('is_popular', $old) == '1') ? 'selected' : ''; ?>>Phổ biến</option>
                 </select>
-                <?php echo form_error('is_popular', '<span class="error">', '</span>', $errors); ?>
             </div>
+
             <div class="form-item">
                 <label for="discount_price">Giá giảm</label>
                 <input type="number" name="discount_price" id="discount_price" placeholder="Giá giảm" 
                        value="<?php echo old('discount_price', $old); ?>">
-                <?php echo form_error('discount_price', '<span class="error">', '</span>', $errors); ?>
+                <?php if (isset($messenger['discount_price'])): ?>
+                    <span class="error"><?php echo implode(', ', $messenger['discount_price']); ?></span>
+                <?php endif; ?>
             </div>
         </div>
-        <div class="form-item">
+
+        <div class="form-group">
+            <div class="form-item">
+                <label for="is_domestic">Tours</label>
+                <select name="is_domestic" id="is_domestic">
+                    <option value="0" <?php echo (old('is_domestic', $old) == '0') ? 'selected' : ''; ?>>Trong nước</option>
+                    <option value="1" <?php echo (old('is_domestic', $old) == '1') ? 'selected' : ''; ?>>Ngoài nước</option>
+                </select>
+            </div>
+
+            <div class="form-item">
                 <label for="image">Hình Ảnh</label>
-                <input type="file" name="image" id="image" >
-                <?php echo form_error('image', '<span class="error">', '</span>', $errors); ?>
+                <input type="file" name="image" id="image">
+                <?php if (isset($messenger['image'])): ?>
+                    <span class="error"><?php echo implode(', ', $messenger['image']); ?></span>
+                <?php endif; ?>
             </div>
+        </div>
+
         <div class="form-item">
-                <label for="description">Mô Tả</label>
-                <textarea style="width: 800px;height: 176px;" name="description" id="description" placeholder="Mô tả sản phẩm" required><?php echo old('description', $old); ?></textarea>
-                <?php echo form_error('description', '<span class="error">', '</span>', $errors); ?>
-            </div>
-        
+            <label for="description">Mô Tả</label>
+            <textarea style="width: 800px;height: 176px;" name="description" id="description"><?php echo old('description', $old); ?></textarea>
+            <?php if (isset($messenger['description'])): ?>
+                <span class="error"><?php echo implode(', ', $messenger['description']); ?></span>
+            <?php endif; ?>
+        </div>
         <div class="form-buttons">
             <button type="submit" class="btn-primary">Sửa Tours</button>
             <button type="button" class="btn-secondary" onclick="window.location.href='?page=category'">Quay lại</button>
@@ -186,3 +199,4 @@ if (!empty($tourDetail)) {
 
 </body>
 </html>
+
