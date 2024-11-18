@@ -43,8 +43,9 @@ $stt = 1;
                 <th>Giá</th>
                 <th>Giảm giá</th>
                 <th>Ảnh</th>
-                <th>Loại tours</th>
+               
                 <th>Tours</th>
+                <th>Loại tours</th>
                 <th width="5%">Sửa</th>
                 <th width="5%">Xóa</th>
             </tr>
@@ -66,7 +67,7 @@ $stt = 1;
                             <?php if ($d['is_popular'] == 0): ?>
                                 <span class="status-btn">Ngoài nước</span>
                             <?php else: ?>
-                                <span class="status-btn">trong nước</span>
+                                <span class="status-btn">Trong nước</span>
                             <?php endif; ?>
                         </td>
                         <td>

@@ -60,12 +60,12 @@
             if (isset($userID) && !empty($userID)) {
                 $updateStatus = update('user', $dataUpdate, "id_user = '$userID'");
                 if ($updateStatus) {
-                    $_SESSION['messenger'] = ['success' => 'Cập nhật tours thành công!'];
+                    $_SESSION['messenger'] = ['success' => 'Cập nhật người dùng thành công!'];
                 } else {
-                    $_SESSION['messenger'] = ['danger' => 'Không thể cập nhật sản phẩm.'];
+                    $_SESSION['messenger'] = ['danger' => 'Không thể cập nhật người dùng.'];
                 }
             } else {
-                $_SESSION['messenger'] = ['danger' => 'Không xác định được sản phẩm để cập nhật.'];
+                $_SESSION['messenger'] = ['danger' => 'Không có dữ liệu để cập nhật.'];
             }
         } else {
             $_SESSION['messenger'] = $messenger;
@@ -166,8 +166,8 @@
         <input  type="hidden" name="id_user" value="<?php echo $userID ?>">
 
         <div class="form-buttons">
-            <button type="submit" class="btn-primary">Sửa người dùng</button>
-            <button type="button" class="btn-secondary" onclick="window.location.href='?page=QLND'">Quay lại</button>
+            <button type="submit" class="btn-1">Sửa người dùng</button>
+            <button type="button" class="btn-2" onclick="window.location.href='?page=QLND'">Quay lại</button>
         </div>
     </form>
 </div>
