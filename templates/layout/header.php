@@ -33,9 +33,7 @@ $fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu 
                           <li><a href="#" id="international-tours-link">Tour quốc tế</a></li>
                       </ul>
                   </li>
-                  <li><a href="#" id="news-link">Tin tức</a></li>
-                  <li><a href="#" id="faq-link">FAQs</a></li>
-                  <li><a href="#" id="contact-link">Liên hệ</a></li>
+                  <li><a href="http://localhost/traveltoursweb/views/user/FAQs.php" id="faq-link">FAQs</a></li>
               </ul>
           </nav>
 

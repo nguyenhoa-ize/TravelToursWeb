@@ -198,19 +198,19 @@
                 <img src="<?php echo SITE_URL . 'templates/image/mountain.jpeg'; ?>" alt="Hình ảnh Tour">
                 <h3>Hành trình núi</h3>
                 <p>Trải nghiệm leo núi và chiêm ngưỡng cảnh quan hùng vĩ.</p>
-                <a href="http://localhost/traveltoursweb/index.php" class="btn">Đặt ngay</a>
+                <a href="http://localhost/traveltoursweb/index.php" class="btn">Xem Chi Tiết</a>
             </div>
             <div class="tour-item">
                 <img src="<?php echo SITE_URL . 'templates/image/beach.jpeg'; ?>" alt="Hình ảnh Tour">
                 <h3>Thư giãn tại biển</h3>
                 <p>Nghỉ ngơi tại những bãi biển đẹp với làn nước trong xanh.</p>
-                <a href="http://localhost/traveltoursweb/index.php" class="btn">Đặt ngay</a>
+                <a href="http://localhost/traveltoursweb/index.php" class="btn">Xem Chi Tiết</a>
             </div>
             <div class="tour-item">
                 <img src="<?php echo SITE_URL . 'templates/image/city.jpeg'; ?>" alt="Hình ảnh Tour">
                 <h3>Khám phá thành phố</h3>
                 <p>Tham quan các thành phố sôi động và nền văn hóa đa dạng.</p>
-                <a href="http://localhost/traveltoursweb/index.php" class="btn">Đặt ngay</a>
+                <a href="http://localhost/traveltoursweb/index.php" class="btn">Xem Chi Tiết</a>
             </div>
         </div>
     </section>
