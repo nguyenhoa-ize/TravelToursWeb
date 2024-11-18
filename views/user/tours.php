@@ -1,5 +1,10 @@
 <?php
     include '../../config.php';
+    include '../../includes/connect.php';
+
+    $sql = "SELECT id_tours, is_domestic, name, description, departure_point, destination_point, price, image, discount_price FROM tours";
+
+    $kq = mysqli_query($conn1, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -28,10 +33,10 @@
                 <h2>Danh mục tour</h2>
                 <ul class="loai-tour">
                     <li>
-                        <a title="Tour trong nước" href="/tour-trong-nuoc" class="link">Tour trong nước </a>
+                        <a title="Tour trong nước" href="#" class="link">Tour trong nước </a>
                     </li>
                     <li>
-                        <a title="Tour nước ngoài" href="/tour-nuoc-ngoai" class="link">Tour nước ngoài</a>
+                        <a title="Tour nước ngoài" href="#" class="link">Tour nước ngoài</a>
                     </li>
                 </ul>
             </div>
@@ -182,60 +187,71 @@
                 </select>
             </div>
             <div class="tour-container">
-                <!-- Tour 1 -->
+            <?php if ($kq) {
+                while ($tour = mysqli_fetch_assoc($kq)) {
+            ?>
                 <div class="the-tour">
-                    <img src="https://cdn2.ivivu.com/2023/12/21/10/ivivu-cho-hoa-dau-nam-con-minh-kieu-tu-trung-quoc-930x520.gif" alt="Tour Đà Lạt 3N2Đ">
-                    <div class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24" fill="none">
-                            <path d="M9.01107 1.625C13.103 1.625 16.9043 4.90179 16.9043 9.03571C16.9043 11.7682 15.9811 13.7001 14.434 15.9524C12.707 18.4667 10.5018 20.8338 9.51601 21.8515C9.23162 22.1451 8.76735 22.1451 8.48296 21.8515C7.4972 20.8338 5.29202 18.4667 3.56496 15.9524C2.01787 13.7001 1.09473 11.7682 1.09473 9.03571C1.09473 4.90179 4.89588 1.625 8.98782 1.625" stroke="#0396ff" stroke-width="2" stroke-linecap="round"></path>
-                            <path d="M11.9637 9.47235C11.9637 11.1256 10.6409 12.4928 9.00411 12.4928C7.36733 12.4928 6.03516 11.1256 6.03516 9.47235C6.03516 7.81912 7.36733 6.56542 9.00411 6.56542C10.6409 6.56542 11.9637 7.81912 11.9637 9.47235Z" stroke="#0396ff" stroke-width="2"></path>
-                        </svg>
-                        <p>Khởi hành từ: <span>Hà Nội</span></p>
+                    <div class="cot-hinh-anh">
+                        <div class="khung-hinh-anh">
+                            <a class="link-hinh-anh" href="<?php echo SITE_URL. 'views/user/tour-detail.php?id=' . $tour['id_tours']; ?>">
+                                <img class="hinh-anh-tour" src="<?php echo SITE_URL. 'templates/image/tours/' . $tour['image']; ?>" alt="<?php echo $tour['name'];?>">
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="tour-name">
-                        <a href="#" title="Du lịch Nha Trang - VinWonders Nha Trang - Hòn Mun 3N2Đ">
-                            Du lịch Nha Trang - VinWonders Nha Trang - Hòn Mun 3N2Đ
-                        </a> Hà Nội 2N1Đ
-                    </h3>
-                    <p>Khám phá vẻ đẹp của thành phố ngàn hoa.</p>
-                    <p class="price">3,000,000 VND</p>
-                </div>
-                <!-- Tour 2 -->
-                <div class="the-tour">
-                    <img src="https://cdn2.ivivu.com/2023/12/21/10/ivivu-cho-hoa-dau-nam-con-minh-kieu-tu-trung-quoc-930x520.gif" alt="Tour Phú Quốc 4N3Đ">
-                    <div class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24" fill="none">
-                            <path d="M9.01107 1.625C13.103 1.625 16.9043 4.90179 16.9043 9.03571C16.9043 11.7682 15.9811 13.7001 14.434 15.9524C12.707 18.4667 10.5018 20.8338 9.51601 21.8515C9.23162 22.1451 8.76735 22.1451 8.48296 21.8515C7.4972 20.8338 5.29202 18.4667 3.56496 15.9524C2.01787 13.7001 1.09473 11.7682 1.09473 9.03571C1.09473 4.90179 4.89588 1.625 8.98782 1.625" stroke="#0396ff" stroke-width="2" stroke-linecap="round"></path>
-                            <path d="M11.9637 9.47235C11.9637 11.1256 10.6409 12.4928 9.00411 12.4928C7.36733 12.4928 6.03516 11.1256 6.03516 9.47235C6.03516 7.81912 7.36733 6.56542 9.00411 6.56542C10.6409 6.56542 11.9637 7.81912 11.9637 9.47235Z" stroke="#0396ff" stroke-width="2"></path>
-                        </svg>
-                        <p>Khởi hành từ: <span>Hà Nội</span></p>
+                    <div class="cot-thong-tin">
+                        <div class="thong-tin-tour">
+                            <div class="chi-tiet-tour">
+                                <span class="ma-tour">Mã tour: <?php echo $tour['id_tours'];?> </span>
+                                <h3 class="tieu-de-tour">
+                                    <a href="<?php echo SITE_URL. 'views/user/tour-detail.php?id=' . $tour['id_tours']; ?>"><?php echo $tour['name'];?></a>
+                                </h3>
+                                <div class="thoi-gian-tour">
+                                    <svg fill="#000000" width="24px" height="24px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-1-7.59V4h2v5.59l3.95 3.95-1.41 1.41L9 10.41z"/></svg>
+                                    Thời gian: 3N2Đ
+                                </div>
+                            </div>
+                            <div class="meta-tour">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24" fill="none">
+                                        <path d="M9.01107 1.625C13.103 1.625 16.9043 4.90179 16.9043 9.03571C16.9043 11.7682 15.9811 13.7001 14.434 15.9524C12.707 18.4667 10.5018 20.8338 9.51601 21.8515C9.23162 22.1451 8.76735 22.1451 8.48296 21.8515C7.4972 20.8338 5.29202 18.4667 3.56496 15.9524C2.01787 13.7001 1.09473 11.7682 1.09473 9.03571C1.09473 4.90179 4.89588 1.625 8.98782 1.625" stroke="#0396ff" stroke-width="2" stroke-linecap="round"></path>
+                                        <path d="M11.9637 9.47235C11.9637 11.1256 10.6409 12.4928 9.00411 12.4928C7.36733 12.4928 6.03516 11.1256 6.03516 9.47235C6.03516 7.81912 7.36733 6.56542 9.00411 6.56542C10.6409 6.56542 11.9637 7.81912 11.9637 9.47235Z" stroke="#0396ff" stroke-width="2"></path>
+                                    </svg>
+                                    <p>Khởi hành từ: <span><?php echo  $tour['departure_point'];?></span></p>
+                                </div>
+                                <?php if (!empty($tour['discount_price'])) { ?>
+                                    <!-- Giá gốc với định dạng và gạch ngang -->
+                                    <div class="gia-tour" style="text-decoration: line-through; color: #333;">
+                                        <?php 
+                                        $formatted_price = number_format($tour['price'], 0, ',', '.') . ' VND';
+                                        echo $formatted_price;
+                                        ?>
+                                    </div>
+                                    <!-- Giá khuyến mãi -->
+                                    <div class="gia-tour">
+                                        <?php 
+                                        $formatted_discount_price = number_format($tour['discount_price'], 0, ',', '.') . ' VND';
+                                        echo $formatted_discount_price;
+                                        ?>
+                                    </div>
+                                <?php } else { ?>
+                                    <!-- Chỉ hiển thị giá nếu không có khuyến mãi -->
+                                    <div class="gia-tour">
+                                        <?php 
+                                        $formatted_price = number_format($tour['price'], 0, ',', '.') . ' VND';
+                                        echo $formatted_price;
+                                        ?>
+                                    </div>
+                                <?php } ?>
+                                <a href="<?php echo SITE_URL. 'views/user/tour-detail.php?id=' . $tour['id_tours']; ?>" class="xem-chi-tiet-tour">Xem chi tiết</a>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="tour-name">
-                        <a href="#" title="Du lịch Nha Trang - VinWonders Nha Trang - Hòn Mun 3N2Đ">
-                            Du lịch Nha Trang - VinWonders Nha Trang - Hòn Mun 3N2Đ
-                        </a> Hà Nội 2N1Đ
-                    </h3>
-                    <p>Thư giãn tại hòn đảo ngọc của Việt Nam.</p>
-                    <p class="price">5,500,000 VND</p>
                 </div>
-                <!-- Tour 3 -->
-                <div class="the-tour">
-                    <img src="https://cdn2.ivivu.com/2023/12/21/10/ivivu-cho-hoa-dau-nam-con-minh-kieu-tu-trung-quoc-930x520.gif" alt="Tour Hà Nội 2N1Đ">
-                    <div class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24" fill="none">
-                            <path d="M9.01107 1.625C13.103 1.625 16.9043 4.90179 16.9043 9.03571C16.9043 11.7682 15.9811 13.7001 14.434 15.9524C12.707 18.4667 10.5018 20.8338 9.51601 21.8515C9.23162 22.1451 8.76735 22.1451 8.48296 21.8515C7.4972 20.8338 5.29202 18.4667 3.56496 15.9524C2.01787 13.7001 1.09473 11.7682 1.09473 9.03571C1.09473 4.90179 4.89588 1.625 8.98782 1.625" stroke="#0396ff" stroke-width="2" stroke-linecap="round"></path>
-                            <path d="M11.9637 9.47235C11.9637 11.1256 10.6409 12.4928 9.00411 12.4928C7.36733 12.4928 6.03516 11.1256 6.03516 9.47235C6.03516 7.81912 7.36733 6.56542 9.00411 6.56542C10.6409 6.56542 11.9637 7.81912 11.9637 9.47235Z" stroke="#0396ff" stroke-width="2"></path>
-                        </svg>
-                        <p>Khởi hành từ: <span>Hà Nội</span></p>
-                    </div>
-                    <h3 class="tour-name">
-                        <a href="#" title="Du lịch Nha Trang - VinWonders Nha Trang - Hòn Mun 3N2Đ">
-                            Du lịch Nha Trang - VinWonders Nha Trang - Hòn Mun 3N2Đ
-                        </a> Hà Nội 2N1Đ
-                    </h3>
-                    <p>Tham quan thủ đô ngàn năm văn hiến.</p>
-                    <p class="price">2,000,000 VND</p>
-                </div>
+            <?php
+                }
+            } else {
+                echo "Error: " . mysqli_error($conn1);
+            }?>
             </div>
         </div>
     </div>
