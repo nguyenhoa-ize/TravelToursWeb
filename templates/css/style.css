@@ -15,7 +15,6 @@
     width: 100%;
     position: fixed;
     z-index: 100000;
-    height: 90px;
 }
 
 .logo {
@@ -49,7 +48,7 @@
 .navbar ul li a {
     text-decoration: none;
     color: #000;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .navbar ul li:hover .dropdown-menu {

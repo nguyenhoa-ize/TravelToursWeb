@@ -8,11 +8,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$departureQuery = "SELECT DISTINCT departure_point AS name FROM tours WHERE departure_point IS NOT NULL";
+$departureQuery = "SELECT name FROM destinations WHERE type = 'departure'";
 $departureResult = $conn->query($departureQuery);
-$destinationQuery = "SELECT DISTINCT destination_point AS name FROM tours WHERE destination_point IS NOT NULL";
+$destinationQuery = "SELECT name FROM destinations WHERE type = 'destination'";
 $destinationResult = $conn->query($destinationQuery);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +34,7 @@ $destinationResult = $conn->query($destinationQuery);
                 <div class="icon-background">
                     <i class="fa fa-map-marker"></i>
                 </div>
-                <select name="departure_point">
+                <select name="departure">
                     <option value="">Chọn điểm đi</option>
                     <?php while($row = $departureResult->fetch_assoc()): ?>
                         <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
@@ -44,7 +43,7 @@ $destinationResult = $conn->query($destinationQuery);
                 <div class="icon-background">
                     <i class="fa fa-map-marker"></i>
                 </div>
-                <select name="destination_point">
+                <select name="destination">
                     <option value="">Chọn điểm đến</option>
                     <?php while($row = $destinationResult->fetch_assoc()): ?>
                         <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
