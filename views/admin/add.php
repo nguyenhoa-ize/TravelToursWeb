@@ -13,49 +13,30 @@
         $errors =[];// Chứa các lỗi
 
         // Validate fullname
-        if (empty($filterAll['username'])) {
-            $errors['username']['required'] = 'Cần phải nhập họ tên';
-        } else {
-            if (strlen($filterAll['username']) < 5) {
+        
+        if (strlen($filterAll['username']) < 5) {
                 $errors['username']['min'] = 'Họ tên phải có ít nhất 5 ký tự.';
-            }
         }
         // validate email: bắt buộc phải nhập, đúng định dạng, kiểm tra email đã tồn tại hay chưa
-        if (empty($filterAll['email'])) {
-            $errors['email']['required'] = 'Cần phải nhập email';
-        } 
-        else {
+        if (!empty($filterAll['email'])) {
             $email  = $filterAll['email'];
-            $sql = "SELECT id FROM user WHERE email ='$email'";
+            $sql = "SELECT id_user FROM user WHERE email ='$email'";
             if(getRows($sql) > 0){
                 $errors['email']['unique'] = 'Email đã tồn tại.';
         }
         
         // Validate số điện thoại: bắt buộc phải nhập, số có đúng định dạng không
-        if (empty($filterAll['phone'])) {
-            $errors['phone']['required'] = 'Số điện thoại bắt buộc phải nhập.';
-        } else {
             if(!isPhone($filterAll['phone'])){
                 $errors['phone']['isPhone'] = 'Số điện thoại không hợp lệ.';
-            }
-        }
+         }
         // Validate password: bắt buộc phải nhập, >=8 ký tự
-        if (empty($filterAll['password'])) {
-            $errors['password']['required'] = 'Mật khẩu bắt buộc phải nhập.';
-        } else {
             if(strlen($filterAll['password']) < 8){
                 $errors['password']['min'] = 'Mật khẩu phải lớn hơn hoặc bằng 8.';
             }
-        }
-        // Validate pasword_confirm: bắt buộc phải nhập, giống password
-        if (empty($filterAll['confirm-password'])) {
-            $errors['confirm-password']['required'] = 'Bạn phải nhập lại mật khẩu.';
-        } else {
             if(($filterAll['password']) != $filterAll['confirm-password']){
                 $errors['pconfirm-password']['match'] = 'Mật khẩu bạn nhập lại không đúng.';
-            }
+            }  
         }
-    }
     if(empty($errors)){
         $dataInsert = [
             'username' => $filterAll['username'],

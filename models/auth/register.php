@@ -110,72 +110,8 @@ $old = getFlashData('old');
     <title>Đăng Ký - Đặt Tour Du Lịch</title>
     <link rel="stylesheet" href="../../templates/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            background-color: #f2f6fc;
-            font-family: Arial, sans-serif;
-        }
-        .register-container {
-            max-width: 500px;
-            margin: 100px auto;
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-        .register-container h2 {
-            text-align: center;
-            color: #007bff;
-            margin-bottom: 30px;
-        }
-        .register-container input {
-            display: block;
-            width: 460px;
-            padding: 12px 20px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .register-container button {
-            display: block;
-            width: 500px;
-            padding: 12px 20px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        .register-container button:hover {
-            background-color: #0056b3;
-        }
-        .register-container a {
-            display: block;
-            text-align: right;
-            margin-top: 10px;
-            color: #007bff;
-            text-decoration: none;
-        }
-        .register-container a:hover {
-            text-decoration: underline;
-        }
-        .alert {
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
+    <link rel="stylesheet" href="../../templates/css/style_register.css">
 
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
 </head>
 <body>
 <div class="register-container">

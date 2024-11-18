@@ -64,69 +64,7 @@
     <title>Đăng Nhập - Đặt Tour Du Lịch</title>
     <link rel= "stylesheet" href="../../templates/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
-        }
-        .login-container {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 30px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .login-container input {
-            display: block;
-            width: 375px;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            font-size: 16px;
-        }
-        .login-container button {
-            display: block;
-            width: 400px;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-        .login-container a {
-            display: block;
-            text-align: right;
-            margin-top: 10px;
-            color: #007bff;
-            text-decoration: none;
-        }
-        .login-container a:hover {
-            text-decoration: underline;
-        }
-        .alert {
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
+    <link rel="stylesheet" href="../../templates/css/style_login.css">
 </head>
 <body>
 <div class="login-container">
