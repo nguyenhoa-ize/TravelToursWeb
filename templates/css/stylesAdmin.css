@@ -80,18 +80,12 @@ h2 {
 .status-btn {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #dc3545; 
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
+    color: black;
     width: 102px;
-    cursor: pointer;
 }
 .sidebar {
     min-height: 100vh;
-    width: 220px;
+    width: 160px;
     background-color: #f1f1f1;
     padding: 15px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -110,5 +104,6 @@ h2 {
 }
 .content {
     flex-grow: 1;
-    padding: 53px;
+    padding-top: 53px;
+    padding-left: 10px;
 }

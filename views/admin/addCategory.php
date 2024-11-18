@@ -127,8 +127,8 @@ unset($_SESSION['old']);
             </div>
         
         <div class="form-buttons">
-            <button type="submit" class="btn-primary">Thêm Sản Phẩm</button>
-            <button type="button" class="btn-secondary" onclick="window.location.href='?page=category'">Quay lại</button>
+            <button type="submit" class="btn-1">Thêm Sản Phẩm</button>
+            <button type="button" class="btn-2" onclick="window.location.href='?page=category'">Quay lại</button>
         </div>
     </form>
 </div>

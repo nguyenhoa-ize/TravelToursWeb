@@ -59,7 +59,7 @@ input::placeholder {
     margin-top: 20px;
 }
 
-.btn-primary {
+.btn-1 {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -69,11 +69,11 @@ input::placeholder {
     cursor: pointer;
 }
 
-.btn-primary:hover {
+.btn-1:hover {
     background-color: #0056b3;
 }
 
-.btn-secondary {
+.btn-2 {
     background-color: #28a745;
     color: white;
     padding: 10px 20px;
@@ -83,7 +83,7 @@ input::placeholder {
     cursor: pointer;
 }
 
-.btn-secondary:hover {
+.btn-2:hover {
     background-color: #218838;
 }
 .alert-container {
