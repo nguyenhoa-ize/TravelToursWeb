@@ -1,6 +1,6 @@
 <?php
-    include '../../templates/layout/header.php';
     include '../../config.php';
+    include '../../templates/layout/header.php';
     include '../../includes/connect.php';
     include '../../includes/database.php';
     include '../../includes/functions.php';
@@ -62,7 +62,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Đăng Nhập - Đặt Tour Du Lịch</title>
-    <link rel="stylesheet" href="../../templates/css/style.css">
+    <link rel= "stylesheet" href="../../templates/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {

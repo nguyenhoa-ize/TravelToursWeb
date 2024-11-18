@@ -1,18 +1,44 @@
-<?php 
-    require '../../config.php';
+<?php
+    include ("../../config.php");
+    include("../../includes/connect.php");
+
+    // Kiểm tra và lấy giá trị 'id' từ URL nếu có
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $id = $_GET['id'];
+    } else {
+        $id = 0;  // Giá trị mặc định nếu không có 'id' hoặc 'id' không hợp lệ
+    }
+
+    // Truy vấn lấy thông tin của tour dựa trên id
+    $sl = "SELECT name, description, price FROM tours WHERE id_tours = $id";
+    $kq = mysqli_query($conn, $sl);
+
+    // Kiểm tra xem truy vấn có thành công không
+    if ($kq) {
+        // Kiểm tra nếu có kết quả
+        if (mysqli_num_rows($kq) > 0) {
+            // Lấy kết quả của tour
+            $row = mysqli_fetch_assoc($kq);
+        } else {
+            echo "Không tìm thấy tour với ID: $id";
+        }
+    } else {
+        echo "Lỗi truy vấn cơ sở dữ liệu: " . mysqli_error($link);
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sản phẩm</title>
+    <title>Chi tiết tour</title>
     <link rel="stylesheet" href="../../templates/css/style.css">
     <link rel="stylesheet" href="../../templates/css/style_tour.css">
     <script src="../../templates/js/tour_detail.js"></script>
 </head>
 <body>
-    <?php include '../../templates/layout/header.php'; ?>
+    <?php include ('../../templates/layout/header.php');?>
     <div class="duong-dan">
         <div class="container">
             <ul class="duongdan">					
@@ -150,10 +176,7 @@
                     </li>
                 </ul>
                 <div id="tab-0" class="tab-content active">
-                    <p>Phượng Hoàng là thị trấn cổ còn lưu giữ nhiều thành quách nghìn năm tuổi, nơi đây được cho là một bảo tàng sống về văn hóa các dân tộc Trung Quốc. 
-                        Trương Gia Giới được ví như chốn thần tiên dưới hạ giới với hơn 3.000 cột đá và vách núi hình thù thiên biến&nbsp;
-                        vạn hóa được chọn làm bối cảnh cho bộ phim nối tiếng Avatar. 
-                        Hãy cùng đến với hành trình Trương Gia Giới - Phượng Hoàng Cổ Trấn 5N4Đ của BestPrice để khám phá mảnh đất tựa thiên đường, lưu lại nhiều kỷ niệm đáng nhớ cho mình nhé.&nbsp;</p>
+                    <p><?php echo $row['description'] ?></p>
                 </div>
                 <div id="tab-1" class="tab-content active">
                         <p>Ngày 1</p>
@@ -161,7 +184,12 @@
             </div>
             <div class="form-tour">
                 <form id="dat-tour" name="dat-tour" method="post">
-                    <p><b>Giá: </b><span id="gia-tour">9.500.000₫</span></p>
+                    <p><b>Giá: </b><span id="gia-tour">
+                        <?php 
+                        $formatted_price = number_format($row['price'], 0, ',', '.') . '₫';
+                        echo $formatted_price;
+                        ?>
+                    </span></p>
                     <div id="ma-tour">
                         <p><b>Mã tour: </b><span>TQ1174</span> </p>
                     </div>

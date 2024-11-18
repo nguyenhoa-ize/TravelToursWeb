@@ -1,6 +1,6 @@
 <?php
-    include '../../templates/layout/header.php';
     include '../../config.php';
+    include '../../templates/layout/header.php';
     include '../../includes/connect.php';
     include '../../includes/database.php';
     include '../../includes/functions.php';

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ND Travel</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="<?php echo SITE_URL. 'templates/css/style.css'?>">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -13,7 +13,7 @@
       <div class="header-container">
           <div class="logo">
               <a href="#" id="logo-link">
-                  <img src="templates/image/Logo.jpeg" alt="Travel Tours">
+                  <img src="<?php echo SITE_URL. 'templates/image/Logo.jpeg'?>" alt="Travel Tours">
               </a>
               <span>Travel Tours</span>
           </div>
@@ -28,7 +28,7 @@
                       </ul>
                   </li>
                   <li class="dropdown">
-                      <a href="#" id="tours-link">Tour du lịch <span class="arrow-down">&#9660;</span></a>
+                      <a href="<?php echo SITE_URL. 'views/user/tours.php'?>" id="tours-link">Tour du lịch <span class="arrow-down">&#9660;</span></a>
                       <ul class="dropdown-menu">
                           <li><a href="#" id="domestic-tours-link">Tour trong nước</a></li>
                           <li><a href="#" id="international-tours-link">Tour quốc tế</a></li>
@@ -64,19 +64,19 @@
     $(document).ready(function() {
       $('#logo-link').click(function(e) {
         e.preventDefault();
-        window.location.href = 'index.php';
+        window.location.href = '<?php echo SITE_URL. 'index.php'?>';
       });
       $('#home-link').click(function(e) {
         e.preventDefault();
-        window.location.href = 'index.php';
+        window.location.href = '<?php echo SITE_URL. 'index.php'?>';
       });
       $('#login-link').click(function(e) {
         e.preventDefault();
-        window.location.href = 'models/auth/login.php'; 
+        window.location.href = '<?php echo SITE_URL. 'models/auth/login.php'?>'; 
         });
     $('#register-link').click(function(e) {
         e.preventDefault();
-        window.location.href = 'models/auth/register.php';
+        window.location.href = '<?php echo SITE_URL. 'models/auth/register.php'?>';
         });
     });
   </script>
