@@ -10,8 +10,8 @@
     }
 
     // Truy vấn lấy thông tin của tour dựa trên id
-    $sl = "SELECT name, description, price FROM tours WHERE id_tours = $id";
-    $kq = mysqli_query($conn, $sl);
+    $sl = "SELECT id_tours, is_domestic, name, description, departure_point, destination_point, price, image, discount_price FROM tours WHERE id_tours = $id";
+    $kq = mysqli_query($conn1, $sl);
 
     // Kiểm tra xem truy vấn có thành công không
     if ($kq) {
@@ -23,7 +23,7 @@
             echo "Không tìm thấy tour với ID: $id";
         }
     } else {
-        echo "Lỗi truy vấn cơ sở dữ liệu: " . mysqli_error($link);
+        echo "Lỗi truy vấn cơ sở dữ liệu: " . mysqli_error($conn1);
     }
 ?>
 
@@ -32,7 +32,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết tour</title>
+    <title><?php echo $row['name'];?></title>
     <link rel="stylesheet" href="../../templates/css/style.css">
     <link rel="stylesheet" href="../../templates/css/style_tour.css">
     <script src="../../templates/js/tour_detail.js"></script>
@@ -47,24 +47,25 @@
                     <span class="icon">&nbsp;<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-chevron-right fa-w-10"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" class=""></path></svg>&nbsp;</span>
                 </li>
                 <li>
-                    <a class="changeurl" href="/trung-quoc" title="Trung Quốc"><span>Trung Quốc</span></a>						
+                    <a class="changeurl" href="#">
+                        <span>
+                            <?php 
+                            if ($row['is_domestic'] == 1) {
+                                echo 'Tour trong nước';
+                            } else {
+                                echo 'Tour nước ngoài';
+                            }
+                            ?>
+                        </span>
+                    </a>
                     <span class="icon">&nbsp;<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-chevron-right fa-w-10"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" class=""></path></svg>&nbsp;</span>
                 </li>
-                <li><strong><span>Vinh - Trương Gia Giới - Phượng Hoàng Cổ Trấn 5N4Đ</span></strong></li>
+                <li><strong><span><?php echo $row['name'];?></span></strong></li>
             </ul>
         </div>
     </div>
     <div class="detail-tour">
-        <h1 class="title-tour">Vinh - Trương Gia Giới - Phượng Hoàng Cổ Trấn 5N4Đ</h1>
-        <div class="danh-gia">
-            <div class="stars">
-                <span data-value="1">&#9733;</span>
-                <span data-value="2">&#9733;</span>
-                <span data-value="3">&#9733;</span>
-                <span data-value="4">&#9733;</span>
-                <span data-value="5">&#9733;</span>
-            </div>
-        </div>
+        <h1 class="title-tour"><?php echo $row['name'];?></h1>
         <div class="info-tour">
             <div class="khoi-hanh item">
                 <div class="icon">
@@ -78,7 +79,7 @@
                         Khởi hành từ 
                     </div>
                     <div class="content">
-                        Phú Quốc
+                        <?php echo $row['departure_point'];?>
                     </div>
                 </div>
             </div>
@@ -94,7 +95,7 @@
                         Điểm đến
                     </div>
                     <div class="content">
-                        Phú Quốc
+                        <?php echo $row['destination_point'];?>
                     </div>
                 </div>
             </div>
@@ -122,26 +123,10 @@
                 </div>
                 <div class="info">
                     <div class="title">
-                        Số chỗ còn lại
+                        Số chỗ còn nhận
                     </div>
                     <div class="content">
                         20 người
-                    </div>
-                </div>
-            </div>
-
-            <div class="phuong-tien item">
-                <div class="icon">
-                    <svg fill="#0396ff" width="24" height="24" viewBox="-1.64 0 31.402 31.402" xmlns="http://www.w3.org/2000/svg">
-                        <path id="Path_11" data-name="Path 11" d="M94.616,129.825H93.244v-8.41a.924.924,0,0,0-.451-.8,6,6,0,0,0-2.117-.694c-.831-.134-2.714-.681-9.657-.681h-.012c-6.943,0-8.826.547-9.657.681a6.017,6.017,0,0,0-2.12.694.931.931,0,0,0-.452.8v8.41H67.409a.459.459,0,0,0-.459.461v5.042a.459.459,0,0,0,.459.46h1.369v11.755a.46.46,0,0,0,.461.46h.484v1.1c0,1.629,1.212,1.543,2.735,1.543s2.781.086,2.781-1.543v-1.023H86.787V149.1c0,1.629,1.254,1.543,2.781,1.543s2.738.086,2.738-1.543V148h.481a.458.458,0,0,0,.457-.46V135.788h1.372a.46.46,0,0,0,.46-.46v-5.042A.46.46,0,0,0,94.616,129.825Zm-19.287-7.68H86.695v3.676H75.329Zm1.237,21.7a.554.554,0,0,1-.556.548H71.252a.553.553,0,0,1-.552-.548V142.19a.556.556,0,0,1,.552-.555H76.01a.557.557,0,0,1,.556.555Zm14.759,0a.553.553,0,0,1-.551.548H86.017a.555.555,0,0,1-.557-.548V142.19a.557.557,0,0,1,.557-.555h4.757a.556.556,0,0,1,.551.555Zm0-6.236a.46.46,0,0,1-.459.46H71.16a.46.46,0,0,1-.46-.46v-8.565a.459.459,0,0,1,.46-.46H90.866a.459.459,0,0,1,.459.46Z" transform="translate(-66.95 -119.243)"/>
-                      </svg>
-                </div>
-                <div class="info">
-                    <div class="title">
-                        Di chuyển
-                    </div>
-                    <div class="content">
-                        Xe khách
                     </div>
                 </div>
             </div>
@@ -150,11 +135,11 @@
             <div class="content-tour">
                 <div class="image-tour">
                     <div class="khung-anh">
-                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-3.jpg?v=1703064850037" style="width:100%">
+                        <img class="hinh-anh" src="<?php echo SITE_URL. 'templates/image/tours/' . $row['image']; ?>" alt="<?php echo $row['name'];?>" style="width: 100%; height: 56.25%">
                     
-                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-5.jpg?v=1703064848660" style="width:100%">
+                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-5.jpg?v=1703064848660" style="width: 100%; height: 56.25%">
                         
-                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-5.jpg?v=1703064848660" style="width:100%">
+                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-5.jpg?v=1703064848660" style="width: 100%; height: 56.25%">
                         
                         <a class="prev" onclick="chuyen_hinh(-1)">❮</a>
                         <a class="next" onclick="chuyen_hinh(1)">❯</a>
@@ -184,14 +169,21 @@
             </div>
             <div class="form-tour">
                 <form id="dat-tour" name="dat-tour" method="post">
-                    <p><b>Giá: </b><span id="gia-tour">
+                    <p><b>Giá: </b>
                         <?php 
-                        $formatted_price = number_format($row['price'], 0, ',', '.') . '₫';
-                        echo $formatted_price;
+                        if (!empty($row['discount_price'])) { 
+                            // Giá gốc (gạch ngang)
+                            echo '<span style="text-decoration: line-through; color: #333; font-size: 16px">' 
+                                . number_format($row['price'], 0, ',', '.') . ' VND</span>';
+                            // Giá khuyến mãi
+                            echo '<span style="margin-left: 10px;" id="gia-tour">' . number_format($row['discount_price'], 0, ',', '.') . ' VND</span>';
+                        } else {
+                            echo '<span id="gia-tour">' . number_format($row['price'], 0, ',', '.') . ' VND</span>';
+                        }
                         ?>
-                    </span></p>
+                    </p>
                     <div id="ma-tour">
-                        <p><b>Mã tour: </b><span>TQ1174</span> </p>
+                        <p><b>Mã tour: </b><span><?php echo $row['id_tours']; ?></span> </p>
                     </div>
                     <div class="ngay-di">
                         <label for="date"><b>Chọn ngày đi:</b></label>

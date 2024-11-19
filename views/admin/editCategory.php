@@ -1,13 +1,7 @@
 <?php
-    include '../../config.php';
     include '../../includes/connect.php';
-    include '../../includes/database.php';
     include '../../includes/functions.php';
-    include '../../includes/session.php';
-?>
-
-<?php 
-
+    include '../../includes/database.php';
 // Khởi tạo biến thông báo
 $messenger = [];  // Mảng chứa thông báo lỗi hoặc thành công
 

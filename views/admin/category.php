@@ -1,19 +1,4 @@
-<?php
-$servername = "localhost:3307";
-$username = "root";
-$password = ""; 
-$dbname = "traveltoursweb";
 
-// Tạo kết nối cơ sở dữ liệu
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Thực hiện truy vấn lấy danh sách tours
-$kq = $conn->query("SELECT * FROM tours");
-$stt = 1;
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,6 +34,8 @@ $stt = 1;
         </thead>
         <tbody>
         <?php
+            $kq = $conn1->query("SELECT * FROM tours");
+            $stt = 1;
             // Kiểm tra nếu có dữ liệu
             if ($kq && $kq->num_rows > 0) {
                 while ($d = $kq->fetch_assoc()) {

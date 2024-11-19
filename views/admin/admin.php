@@ -1,15 +1,11 @@
 <?php
 session_start();
-$servername = "localhost:3307";
-$username = "root";
-$password = ""; 
-$dbname = "traveltoursweb";
+    include '../../config.php';
+    include '../../includes/connect.php';
+    //include '../../includes/database.php';
+    //include '../../includes/functions.php';
+    include '../../includes/session.php';
 
-// Tạo kết nối cơ sở dữ liệu
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 $page = isset($_GET['page']) ? htmlspecialchars($_GET['page']) : null;
 $action = isset($_GET['action']) ? htmlspecialchars($_GET['action']) : null;
 $id_user = isset($_GET['id_user']) ? (int)$_GET['id_user'] : null; // Ép kiểu số nếu ID là số

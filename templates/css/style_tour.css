@@ -1,6 +1,4 @@
-/* Reset và thiết lập cơ bản */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -24,7 +22,6 @@ a {
     padding: 0 15px;
 }
 
-/* Breadcrumb styling */
 .duong-dan {
     background-position: center center;
     background-repeat: no-repeat;
@@ -32,7 +29,7 @@ a {
     background-color: #0396ff;
     min-height: 150px;
     display: flex;
-    align-items: center; /* Căn giữa theo chiều dọc */
+    align-items: center;
     color: #fff;
     margin-top: 90px;
 }
@@ -94,7 +91,7 @@ a {
 .detail-tour {
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 8px #0000001a;
     margin-top: 20px;
     border-radius: 5px;
 }
@@ -183,7 +180,6 @@ a {
 }
 
 
-/* Slideshow container */
 .khung-anh {
     max-width: 1000px;
     position: relative;
@@ -191,7 +187,6 @@ a {
     margin-top: 10px;
 }
     
-    /* Next & previous buttons */
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -206,18 +201,15 @@ a {
     user-select: none;
 }
     
-/* Position the "next button" to the right */
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
 }
     
-/* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+    background-color: #000000cc;
 }
     
-/* The dots/bullets/indicators */
 .dot {
     cursor: pointer;
     height: 15px;
@@ -226,7 +218,7 @@ a {
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    transition: background-color 0.6s ease;
+    opacity: 0.8;
 }
     
 .dot:hover {
@@ -547,18 +539,16 @@ input[type="reset"]:hover {
 }
 
 
-/* Nội dung chính */
 .danhsach-tour {
     display: flex;
     flex-direction: column;
-    margin-left: 270px; /* Khoảng cách bằng chiều rộng của danh mục */
-    
+    margin-left: 270px; 
 }
 
-/* Sắp xếp theo */
 .sap-xep {
     display: flex;
     align-items: center;
+    margin-left: 20px;
     justify-content: space-between;
     padding: 10px;
     background-color: #fff;
@@ -566,7 +556,6 @@ input[type="reset"]:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Tiêu đề "Sắp xếp theo" */
 .sap-xep h3 {
     margin: 0;
     font-size: 18px;
@@ -574,7 +563,6 @@ input[type="reset"]:hover {
     font-weight: bold;
 }
 
-/* Style cho dropdown select */
 #sort-select {
     padding: 8px;
     font-size: 16px;
@@ -585,19 +573,16 @@ input[type="reset"]:hover {
     width: 200px;
 }
 
-/* Hiệu ứng khi hover lên dropdown */
 #sort-select:hover {
     border-color: #007bff;
 }
 
-/* Hiệu ứng khi dropdown có focus */
 #sort-select:focus {
     outline: none;
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Điều chỉnh khoảng cách giữa các mục trong dropdown */
 #sort-select option {
     padding: 8px;
     font-size: 16px;
@@ -618,55 +603,124 @@ input[type="reset"]:hover {
     justify-content: center;
 }
 .the-tour {
-    background: #fff;
     border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    border-radius: 8px;
     overflow: hidden;
-    text-align: center;
-}
-.the-tour img {
+    display: flex;
+    margin: 0;
     width: 100%;
-    height: 150px;
-    border-radius: 6px;
 }
 
-.the-tour .icon{
+.cot-hinh-anh {
+    flex: 1;
+    position: relative;
+}
+
+.khung-hinh-anh {
+    position: relative;
+    padding: 5px;
+}
+
+.hinh-anh-tour {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.hinh-anh-tour:hover {
+    opacity: 0.8;
+}
+
+.cot-thong-tin {
+    flex: 2;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.thong-tin-tour {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.chi-tiet-tour {
+    flex: 1;
+}
+
+.ma-tour {
+    font-size: 14px;
+    color: #999;
+}
+
+.tieu-de-tour {
+    font-size: 18px;
+    margin: 8px 0;
+    font-weight: bold;
+}
+
+.tieu-de-tour a {
+    text-decoration: none;
+    color: #333;
+}
+
+.thoi-gian-tour {
     display: flex;
     align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
 }
 
-.tour-name h3 {
-    margin-top: 10px;
-    text-align: left;
+.thoi-gian-tour svg {
+    width: 16px;
+    height: 16px;
+    fill: #99A2BC;
+    margin-right: 4px;
+}
+
+.meta-tour {
+    text-align: right;
+}
+
+.gia-tour {
     font-size: 18px;
-
+    color: #e74c3c;
+    font-weight: bold;
 }
 
-.tour-name a{
+.xem-chi-tiet-tour {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+.meta-tour .icon {
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    margin-bottom: 8px; 
+}
+
+.meta-tour .icon svg {
+    width: 18px; 
+    height: 24px;
+    fill: none; 
+}
+
+.meta-tour .icon p {
+    font-size: 14px;
+    color: #333;
     margin: 0;
 }
 
-.the-tour .icon p {
-    margin-left: 10px;
-    text-align: left;
-    color: #007bff;
+.meta-tour .icon p span {
+    color: #0396ff;
+    font-weight: bold; 
 }
 
-.the-tour:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-.the-tour p {
-    color: #555;
-    margin-top: 10px;
-}
-.the-tour .price {
-    font-weight: bold;
-    color: #007bff;
-    text-align: left;
-    margin-bottom: 10px;
-    font-size: 20px;
-}

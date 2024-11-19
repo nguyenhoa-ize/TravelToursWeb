@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost:3307";
-$username = "root";
-$password = ""; 
-$dbname = "traveltoursweb";
 
-// Tạo kết nối cơ sở dữ liệu
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $message = ""; // Biến lưu thông báo
 
@@ -20,15 +11,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
     // Câu lệnh UPDATE với 'id_order'
     $update_query = "UPDATE orders SET trang_thai = '$new_status' WHERE id_order = '$order_id'"; 
     
-    if ($conn->query($update_query) === TRUE) {
+    if ($conn1->query($update_query) === TRUE) {
         $message = "Cập nhật trạng thái đơn hàng thành công!"; // Thông báo thành công
     } else {
-        $message = "Lỗi cập nhật: " . $conn->error; // Thông báo lỗi nếu có
+        $message = "Lỗi cập nhật: " . $conn1->error; // Thông báo lỗi nếu có
     }
 }
 
 // Thực hiện truy vấn lấy danh sách đơn hàng
-$kq = $conn->query("SELECT * FROM orders");
+$kq = $conn1->query("SELECT * FROM orders");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +51,6 @@ $kq = $conn->query("SELECT * FROM orders");
                 <th>Thành tiền</th>
                 <th>Ngày đặt</th>
                 <th>Phương thức thanh toán</th>
-                <th>Giảm giá</th>
                 <th>Trạng thái</th>
                 <th>Thông tin đơn hàng</th>
             </tr>
@@ -78,7 +68,6 @@ $kq = $conn->query("SELECT * FROM orders");
                             <td><?php echo $d['thanh_tien'] ?></td>
                             <td><?php echo $d['ngay_dat'] ?></td>
                             <td><?php echo $d['phuong_thuc_tt'] ?></td>
-                            <td><?php echo $d['giam_gia'] ?></td>
                             <td>
                                 <form method="POST" action="">
                                     <input type="hidden" name="id_order" value="<?php echo $d['id_order'] ?>"> <!-- Sử dụng 'id_order' -->

@@ -1,5 +1,4 @@
 <?php
-    include '../../config.php';
     include '../../includes/connect.php';
     include '../../includes/database.php';
     include '../../includes/functions.php';
@@ -67,22 +66,18 @@
                 <label for="username">Họ tên</label>
                 <input type="text" name="username" id="username" placeholder="Họ tên" required
                        value="<?php echo old('username', $old); ?>">
-                <?php echo form_error('username', '<span class="error">', '</span>', $messenger); ?>
             </div>
             
             <div class="form-item">
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Mật khẩu" required>
-                <?php echo form_error('password', '<span class="error">', '</span>', $messenger); ?>
             </div>
         </div>
         
         <div class="form-group">
             <div class="form-item">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Địa chỉ email" required
-                       value="<?php echo old('email', $old); ?>">
-                <?php echo form_error('email', '<span class="error">', '</span>', $messenger); ?>
+                <input type="email" name="email" id="email" placeholder="Địa chỉ email" required>
             </div>
             
             <div class="form-item">
@@ -106,7 +101,6 @@
                     <option value="0" <?php echo (old('status', $old) == '0') ? 'selected' : ''; ?>>Đã kích hoạt</option>
                     <option value="1" <?php echo (old('status', $old) == '1') ? 'selected' : ''; ?>>Chưa kích hoạt</option>
                 </select>
-                <?php echo form_error('status', '<span class="error">', '</span>', $messenger); ?>
             </div>
         </div>
         

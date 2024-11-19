@@ -1,18 +1,6 @@
 <?php
-$servername = "localhost:3307";
-$username = "root";
-$password = ""; 
-$dbname = "traveltoursweb";
-
-// Tạo kết nối cơ sở dữ liệu
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
 // Thực hiện truy vấn lấy danh sách người dùng
-$kq = $conn->query("SELECT * FROM user");
+$kq = $conn1->query("SELECT * FROM user");
 $stt = 1;
 ?>
 <!DOCTYPE html>

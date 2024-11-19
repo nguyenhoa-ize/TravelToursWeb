@@ -1,9 +1,7 @@
 <?php
-    include '../../config.php';
     include '../../includes/connect.php';
-    include '../../includes/database.php';
     include '../../includes/functions.php';
-    include '../../includes/session.php';
+
 ?>
 <?php 
 if (isPost()) {
@@ -97,7 +95,6 @@ unset($_SESSION['old']);
                 <label for="name">Tên Sản Phẩm</label>
                 <input type="text" name="name" id="name" placeholder="Tên sản phẩm" required
                        value="<?php echo old('name', $old); ?>">
-                <?php echo form_error('name', '<span class="error">', '</span>', $messenger); ?>
             </div>
             
             <div class="form-item">
@@ -115,7 +112,6 @@ unset($_SESSION['old']);
                     <option value="0" <?php echo (old('is_popular', $old) == '0') ? 'selected' : ''; ?>>Bình thường</option>
                     <option value="1" <?php echo (old('is_popular', $old) == '1') ? 'selected' : ''; ?>>phổ biến</option>
                 </select>
-                <?php echo form_error('is_popular', '<span class="error">', '</span>', $messenger); ?>
             </div>
             <div class="form-item">
                 <label for="discount_price">Giảm giá</label>
@@ -132,7 +128,6 @@ unset($_SESSION['old']);
                     <option value="0" <?php echo (old('is_domestic', $old) == '0') ? 'selected' : ''; ?>>Trong nước</option>
                     <option value="1" <?php echo (old('is_domestic', $old) == '1') ? 'selected' : ''; ?>>Ngoài nước</option>
                 </select>
-                <?php echo form_error('is_domestic', '<span class="error">', '</span>', $messenger); ?>
             </div>
             <div class="form-item">
                 <label for="images">Hình Ảnh</label>
@@ -143,8 +138,8 @@ unset($_SESSION['old']);
 
         <div class="form-item">
             <label for="description">Mô Tả</label>
-            <textarea style="width: 800px;height: 176px;" name="description" id="description" placeholder="Mô tả sản phẩm" required><?php echo old('description', $old); ?></textarea>
-            <?php echo form_error('description', '<span class="error">', '</span>', $messenger); ?>
+            <textarea style="width: 800px;height: 176px;" name="description" id="description" placeholder="Mô tả sản phẩm" required>
+                <?php echo old('description', $old); ?></textarea>
         </div>
 
         <div class="form-buttons">

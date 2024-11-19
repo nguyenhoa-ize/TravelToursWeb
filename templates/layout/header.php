@@ -1,7 +1,9 @@
 <?php
+include '../../config.php';
 session_start();
 $isLoggedIn = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 $fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu đã đăng nhập
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
