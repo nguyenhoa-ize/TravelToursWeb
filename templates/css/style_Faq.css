@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+}
+
+.container {
+    width:100%;
+    margin: 0 auto;
+    background: #fff;
+    margin-top: 110px;
+    padding-left: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+header h1 {
+    font-size: 2em;
+    color: #333;
+    font-size: 30px;
+}
+
+header p {
+    margin: 10px 0;
+}
+
+
+.noi_dung h2 {
+    margin-bottom: px;
+    font-size: 22.5px;
+}
+
+.noi_dung ul {
+    list-style: none;
+    padding: 0;
+}
+
+.noi_dung ul li {
+    background: #e9e9e9;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.noi_dung ul li:hover {
+    background: #dcdcdc;
+}
+.question{
+    font-size: 20px;
+}
+.answer{
+    font-size: 17px;
+}
+
