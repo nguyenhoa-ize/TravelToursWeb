@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $isLoggedIn = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 $fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu đã đăng nhập
 
@@ -45,7 +47,6 @@ $fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu 
                     <a href="<?php echo SITE_URL . 'views/user/cart.php'; ?>" class="cart-link">
                         <i class="fas fa-shopping-cart cart-icon"></i>
                         <span class="cart-text">Giỏ hàng</span>
-                        <span class="cart-count">0</span> <!-- Dữ liệu đếm số lượng sản phẩm -->
                     </a>
                 </div>
                 <div class="user-greeting">
