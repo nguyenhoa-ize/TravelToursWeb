@@ -464,6 +464,11 @@ input[type="reset"]:hover {
     float: left;
     overflow-y: auto; /* Cuộn nội dung nếu danh mục dài */
 }
+
+.danh-muc{
+    font-size: 16px;
+}
+
 .danh-muc h2 {
     font-size: 20px;
     margin-bottom: 5px;
@@ -506,6 +511,7 @@ input[type="reset"]:hover {
 }
 
 .bo-loc ul {
+    font-size: 16px;
     list-style: none;
     padding: 0;
 }
@@ -557,6 +563,43 @@ input[type="reset"]:hover {
     padding: 0;
     margin: 10px 0;
 }
+
+.bo-loc select {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  appearance: none;
+  margin-bottom: 10px;
+}
+
+.bo-loc select:hover {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
+
+.bo-loc select::after {
+  content: "\f078";
+  font-family: 'Font Awesome 5 Free';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.bo-loc select option.hidden {
+  display: none;
+}
+
+.bo-loc select option:checked {
+  background-color: #e6e6e6;
+}
+
+.bo-loc select option{
+    height: inherit;
+  }
 
 .selected-item {
     display: inline-block;
