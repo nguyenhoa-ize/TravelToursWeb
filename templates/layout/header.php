@@ -46,7 +46,7 @@ $fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu 
                     <!-- Thêm liên kết tới cart.php -->
                     <a href="<?php echo SITE_URL . 'views/user/cart.php'; ?>" class="cart-link">
                         <i class="fas fa-shopping-cart cart-icon"></i>
-                        <span class="cart-text">Giỏ hàng</span>
+                        <span class="cart-text">Tour đã đặt</span>
                     </a>
                 </div>
                 <div class="user-greeting">
