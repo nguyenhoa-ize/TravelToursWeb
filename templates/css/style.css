@@ -420,6 +420,17 @@ p {
 .tour-card .tour-info p:last-child {
     margin-bottom: 0;
 }
+.tour-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tour-link:hover .tour-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
 /* Dịch vụ */
 .container-fluid.service {
     font-family: 'Arial', sans-serif;

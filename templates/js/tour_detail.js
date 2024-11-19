@@ -29,25 +29,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const rightArrow = document.querySelector(".chon-ngay .arrow.right");
     const selectedDateInput = document.getElementById("selected-date");
 
-    let visibleStart = 0; // Chỉ mục bắt đầu hiển thị
+    let dateIndex = 0; // Chỉ mục bắt đầu hiển thị
     const maxVisibleDates = 3; // Số ngày hiển thị tối đa
 
     function updateVisibleDates() {
         dates.forEach((date, index) => {
             date.style.display = 
-                index >= visibleStart && index < visibleStart + maxVisibleDates
+                index >= dateIndex && index < dateIndex + maxVisibleDates
                     ? "inline-block"
                     : "none";
         });
 
         // Cập nhật trạng thái nút mũi tên
-        leftArrow.disabled = visibleStart === 0;
-        rightArrow.disabled = visibleStart + maxVisibleDates >= dates.length;
+        leftArrow.disabled = dateIndex === 0;
+        rightArrow.disabled = dateIndex + maxVisibleDates >= dates.length;
     }
 
     function updateActiveDate() {
         dates.forEach(date => date.classList.remove("active"));
-        const activeDate = dates[visibleStart];
+        const activeDate = dates[dateIndex];
         if (activeDate) {
             activeDate.classList.add("active");
             selectedDateInput.value = activeDate.textContent.trim();
@@ -56,21 +56,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     dates.forEach((date, index) => {
         date.addEventListener("click", () => {
-            visibleStart = index; // Cập nhật ngày được chọn
+            dateIndex = index; // Cập nhật ngày được chọn
             updateActiveDate();
         });
     });
 
     leftArrow.addEventListener("click", () => {
-        if (visibleStart > 0) {
-            visibleStart--;
+        if (dateIndex > 0) {
+            dateIndex--;
             updateVisibleDates();
         }
     });
 
     rightArrow.addEventListener("click", () => {
-        if (visibleStart + maxVisibleDates < dates.length) {
-            visibleStart++;
+        if (dateIndex + maxVisibleDates < dates.length) {
+            dateIndex++;
             updateVisibleDates();
         }
     });

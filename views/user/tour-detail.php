@@ -13,6 +13,9 @@
     $sl = "SELECT id_tours, is_domestic, name, description, departure_point, destination_point, price, image, discount_price FROM tours WHERE id_tours = $id";
     $kq = mysqli_query($conn1, $sl);
 
+    $sl1 = "SELECT day FROM itinerary  WHERE id_tours = $id";
+    $kq1 = mysqli_query($conn1, $sl1);
+
     // Kiểm tra xem truy vấn có thành công không
     if ($kq) {
         // Kiểm tra nếu có kết quả
@@ -20,7 +23,8 @@
             // Lấy kết quả của tour
             $row = mysqli_fetch_assoc($kq);
         } else {
-            echo "Không tìm thấy tour với ID: $id";
+            header('Location: ' . SITE_URL);
+            exit(); 
         }
     } else {
         echo "Lỗi truy vấn cơ sở dữ liệu: " . mysqli_error($conn1);
@@ -135,11 +139,11 @@
             <div class="content-tour">
                 <div class="image-tour">
                     <div class="khung-anh">
-                        <img class="hinh-anh" src="<?php echo SITE_URL. 'templates/image/tours/' . $row['image']; ?>" alt="<?php echo $row['name'];?>" style="width: 100%; height: 56.25%">
+                        <img class="hinh-anh" src="<?php echo SITE_URL. 'templates/image/tours/' . $row['image']; ?>" alt="<?php echo $row['name'];?>">
                     
-                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-5.jpg?v=1703064848660" style="width: 100%; height: 56.25%">
+                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-5.jpg?v=1703064848660">
                         
-                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-5.jpg?v=1703064848660" style="width: 100%; height: 56.25%">
+                        <img class="hinh-anh" src="https://bizweb.dktcdn.net/thumb/1024x1024/100/505/645/products/sp5-5.jpg?v=1703064848660">
                         
                         <a class="prev" onclick="chuyen_hinh(-1)">❮</a>
                         <a class="next" onclick="chuyen_hinh(1)">❯</a>
@@ -168,7 +172,7 @@
                 </div>    
             </div>
             <div class="form-tour">
-                <form id="dat-tour" name="dat-tour" method="post">
+                <form id="dat-tour" action="../../models/tour/dat-tour.php" name="dat-tour" method="post">
                     <p><b>Giá: </b>
                         <?php 
                         if (!empty($row['discount_price'])) { 
@@ -184,9 +188,10 @@
                     </p>
                     <div id="ma-tour">
                         <p><b>Mã tour: </b><span><?php echo $row['id_tours']; ?></span> </p>
+                        <input type="hidden" name="ma-tour" value="<?php echo $row['id_tours']; ?>">
                     </div>
                     <div class="ngay-di">
-                        <label for="date"><b>Chọn ngày đi:</b></label>
+                        <div><b>Chọn ngày đi:</b></div>
                         <div class="time-block">
                             <div class="icon">
                                 <svg fill="#fff" width="30" height="30" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M790 166h-41V83h-84v83H333V83h-83v83h-42q-34 0-58.5 24.5T125 250v582q0 34 24 58.5t59 24.5h582q35 0 59-24.5t24-58.5V250q0-35-24.5-59.5T790 166zm0 666H208V374h582v458zM291 457h208v208H291V457z"/>
@@ -194,17 +199,42 @@
                             </div>
                             <div class="chon-ngay">
                                 <div class="date-selector">
-                                    <button type="button" class="arrow left">←</button>
+                                    <button type="button" class="arrow left">
+                                        <svg version="1.1" id="Icons" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                            viewBox="0 0 32 32" xml:space="preserve">
+                                        <style type="text/css">
+                                            .st0{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                                        </style>
+                                        <circle class="st0" cx="16" cy="16" r="13"/>
+                                        <polyline class="st0" points="18,21 13,16 18,11 "/>
+                                        </svg>       
+                                    </button>
                                     <div class="dates">
-                                        <button type="button" class="date">22/11</button>
-                                        <button type="button" class="date">20/12</button>
-                                        <button type="button" class="date">27/12</button>
-                                        <button type="button" class="date">28/12</button>
-                                        <button type="button" class="date">29/12</button>
-                                        <button type="button" class="date">05/01</button>
-                                        <button type="button" class="date">10/01</button>
+                                    <?php if ($kq1) {
+                                        while ($date = mysqli_fetch_assoc($kq1)) {
+                                            // Lấy ngày hiện tại và chuyển về định dạng timestamp
+                                            $today = strtotime(date('Y-m-d'));
+
+                                            // Chuyển đổi ngày trong cơ sở dữ liệu thành timestamp
+                                            $db_date = strtotime($date['day']);
+
+                                            // So sánh và chỉ hiển thị nếu ngày trong cơ sở dữ liệu lớn hơn ngày hiện tại
+                                            if ($db_date > $today) { ?>
+                                                <button type="button" class="date"><?php echo date('d/m/Y', $db_date); ?></button>
+                                            <?php }
+                                        }
+                                    } ?>
                                     </div>
-                                    <button type="button" class="arrow right">→</button>
+                                    <button type="button" class="arrow right">
+                                        <svg version="1.1" id="Icons" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 32 32" xml:space="preserve">
+                                        <style type="text/css">
+                                            .st0{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                                        </style>
+                                        <circle class="st0" cx="16" cy="16" r="13"/>
+                                        <polyline class="st0" points="14,11 19,16 14,21 "/>
+                                        </svg>
+                                    </button>
                                 </div>
                                 <input type="hidden" name="selected-date" id="selected-date">
                             </div>
@@ -212,7 +242,7 @@
                     </div>
                     <div class="soluong">
                         <span style="font-weight: bold;">Số lượng: </span>
-                        <input type="number" min="0" name="so-luong" value="0" title="Số lượng" id="so-luong" onchange="tinhTongTien()">
+                        <input type="number" min="1" name="so-luong" value="0" title="Số lượng" id="so-luong" onchange="tinhTongTien()">
                     </div>
                     <div class="tongtien">
                         <p id="tong"><b>Tổng tiền: </b><span id="tong-tien">0₫</span></p>
