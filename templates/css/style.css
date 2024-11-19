@@ -505,3 +505,22 @@ h5 {
     font-weight: bold;
     unicode-bidi: isolate;
 }
+
+.btn-account {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px solid #0066CC;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Khoảng cách giữa các nút */
+    color: #0066CC; /* Màu chữ */
+    background-color: #fff; /* Màu nền */
+}
+
+.btn-account:hover {
+    background-color: #E6F0FF; /* Màu nền khi hover */
+}

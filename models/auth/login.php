@@ -7,6 +7,7 @@
     include '../../includes/session.php';
 ?>
 <?php
+    session_start();
     
     if (isPost()) {
         $filterAll = filter();
@@ -23,11 +24,12 @@
                 $passwordHash = $userQuery['password'];
                 if (password_verify($password, $passwordHash)) {
                     // Truy vấn lấy thông tin fullname và role
-                    $userDetails = oneRaw("SELECT fullname, role FROM user WHERE email = '$email'");
+                    $userDetails = oneRaw("SELECT fullname, role, id_user FROM user WHERE email = '$email'");
                 
                     if (!empty($userDetails)) {
                         // Lưu thông tin vào session
                         $_SESSION['loggedin'] = true;
+                        $_SESSION['id_user'] = $userDetails['id_user'];
                         $_SESSION['fullname'] = $userDetails['fullname'];
                         $_SESSION['role'] = $userDetails['role'];
                 
@@ -89,9 +91,8 @@
     <a href="register.php">Chưa có tài khoản?</a>
     </form>
 </div>
-<?php
-    include '../../templates/layout/footer.php';
-?>
+
+
 </body>
 </html>
 
