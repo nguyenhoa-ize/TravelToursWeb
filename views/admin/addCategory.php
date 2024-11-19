@@ -1,6 +1,7 @@
 <?php
     include '../../includes/connect.php';
     include '../../includes/functions.php';
+    include '../../includes/database.php';
 
 ?>
 <?php 
@@ -57,6 +58,8 @@ if (isPost()) {
             'discount_price' => $filterAll['discount_price'],
             'image' => $images, // Lưu chuỗi ảnh
             'is_popular' => $filterAll['is_popular'],
+            'departure_point' => $filterAll['departure_point'],
+            'destination_point' => $filterAll['destination_point'],
         ];
 
         $insertStatus = insert('tours', $dataInsert);
@@ -118,6 +121,19 @@ unset($_SESSION['old']);
                 <input type="number" name="discount_price" id="discount_price" placeholder="Giảm giá" required
                        value="<?php echo old('discount_price', $old); ?>">
                 <?php echo form_error('discount_price', '<span class="error">', '</span>', $messenger); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-item">
+                <label for="departure_point">Điểm đi</label>
+                <input type="text" name="departure_point" id="departure_point" placeholder="Điểm đi" required
+                       value="<?php echo old('departure_point', $old); ?>">
+            </div>
+            
+            <div class="form-item">
+                <label for="destination_point">Điểm đến</label>
+                <input type="text" name="destination_point" id="destination_point" placeholder="Điểm đến" required
+                       value="<?php echo old('destination_point', $old); ?>">
             </div>
         </div>
 

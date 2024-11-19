@@ -46,7 +46,7 @@
                 'email' => $filterAll['email'],
                 'phone' => $filterAll['phone'],
                 'status' => $filterAll['status'],
-                'created_at' => date('Y-m-d H:i:s')
+                'created_at' => date('Y-m-d H:i:s'),
             ];
 
             // Cập nhật mật khẩu nếu có

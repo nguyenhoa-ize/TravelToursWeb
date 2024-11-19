@@ -1,7 +1,7 @@
 <?php
     include '../../includes/connect.php';
-    include '../../includes/database.php';
     include '../../includes/functions.php';
+    include '../../includes/database.php';
 
     if (isPost()) {
         $filterAll = filter();
