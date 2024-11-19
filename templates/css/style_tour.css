@@ -77,7 +77,6 @@ a {
     fill: currentColor;
 }
 
-/* Text styles */
 .text-left {
     text-align: left;
 }
@@ -90,7 +89,6 @@ a {
     text-align: right;
 }
 
-/* Additional styling for breadcrumb container */
 .detail-tour {
     padding: 20px;
     background-color: #fff;
@@ -339,6 +337,53 @@ a {
     border-radius: 4px;
     font-size: 16px; 
 }
+
+.chon-ngay .date-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.chon-ngay .arrow {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.chon-ngay .dates {
+    display: flex;
+    gap: 10px;
+}
+
+.chon-ngay .date {
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: red;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 50px;
+    text-align: center;
+}
+
+.chon-ngay .date:hover {
+    background-color: red;
+    color: white;
+}
+
+.chon-ngay .date.active {
+    background-color: red;
+    color: white;
+}
+
+.chon-ngay  .arrow:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 
 .soluong{
     padding-bottom: 10px;
@@ -725,5 +770,5 @@ input[type="reset"]:hover {
 .meta-tour .icon p span {
     color: #0396ff;
     font-weight: bold; 
-}
+} 
 

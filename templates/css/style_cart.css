@@ -1,115 +1,58 @@
-/* Tổng thể */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
+.detail-tour {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cart-container {
-    width: 50%;
-    margin: 50px auto;
-    background: #fff;
-    padding: 20px 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.title-tour {
+    font-size: 2em;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
-h2 {
-    text-align: center;
-    color: #333;
+.info-tour {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
-/* Nhãn và input */
-label {
-    display: block;
-    margin-bottom: 8px;
+.item {
+    width: 23%;
+}
+
+.item .title {
+    font-size: 1.1em;
     font-weight: bold;
+}
+
+.item .content {
+    font-size: 1em;
     color: #555;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="date"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+.description {
+    margin-top: 20px;
+}
+
+.description h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.description p {
+    font-size: 1em;
+    line-height: 1.6;
     color: #333;
 }
 
-textarea {
-    resize: none;
-    height: 80px;
-}
-
-/* Radio buttons */
-input[type="radio"] {
-    margin-right: 10px;
-}
-
-label[for="payment_method"] {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-div {
-    margin-bottom: 15px;
-}
-
-/* Phần tổng cộng */
-p {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: right;
+.discount-price {
+    font-size: 1.2em;
     color: #d9534f;
 }
 
-/* Nút submit */
-button[type="submit"] {
-    width: 100%;
-    background-color: #28a745;
-    color: #fff;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.price {
+    font-size: 1.2em;
+    color: #5bc0de;
 }
-
-button[type="submit"]:hover {
-    background-color: #218838;
-}
-
-/* Thông báo lỗi/thành công */
-.alert {
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.alert.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert.danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .cart-container {
-        width: 90%;
-        margin: 20px auto;
-    }
-}
-

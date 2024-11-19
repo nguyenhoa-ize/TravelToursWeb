@@ -193,8 +193,21 @@
                                 </svg>
                             </div>
                             <div class="chon-ngay">
-                                <input type="date" id="date" name="date" placeholder="Chọn ngày đi">
-                            </div>                     
+                                <div class="date-selector">
+                                    <button type="button" class="arrow left">←</button>
+                                    <div class="dates">
+                                        <button type="button" class="date">22/11</button>
+                                        <button type="button" class="date">20/12</button>
+                                        <button type="button" class="date">27/12</button>
+                                        <button type="button" class="date">28/12</button>
+                                        <button type="button" class="date">29/12</button>
+                                        <button type="button" class="date">05/01</button>
+                                        <button type="button" class="date">10/01</button>
+                                    </div>
+                                    <button type="button" class="arrow right">→</button>
+                                </div>
+                                <input type="hidden" name="selected-date" id="selected-date">
+                            </div>
                         </div>
                     </div>
                     <div class="soluong">
