@@ -38,13 +38,12 @@ $fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu 
           </nav>
 
           <div class="header-right">
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" placeholder="Tìm kiếm..." class="search-input">
-                <button type="submit" class="search-button">Tìm kiếm</button>
-            </div>
-
             <?php if ($isLoggedIn): ?>
+            <div class="cart-container">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+                <span class="cart-text">Giỏ hàng</span>
+                <span class="cart-count">0</span>
+            </div>
                 <div class="user-greeting">
                     <span>Xin Chào, <?php echo htmlspecialchars($fullname); ?>!</span>
                     <a href="<?php echo SITE_URL . 'models/auth/logout.php'; ?>" class="btn-logout">Đăng xuất</a>

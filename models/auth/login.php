@@ -89,9 +89,11 @@
     <a href="register.php">Chưa có tài khoản?</a>
     </form>
 </div>
+<?php
+    include '../../templates/layout/footer.php';
+?>
 </body>
 </html>
-<?php
-?>
+
 
 

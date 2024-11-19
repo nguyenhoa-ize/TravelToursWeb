@@ -110,51 +110,31 @@
     font-weight: bold;
     padding-right: 47px;
 }
-
-.search-container {
-    position: relative;
+.cart-container {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    cursor: pointer;
 }
 
-.search-form {
-    display: flex;
-    align-items: center;
-    position: relative;
+.cart-icon {
+    font-size: 20px;
+    margin-right: 8px;
+    color: #333;
 }
 
-.search-input {
-    display: none;
-    padding: 5px;
+.cart-text {
+    font-size: 16px;
+    margin-right: 8px;
+    color: #333;
+}
+
+.cart-count {
+    background-color: #ff5722;
+    color: white;
     font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 5px;
-}
-
-.search-button {
-    display: none;
-    padding: 5px 10px;
-    background-color: #0066CC;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    background-color: #004a99;
-}
-
-.search-icon {
-    font-size: 18px;
-    color: #0066CC;
-    cursor: pointer;
-}
-
-.search-icon:hover {
-    color: #004a99;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
 }
 .user-greeting {
     display: flex;
@@ -385,6 +365,7 @@ p {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
+    width: 100%;
 }
 
 .tour-card:hover {
