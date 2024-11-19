@@ -11,6 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh sách Tour Du Lịch</title>
+    <link rel="stylesheet" href="../../templates/css/style.css">
     <link rel="stylesheet" href="../../templates/css/style_tour.css">
 </head>
 <body>
