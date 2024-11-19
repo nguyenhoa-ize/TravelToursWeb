@@ -12,19 +12,19 @@
     if (isPost()) {
         $filterAll = filter();
     
-        if (!empty(trim($filterAll['email'])) && !empty(trim($filterAll['password']))) {
+        if (!empty(trim($filterAll['username'])) && !empty(trim($filterAll['password']))) {
             // kiểm tra đăng nhập
-            $email = $filterAll['email'];
+            $username = $filterAll['username'];
             $password = $filterAll['password'];
     
-            // Truy vấn lấy thông tin users theo email
-            $userQuery = oneRaw("SELECT password FROM user WHERE email = '$email'");
+            // Truy vấn lấy thông tin users theo username
+            $userQuery = oneRaw("SELECT password FROM user WHERE username = '$username'");
     
             if (!empty($userQuery)) {
                 $passwordHash = $userQuery['password'];
                 if (password_verify($password, $passwordHash)) {
                     // Truy vấn lấy thông tin fullname và role
-                    $userDetails = oneRaw("SELECT fullname, role, id_user FROM user WHERE email = '$email'");
+                    $userDetails = oneRaw("SELECT fullname, role, id_user FROM user WHERE username = '$username'");
                 
                     if (!empty($userDetails)) {
                         // Lưu thông tin vào session
@@ -47,13 +47,13 @@
                     redirect('login.php');
                 }                
             } else {
-                setFlashData('msg', 'Email không tồn tại.');
+                setFlashData('msg', 'Username không tồn tại.');
                 setFlashData('msg_type', 'danger');
                 redirect('login.php');
             }
         exit();
         } else {
-            setFlashData('msg', 'Vui lòng nhập email và mật khẩu.');
+            setFlashData('msg', 'Vui lòng nhập username và mật khẩu.');
             setFlashData('msg_type', 'danger');
             redirect('login.php');
         }
@@ -84,7 +84,7 @@
         }
 
         ?>
-    <input type="text" name="email" id="email" placeholder="Địa chỉ email">
+    <input type="text" name="username" id="username" placeholder="Nhập username">
     <input type="password" name="password" id="password" placeholder="Mật khẩu">
     <button type="submit">Đăng nhập</button>
     <a href="forgot.php">Quên mật khẩu?</a>
