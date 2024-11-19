@@ -1,3 +1,58 @@
+<?php
+// Giả sử bạn đã có các file cần thiết như config.php, connect.php, session.php, v.v.
+include '../../config.php';
+include '../../includes/connect.php';
+include '../../includes/session.php';
+
+// Hàm filter() giả sử lọc dữ liệu từ URL hoặc form
+function filter() {
+    return $_GET; // Hoặc bạn có thể thay bằng $_POST tùy thuộc vào phương thức gửi dữ liệu
+}
+
+// Hàm redirect() để chuyển hướng người dùng
+function redirect($url) {
+    header("Location: $url");
+    exit();
+}
+
+// Kiểm tra và lấy dữ liệu thanh toán
+$filterAll = filter();
+if (!empty($filterAll['id_order'])) {
+    $paymentID = $filterAll['id_order']; // Lấy id_order từ dữ liệu lọc
+    $paymentDetail = oneRaw("SELECT * FROM orders WHERE id_order='$paymentID'"); // Truy vấn thông tin thanh toán
+
+    if (!empty($paymentDetail)) {
+        // Lấy thông tin từ bảng tours và users
+        $tourID = $paymentDetail['id_tours'];
+        $userID = $paymentDetail['id_user'];
+
+        // Truy vấn bảng tours để lấy tên tour
+        $tourDetail = oneRaw("SELECT name FROM tours WHERE id_tours='$tourID'");
+
+        // Truy vấn bảng users để lấy tên người dùng (username)
+        $userDetail = oneRaw("SELECT username FROM user WHERE id_user='$userID'");
+
+        // Lưu thông tin vào biến $old
+        $old = $paymentDetail;
+        $old['name'] = $tourDetail['name']; // Thêm tên tour vào thông tin đơn hàng
+        $old['username'] = $userDetail['username']; // Thêm tên người dùng vào thông tin đơn hàng
+    } else {
+        // Nếu không tìm thấy đơn hàng, chuyển hướng về trang danh sách đơn hàng
+        redirect("?page=cart");
+    }
+} else {
+    // Nếu không có id_order trong URL, chuyển hướng về trang danh sách đơn hàng
+    redirect("?page=cart");
+}
+
+// Hàm oneRaw() giả sử trả về một dòng dữ liệu
+function oneRaw($query) {
+    global $conn1; // Sử dụng kết nối cơ sở dữ liệu toàn cục
+    $result = $conn1->query($query);
+    return $result->fetch_assoc(); // Trả về mảng kết quả
+}
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -6,7 +61,7 @@
   <title>Thanh Toán</title>
   <link rel="stylesheet" href="../../templates/css/style_payment.css">
   <style>
-    
+    /* Bạn có thể thêm CSS tại đây nếu cần */
   </style>
   <!-- Thêm thư viện jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -20,7 +75,8 @@
           <thead>
             <tr>
               <th>Phương thức thanh toán</th>
-              <th>Lựa chọn</th>
+              <th>&ensp;&ensp;&ensp;&ensp;&ensp;</th>
+              <th>&ensp;</th>
             </tr>
           </thead>
           <tbody>
@@ -92,16 +148,20 @@
           </thead>
           <tbody>
             <tr>
-              <td>Mã đơn hàng:</td>
-              <td>123456</td>
+              <td>&ensp;Mã đơn hàng:</td>
+              <td><?= $old['id_tours'] ?></td> <!-- Hiển thị mã đơn hàng -->
             </tr>
             <tr>
-              <td>Tours</td>
-              <td>€69.60</td>
+              <td>&ensp;Tên đơn hàng:</td>
+              <td><?= $old['name'] ?></td> <!-- Hiển thị tên tour -->
+            </tr>
+            <tr>
+              <td>&ensp;Tên người đặt:</td>
+              <td><?= $old['username'] ?></td> <!-- Hiển thị tên người dùng -->
             </tr>
             <tr class="tong">
-              <td><strong>Tổng cộng</strong></td>
-              <td><strong>€97.36</strong></td>
+              <td><strong>&ensp;Tổng cộng:</strong></td>
+              <td><?= $old['thanh_tien'] ?></td> <!-- Hiển thị tổng tiền -->
             </tr>
           </tbody>
         </table>
@@ -127,7 +187,7 @@
       // Hiện modal khi nhấn nút Thanh toán
       $('#payButton').click(function() {
         if ($('input[name="phuong-thuc"]:checked').length > 0) {
-          $('#modalXacNhan').fadeIn();
+          $('#modalXacNhan').show(); // Sử dụng show() để hiển thị modal
         } else {
           alert('Vui lòng chọn phương thức thanh toán.');
         }
@@ -135,15 +195,21 @@
 
       // Ẩn modal khi nhấn Hủy
       $('#cancelPayment').click(function() {
-        $('#modalXacNhan').fadeOut();
+        $('#modalXacNhan').hide(); // Sử dụng hide() để ẩn modal
       });
 
       // Xác nhận thanh toán
       $('#confirmPayment').click(function() {
-        $('#modalXacNhan').fadeOut();
+        $('#modalXacNhan').hide(); // Sử dụng hide() để ẩn modal
         alert('Thanh toán thành công!');
+      });
+      // Khi nhấn nút "Thoát"
+      $('.huy-thanh-toan').click(function() {
+        // Chuyển hướng về trang index
+        window.location.href = "http://localhost/TravelToursWeb/";  // Thay đổi đường dẫn theo vị trí của trang index
       });
     });
   </script>
+
 </body>
 </html>

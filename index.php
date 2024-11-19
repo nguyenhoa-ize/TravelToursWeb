@@ -78,20 +78,23 @@ $destinationResult = $conn1->query($destinationQuery);
                 <div class="container">
                     <div class="row">
                         <?php
-                        $popularToursQuery = "SELECT name, description, price, image FROM tours WHERE is_popular = 1 LIMIT 4";
+                        $popularToursQuery = "SELECT id_tours, name, description, price, image FROM tours WHERE is_popular = 1 LIMIT 4";
                         $popularToursResult = $conn1->query($popularToursQuery);
 
                         while ($row = $popularToursResult->fetch_assoc()):
+                            $tourId = $row['id_tours']; 
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="tour-card">
-                                    <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
-                                    <div class="tour-info p-3">
-                                        <h5><?= $row['name'] ?></h5>
-                                        <p><?= $row['description'] ?></p>
-                                        <p><strong>Giá:</strong> <?= number_format($row['price'], 0, ',', '.') ?> VND</p>
+                                <a href="http://localhost/traveltoursweb/views/user/tour-detail.php?id=<?= $tourId ?>" class="tour-link">
+                                    <div class="tour-card">
+                                        <img src="templates/image/tours/<?php echo $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
+                                        <div class="tour-info p-3">
+                                            <h5><?= $row['name'] ?></h5>
+                                            <p><?= $row['description'] ?></p>
+                                            <p><strong>Giá:</strong> <?= number_format($row['price'], 0, ',', '.') ?> VND</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         <?php endwhile; ?>
                     </div>
@@ -104,26 +107,30 @@ $destinationResult = $conn1->query($destinationQuery);
                 <div class="container">
                     <div class="row">
                         <?php
-                        $promotionToursQuery = "SELECT name, description, price, discount_price, image FROM tours WHERE discount_price IS NOT NULL LIMIT 4";
+                        $promotionToursQuery = "SELECT id_tours, name, description, price, discount_price, image FROM tours WHERE discount_price IS NOT NULL LIMIT 4";
                         $promotionToursResult = $conn1->query($promotionToursQuery);
 
                         while ($row = $promotionToursResult->fetch_assoc()):
+                            $tourId = $row['id_tours'];
                         ?>
                             <div class="col-lg-3 col-md-6 mb-4">
-                                <div class="tour-card">
-                                    <img src="templates/image/tours/<?= $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
-                                    <div class="tour-info p-3">
-                                        <h5><?= $row['name'] ?></h5>
-                                        <p><?= $row['description'] ?></p>
-                                        <p><strong>Giá Gốc:</strong> <del><?= number_format($row['price'], 0, ',', '.') ?> VND</del></p>
-                                        <p><strong>Giá Khuyến Mãi:</strong> <?= number_format($row['discount_price'], 0, ',', '.') ?> VND</p>
+                                <a href="http://localhost/traveltoursweb/views/user/tour-detail.php?id=<?= $tourId ?>" class="tour-link">
+                                    <div class="tour-card">
+                                        <img src="templates/image/tours/<?= $row['image'] ?>" class="img-fluid" alt="<?= $row['name'] ?>">
+                                        <div class="tour-info p-3">
+                                            <h5><?= $row['name'] ?></h5>
+                                            <p><?= $row['description'] ?></p>
+                                            <p><strong>Giá Gốc:</strong> <del><?= number_format($row['price'], 0, ',', '.') ?> VND</del></p>
+                                            <p><strong>Giá Khuyến Mãi:</strong> <?= number_format($row['discount_price'], 0, ',', '.') ?> VND</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         <?php endwhile; ?>
                     </div>
                 </div>
             </div>
+
             </div>
         </div>
     </div>

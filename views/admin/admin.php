@@ -2,8 +2,6 @@
 session_start();
     include '../../config.php';
     include '../../includes/connect.php';
-    //include '../../includes/database.php';
-    //include '../../includes/functions.php';
     include '../../includes/session.php';
 
 $page = isset($_GET['page']) ? htmlspecialchars($_GET['page']) : null;

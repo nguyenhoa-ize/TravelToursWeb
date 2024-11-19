@@ -55,6 +55,8 @@ if (isPost()) {
             'discount_price' => $discountPrice,
             'image' => $image,
             'is_popular' => $filterAll['is_popular'],
+            'departure_point' => $filterAll['departure_point'],
+            'destination_point' => $filterAll['destination_point'],
         ];
 
         if (isset($tourID) && !empty($tourID)) {
@@ -136,6 +138,20 @@ if (isPost()) {
                 <?php if (isset($messenger['price'])): ?>
                     <span class="error"><?php echo implode(', ', $messenger['price']); ?></span>
                 <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-item">
+                <label for="departure_point">Điểm đi</label>
+                <input type="text" name="departure_point" id="departure_point" placeholder="Điểm đi" required
+                       value="<?php echo old('departure_point', $old); ?>">
+            </div>
+            
+            <div class="form-item">
+                <label for="destination_point">Điểm đến</label>
+                <input type="text" name="destination_point" id="destination_point" placeholder="Điểm đến" required
+                       value="<?php echo old('destination_point', $old); ?>">
             </div>
         </div>
 

@@ -25,6 +25,8 @@
                 <th>Mô tả</th>
                 <th>Giá</th>
                 <th>Giảm giá</th>
+                <th>Điểm đi</th>
+                <th>Điểm đến</th>
                 <th>Ảnh</th>
                 <th>Tours</th>
                 <th>Loại tours</th>
@@ -48,6 +50,9 @@
                         <td><?= $d['description'] ?></td>
                         <td><?= $d['price'] ?></td>
                         <td><?= $d['discount_price'] ?></td>
+                        <td><?= $d['departure_point'] ?></td>
+                        <td><?= $d['destination_point'] ?></td>
+                        
                         <td>
                             <?php
                             // Lặp qua mảng ảnh và hiển thị từng ảnh
