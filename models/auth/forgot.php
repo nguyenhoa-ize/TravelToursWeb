@@ -1,6 +1,7 @@
 <?php
-    include '../../templates/layout/header.php';
+    
     include '../../config.php';
+
     include '../../includes/connect.php';
     include '../../includes/database.php';
     include '../../includes/functions.php';
@@ -86,6 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn1'])) {
 
 </head>
 <body>
+    <?php
+    include '../../templates/layout/header.php';
+    ?>
+    
 <div class="recovery-container">
   <form action="" method="post">
       <h2>Quên Mật Khẩu</h2>
@@ -101,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn1'])) {
 </div>
 <?php if ($thongbao != "") { ?>
 <style>
+  
   .notification-container {
       max-width: 600px;
       margin: 50px auto;
@@ -144,9 +150,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn1'])) {
   <a href="../../index.php">Trang chủ</a>
 </div>
 <?php exit(); } ?>
+<div>
+
+</div>
 </body>
 </html>
-
 <?php
     include '../../templates/layout/footer.php';
 ?>
+
+
