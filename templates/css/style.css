@@ -209,9 +209,11 @@
     background-color:#888;
     padding:20px 0;
     text-align: center;
-    position: relative;
+    position:relative;
     bottom: 0;
     margin:-8px;
+    width: 100%;
+    z-index: -999;
 }
 
 /* Giới thiệu */
