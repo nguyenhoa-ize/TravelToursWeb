@@ -22,8 +22,20 @@ if (!empty($filterAll['id_order'])) {
     $paymentDetail = oneRaw("SELECT * FROM orders WHERE id_order='$paymentID'"); // Truy vấn thông tin thanh toán
 
     if (!empty($paymentDetail)) {
-        // Lưu thông tin thanh toán vào biến $old
+        // Lấy thông tin từ bảng tours và users
+        $tourID = $paymentDetail['id_tours'];
+        $userID = $paymentDetail['id_user'];
+
+        // Truy vấn bảng tours để lấy tên tour
+        $tourDetail = oneRaw("SELECT name FROM tours WHERE id_tours='$tourID'");
+
+        // Truy vấn bảng users để lấy tên người dùng (username)
+        $userDetail = oneRaw("SELECT username FROM user WHERE id_user='$userID'");
+
+        // Lưu thông tin vào biến $old
         $old = $paymentDetail;
+        $old['name'] = $tourDetail['name']; // Thêm tên tour vào thông tin đơn hàng
+        $old['username'] = $userDetail['username']; // Thêm tên người dùng vào thông tin đơn hàng
     } else {
         // Nếu không tìm thấy đơn hàng, chuyển hướng về trang danh sách đơn hàng
         redirect("?page=cart");
@@ -141,15 +153,15 @@ function oneRaw($query) {
             </tr>
             <tr>
               <td>&ensp;Tên đơn hàng:</td>
-              <td><?= $old['name_tour'] ?></td> <!-- Hiển thị mã đơn hàng -->
+              <td><?= $old['name'] ?></td> <!-- Hiển thị tên tour -->
             </tr>
             <tr>
               <td>&ensp;Tên người đặt:</td>
-              <td><?= $old['ten_nguoi_dat'] ?></td> <!-- Hiển thị mã đơn hàng -->
+              <td><?= $old['username'] ?></td> <!-- Hiển thị tên người dùng -->
             </tr>
             <tr class="tong">
               <td><strong>&ensp;Tổng cộng:</strong></td>
-              <td><?= $old['thanh_tien'] ?></td> <!-- Hiển thị mã đơn hàng -->
+              <td><?= $old['thanh_tien'] ?></td> <!-- Hiển thị tổng tiền -->
             </tr>
           </tbody>
         </table>
@@ -191,8 +203,13 @@ function oneRaw($query) {
         $('#modalXacNhan').hide(); // Sử dụng hide() để ẩn modal
         alert('Thanh toán thành công!');
       });
+      // Khi nhấn nút "Thoát"
+      $('.huy-thanh-toan').click(function() {
+        // Chuyển hướng về trang index
+        window.location.href = "http://localhost/TravelToursWeb/";  // Thay đổi đường dẫn theo vị trí của trang index
+      });
     });
-</script>
+  </script>
 
 </body>
 </html>
