@@ -51,6 +51,7 @@ $fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu 
                 </div>
                 <div class="user-greeting">
                     <span>Xin Chào, <?php echo htmlspecialchars($fullname); ?>!</span>
+                    <a href="<?php echo SITE_URL . 'models/auth/profile.php'; ?>" class="btn-account">Tài khoản</a> 
                     <a href="<?php echo SITE_URL . 'models/auth/logout.php'; ?>" class="btn-logout">Đăng xuất</a>
                 </div>
             <?php else: ?>
