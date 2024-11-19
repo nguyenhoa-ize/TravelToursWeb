@@ -1,97 +1,58 @@
-/* Basic styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    width: 80%;
-    margin: 20px auto;
+.detail-tour {
+    max-width: 900px;
+    margin: 30px auto;
     padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
-    text-align: center;
+.title-tour {
+    font-size: 2em;
     margin-bottom: 20px;
-}
-
-.cart-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.cart-table th, .cart-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-.cart-table th {
-    background-color: #f8f8f8;
-}
-
-.cart-table td input {
-    width: 60px;
-    padding: 5px;
-}
-
-.cart-table td button {
-    padding: 5px 10px;
-    margin-right: 5px;
-}
-
-.total-price {
-    margin-top: 20px;
-    font-size: 18px;
     font-weight: bold;
-    text-align: right;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #218838;
-}
-
-.alert {
-    padding: 10px;
+.info-tour {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
-    border-radius: 4px;
-    text-align: center;
 }
 
-.success {
-    background-color: #28a745;
-    color: white;
+.item {
+    width: 23%;
 }
 
-.danger {
-    background-color: #dc3545;
-    color: white;
+.item .title {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.item .content {
+    font-size: 1em;
+    color: #555;
+}
+
+.description {
+    margin-top: 20px;
+}
+
+.description h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.description p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333;
+}
+
+.discount-price {
+    font-size: 1.2em;
+    color: #d9534f;
+}
+
+.price {
+    font-size: 1.2em;
+    color: #5bc0de;
 }
