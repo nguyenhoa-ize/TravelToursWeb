@@ -41,11 +41,14 @@ $fullname = $isLoggedIn ? $_SESSION['fullname'] : null; // Lấy fullname nếu 
 
           <div class="header-right">
             <?php if ($isLoggedIn): ?>
-            <div class="cart-container">
-                <i class="fas fa-shopping-cart cart-icon"></i>
-                <span class="cart-text">Giỏ hàng</span>
-                <span class="cart-count">0</span>
-            </div>
+                <div class="cart-container">
+                    <!-- Thêm liên kết tới cart.php -->
+                    <a href="<?php echo SITE_URL . 'views/user/cart.php'; ?>" class="cart-link">
+                        <i class="fas fa-shopping-cart cart-icon"></i>
+                        <span class="cart-text">Giỏ hàng</span>
+                        <span class="cart-count">0</span> <!-- Dữ liệu đếm số lượng sản phẩm -->
+                    </a>
+                </div>
                 <div class="user-greeting">
                     <span>Xin Chào, <?php echo htmlspecialchars($fullname); ?>!</span>
                     <a href="<?php echo SITE_URL . 'models/auth/logout.php'; ?>" class="btn-logout">Đăng xuất</a>
