@@ -52,7 +52,6 @@ $kq = $conn1->query("SELECT * FROM orders");
                 <th>Ngày đặt</th>
                 <th>Phương thức thanh toán</th>
                 <th>Trạng thái</th>
-                <th>Thông tin đơn hàng</th>
             </tr>
         </thead>
         <tbody>
@@ -80,7 +79,6 @@ $kq = $conn1->query("SELECT * FROM orders");
                                     <button type="submit" name="update_status">Cập nhật</button>
                                 </form>
                             </td>
-                            <td><?php echo $d['thong_tin_don_hang'] ?></td>
                         </tr>
             <?php
                     }
