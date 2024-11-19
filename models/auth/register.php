@@ -18,6 +18,13 @@
             if (strlen($filterAll['username']) < 5) {
                 $errors['username']['min'] = 'Username phải có ít nhất 5 ký tự.';
             }
+            else {
+                $username  = $filterAll['username'];
+                $sql = "SELECT id_user FROM user WHERE username ='$username'";
+                if(getRows($sql) > 0){
+                    $errors['username']['unique'] = 'Username đã tồn tại.';
+                }
+            }
         }
 
         // Validate fullname
@@ -45,6 +52,14 @@
         } else {
             if(!isPhone($filterAll['phone'])){
                 $errors['phone']['isPhone'] = 'Số điện thoại không hợp lệ.';
+            }
+        }
+        // Validate số điện thoại: bắt buộc phải nhập, số có đúng định dạng không
+        if (empty($filterAll['address'])) {
+            $errors['address']['required'] = 'Bạn chưa nhập thành phố bạn đang ở.';
+        } else {
+            if(!isPhone($filterAll['address']) <3 ){
+                $errors['address']['min'] = 'Tên thành phố phải có ít nhất 3 ký tự.';
             }
         }
         // Validate password: bắt buộc phải nhập, >=8 ký tự
@@ -144,8 +159,14 @@ $old = getFlashData('old');
     <?php 
         echo form_error('phone','<span class="error">','</span>',$errors );
     ?>
-    <input type="number" name="phone" id="phone" placeholder="Số điện thoại"value="<?php 
+    <input type="text" name="phone" id="phone" placeholder="Số điện thoại"value="<?php 
     echo old('phone',$old);
+    ?>">
+    <?php 
+        echo form_error('address','<span class="error">','</span>',$errors );
+    ?>
+    <input type="text" name="address" id="address" placeholder="Thành phố bạn đang ở"value="<?php 
+    echo old('address',$old);
     ?>">
     <?php 
         echo form_error('password','<span class="error">','</span>',$errors );

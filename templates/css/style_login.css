@@ -17,7 +17,7 @@ body {
 }
 .login-container input {
     display: block;
-    width: 375px;
+    width: 400px;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
