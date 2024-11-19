@@ -1,0 +1,144 @@
+/* CSS tùy chỉnh */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.phuong-thuc-thanh-toan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.phuong-thuc-thanh-toan img {
+  width: 60px;
+  margin: 5px;
+}
+
+.phuong-thuc-thanh-toan span {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+}
+
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.modal button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-confirm {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Trang thanh toán */
+.trang-thanh-toan {
+  max-width: 900px;
+  margin: 50px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.quay-lai-trang {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.thanh-toan {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead th {
+  text-align: left;
+  font-size: 18px;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+tbody td {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.tom-tat-don-hang {
+  width: 50%;
+}
+
+.tong {
+  font-weight: bold;
+}
+
+.nut-thanh-toan, .huy-thanh-toan {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.nut-thanh-toan {
+  background-color: #28a745;
+  color: white;
+}
+
+.huy-thanh-toan {
+  background-color: #dc3545;
+  color: white;
+}

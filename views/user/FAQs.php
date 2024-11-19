@@ -1,4 +1,7 @@
-<?php   include '../../templates/layout/header.php';?>
+<?php   
+include '../../config.php';
+include '../../templates/layout/header.php'
+;?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
